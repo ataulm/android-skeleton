@@ -1,5 +1,7 @@
+/.idea/
 /.idea/workspace.xml
 /.idea/libraries
+*.iml
 .DS_Store
 
 # Built application files
