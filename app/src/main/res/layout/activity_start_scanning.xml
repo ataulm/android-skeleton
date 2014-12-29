@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Start scanning"
+    android:onClick="startScanning" />
+
+  <TextView
+    android:id="@+id/start_scanning_text_scan_data"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="No scan data" />
+
+</LinearLayout>
