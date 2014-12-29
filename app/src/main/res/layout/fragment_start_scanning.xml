@@ -5,22 +5,15 @@
   android:layout_height="match_parent">
 
   <Button
+    android:id="@+id/start_scanning_button_start_scan"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Activity: Start scanning"
-    android:onClick="startScanning" />
+    android:text="Fragment: Start scanning" />
 
   <TextView
     android:id="@+id/start_scanning_text_scan_data"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="No scan data" />
-
-  <Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:text="Open activity with fragment"
-    android:onClick="openActivityWithFragment" />
 
 </LinearLayout>

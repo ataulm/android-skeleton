@@ -8,6 +8,7 @@
     android:theme="@style/AppTheme">
 
     <activity android:name=".StartScanningActivity" />
+    <activity android:name=".StartScanningFromFragmentActivity" />
 
     <activity-alias
       android:name="activity.primary_launcher"

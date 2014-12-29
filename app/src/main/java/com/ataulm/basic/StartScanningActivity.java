@@ -38,4 +38,8 @@ public class StartScanningActivity extends Activity {
         }
     }
 
+    public void openActivityWithFragment(View view) {
+        startActivity(new Intent(this, StartScanningFromFragmentActivity.class));
+    }
+
 }
