@@ -50,14 +50,16 @@
     android:layout_below="@id/show_text_poster"
     android:layout_marginTop="16dp"
     android:text="A single-camera ensemble comedy following the lives of an eclectic group of detectives in a New York precinct, including one slacker who is forced to shape up when he gets a new boss."
-    android:textSize="24sp"
+    android:textSize="20sp"
     android:textColor="@android:color/primary_text_dark" />
 
   <Button
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
     android:layout_alignParentBottom="true"
     android:layout_marginTop="16dp"
+    android:textColor="@android:color/tertiary_text_dark"
     android:text="WATCH" />
 
 </RelativeLayout>
