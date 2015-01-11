@@ -12,47 +12,51 @@
     android:background="#FFFF00"
     android:importantForAccessibility="no" />
 
-  <com.ataulm.basic.MoreAccessibleTextView
+  <TextView
     android:id="@+id/show_text_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="16dp"
     android:layout_toRightOf="@id/show_text_poster"
     android:background="@drawable/selector_background_color"
+    android:focusable="true"
     android:text="Brooklyn Nine Nine"
     android:textColor="@android:color/primary_text_dark"
     android:textSize="24sp" />
 
-  <com.ataulm.basic.MoreAccessibleTextView
-    android:id="@+id/show_text_network"
+  <TextView
+    android:id="@id/show_text_network"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignBottom="@id/show_text_poster"
     android:layout_marginLeft="16dp"
     android:layout_toRightOf="@id/show_text_poster"
     android:background="@drawable/selector_background_color"
+    android:focusable="true"
     android:text="Fox"
     android:textColor="@android:color/secondary_text_dark"
     android:textSize="24sp" />
 
-  <com.ataulm.basic.MoreAccessibleTextView
+  <TextView
     android:id="@+id/show_text_time"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignBottom="@id/show_text_poster"
     android:layout_alignParentRight="true"
     android:background="@drawable/selector_background_color"
+    android:focusable="true"
     android:text="Mon 01:00"
     android:textColor="@android:color/secondary_text_dark"
     android:textSize="24sp" />
 
-  <com.ataulm.basic.MoreAccessibleTextView
+  <TextView
     android:id="@+id/show_text_description"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/show_text_poster"
     android:layout_marginTop="16dp"
     android:background="@drawable/selector_background_color"
+    android:focusable="true"
     android:text="A single-camera ensemble comedy following the lives of an eclectic group of detectives in a New York precinct, including one slacker who is forced to shape up when he gets a new boss."
     android:textColor="@android:color/primary_text_dark"
     android:textSize="20sp" />

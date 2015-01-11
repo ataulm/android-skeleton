@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:padding="16dp"
-  android:background="@android:color/black">
+  android:background="@android:color/black"
+  android:padding="16dp">
 
   <ImageView
     android:id="@+id/show_text_poster"
@@ -16,32 +16,35 @@
     android:id="@+id/show_text_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_toRightOf="@id/show_text_poster"
     android:layout_marginLeft="16dp"
+    android:layout_toRightOf="@id/show_text_poster"
+    android:background="@drawable/selector_background_color"
     android:text="Brooklyn Nine Nine"
-    android:textSize="24sp"
-    android:textColor="@android:color/primary_text_dark" />
+    android:textColor="@android:color/primary_text_dark"
+    android:textSize="24sp" />
 
   <TextView
     android:id="@+id/show_text_network"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_toRightOf="@id/show_text_poster"
-    android:layout_marginLeft="16dp"
     android:layout_alignBottom="@id/show_text_poster"
+    android:layout_marginLeft="16dp"
+    android:layout_toRightOf="@id/show_text_poster"
+    android:background="@drawable/selector_background_color"
     android:text="Fox"
-    android:textSize="24sp"
-    android:textColor="@android:color/secondary_text_dark" />
+    android:textColor="@android:color/secondary_text_dark"
+    android:textSize="24sp" />
 
   <TextView
     android:id="@+id/show_text_time"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
     android:layout_alignBottom="@id/show_text_poster"
+    android:layout_alignParentRight="true"
+    android:background="@drawable/selector_background_color"
     android:text="Mon 01:00"
-    android:textSize="24sp"
-    android:textColor="@android:color/secondary_text_dark" />
+    android:textColor="@android:color/secondary_text_dark"
+    android:textSize="24sp" />
 
   <TextView
     android:id="@+id/show_text_description"
@@ -49,17 +52,18 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/show_text_poster"
     android:layout_marginTop="16dp"
+    android:background="@drawable/selector_background_color"
     android:text="A single-camera ensemble comedy following the lives of an eclectic group of detectives in a New York precinct, including one slacker who is forced to shape up when he gets a new boss."
-    android:textSize="20sp"
-    android:textColor="@android:color/primary_text_dark" />
+    android:textColor="@android:color/primary_text_dark"
+    android:textSize="20sp" />
 
   <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
     android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
     android:layout_marginTop="16dp"
-    android:textColor="@android:color/tertiary_text_dark"
-    android:text="WATCH" />
+    android:text="WATCH"
+    android:textColor="@android:color/tertiary_text_dark" />
 
 </RelativeLayout>
