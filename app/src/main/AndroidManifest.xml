@@ -8,10 +8,22 @@
     android:label="@string/app_name"
     android:theme="@style/AppTheme">
     <activity android:name=".ShowActivity" />
+    <activity android:name=".AccessibleShowActivity" />
 
     <activity-alias
       android:name="activity.primary_launcher"
-      android:targetActivity=".ShowActivity">
+      android:targetActivity=".ShowActivity"
+      android:label="TV-Bad">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity-alias>
+
+    <activity-alias
+      android:name="activity.secondary"
+      android:targetActivity=".AccessibleShowActivity"
+      android:label="TV-Good">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
