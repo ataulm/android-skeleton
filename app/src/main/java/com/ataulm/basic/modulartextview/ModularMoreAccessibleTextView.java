@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
+import static android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener;
+
 public class ModularMoreAccessibleTextView extends TextView {
 
     public ModularMoreAccessibleTextView(Context context, AttributeSet attrs) {
@@ -18,11 +20,11 @@ public class ModularMoreAccessibleTextView extends TextView {
     @Override
     protected void onFinishInflate() {
         AccessibilityManager accessibilityManager = (AccessibilityManager) getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
-        AccessibilityManager.AccessibilityStateChangeListener listener = new SetFocusableOnAccessibilityStateChangeListener(this);
-        accessibilityManager.addAccessibilityStateChangeListener(listener);
 
-        // need the initial kick up the butt
-        setFocusable(accessibilityManager.isEnabled());
+        boolean initialAccessibilityEnabledValue = accessibilityManager.isEnabled();
+        AccessibilityStateChangeListener listener = new SetFocusableOnAccessibilityStateChangeListener(this, initialAccessibilityEnabledValue);
+
+        accessibilityManager.addAccessibilityStateChangeListener(listener);
     }
 
 }

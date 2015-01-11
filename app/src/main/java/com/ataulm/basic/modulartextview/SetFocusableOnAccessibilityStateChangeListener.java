@@ -7,8 +7,9 @@ class SetFocusableOnAccessibilityStateChangeListener implements AccessibilityMan
 
     private final View view;
 
-    SetFocusableOnAccessibilityStateChangeListener(View view) {
+    SetFocusableOnAccessibilityStateChangeListener(View view, boolean accessibilityEnabled) {
         this.view = view;
+        onAccessibilityStateChanged(accessibilityEnabled);
     }
 
     @Override
