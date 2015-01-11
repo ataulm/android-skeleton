@@ -1,4 +1,4 @@
-package com.ataulm.basic;
+package com.ataulm.basic.activecheck;
 
 import android.content.Context;
 import android.view.View;

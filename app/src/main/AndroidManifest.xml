@@ -8,11 +8,13 @@
     android:label="@string/app_name"
     android:theme="@style/AppTheme">
 
-    <activity android:name=".StoryActivity" />
+    <activity android:name=".activecheck.StoryActivity" />
+    <activity android:name=".listeningtextview.ListeningTextViewStoryActivity" />
+    <activity android:name=".modulartextview.ModularTextViewStoryActivity" />
 
     <activity-alias
       android:name="activity.primary_launcher"
-      android:targetActivity=".StoryActivity">
+      android:targetActivity=".modulartextview.ModularTextViewStoryActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />

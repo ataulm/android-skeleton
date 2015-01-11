@@ -1,10 +1,13 @@
-package com.ataulm.basic;
+package com.ataulm.basic.activecheck;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
+
+import com.ataulm.basic.R;
+import com.ataulm.basic.Story;
 
 public class StoryActivity extends Activity {
 
