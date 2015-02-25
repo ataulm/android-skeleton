@@ -25,6 +25,7 @@ public class MyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
         testTextView = (TextView) findViewById(R.id.test_textview);
         testTextView.setText("The quick brown fox jumps over the lazy dog");
         testTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, DEFAULT_TEXT_SIZE_SP);
@@ -37,6 +38,7 @@ public class MyActivity extends Activity {
         lineSpacingTextView.setText(String.format(LINE_SPACING_PATTERN, 0));
 
         enableLinesCheckBox = (CheckBox) findViewById(R.id.enable_lines_checkbox);
+
         rulerView = (RulerView) findViewById(R.id.ruler);
         rulerView.setVisibility(enableLinesCheckBox.isChecked() ? View.VISIBLE : View.INVISIBLE);
 
