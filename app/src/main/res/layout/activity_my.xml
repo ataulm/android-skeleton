@@ -1,7 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:orientation="vertical">
+  android:padding="16dp">
 
-</LinearLayout>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/test_textview"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:text="A quick brown fox jumps over the lazy dog" />
+
+  </LinearLayout>
+
+  <com.ataulm.basic.RulerView
+    android:id="@+id/ruler"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/font_size_textview"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:text="Font size: 14sp"
+      android:padding="6dp" />
+
+    <TextView
+      android:id="@+id/line_spacing_textview"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:text="Line spacing extra: 0sp"
+      android:padding="6dp" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Line spacing multiplier: 1"
+      android:padding="6dp" />
+
+    <CheckBox
+      android:id="@+id/enable_lines_checkbox"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Enable ruled lines"
+      android:textColor="?android:textColorPrimary" />
+
+  </LinearLayout>
+</FrameLayout>
