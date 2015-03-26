@@ -10,6 +10,9 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 public class FooTest {
 
+    private static final int HALF = 1;
+    private static final int WHOLE = 2;
+
     @Mock
     Bar mockBar;
 
@@ -18,15 +21,16 @@ public class FooTest {
     @Before
     public void setUp() {
         initMocks(this);
-        when(mockBar.add(1, 1)).thenReturn(2);
+        when(mockBar.add(HALF, HALF)).thenReturn(WHOLE);
         foo = new Foo(mockBar);
     }
 
     @Test
-    public void bruh() {
-        int actual = foo.twice(1);
+    public void twiceWillReturnDoubleTheInput() {
+        int actual = foo.twice(HALF);
 
-        assertThat(actual).isEqualTo(2);
+        int expected = WHOLE;
+        assertThat(actual).isEqualTo(expected);
     }
 
 }
