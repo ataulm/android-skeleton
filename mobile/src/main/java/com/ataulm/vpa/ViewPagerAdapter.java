@@ -6,12 +6,10 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ataulm.wutson.vpa.ViewStates;
-
 import java.util.Map;
 import java.util.WeakHashMap;
 
-abstract class ViewPagerAdapter extends PagerAdapter {
+public abstract class ViewPagerAdapter extends PagerAdapter {
 
     private final Map<View, Integer> instantiatedViews = new WeakHashMap<>();
 
