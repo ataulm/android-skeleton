@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.ataulm.vpa.ViewPagerAdapter;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 public class MyActivity extends Activity {
 
     ViewPager viewPager;
@@ -49,9 +51,7 @@ public class MyActivity extends Activity {
 
         @Override
         protected View getView(ViewGroup container, int position) {
-            TextView view = new TextView(context);
-            view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            view.setGravity(Gravity.CENTER);
+            TextView view = new ClickTextView(context);
             view.setText(What.values()[position].name());
             return view;
         }
@@ -59,6 +59,35 @@ public class MyActivity extends Activity {
         @Override
         public int getCount() {
             return What.values().length;
+        }
+
+    }
+
+    static class ClickTextView extends TextView {
+
+        private int clickCount;
+        private CharSequence text;
+
+        public ClickTextView(Context context) {
+            super(context);
+            setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
+            setGravity(Gravity.CENTER);
+            setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    clickCount++;
+                    updateText();
+                }
+
+            });
+        }
+
+        private void updateText() {
+            if (text == null) {
+                text = getText();
+            }
+            setText(text + ": " + String.valueOf(clickCount));
         }
 
     }
