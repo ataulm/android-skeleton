@@ -78,7 +78,6 @@ public abstract class ViewPagerAdapter extends PagerAdapter {
             super.restoreState(state, loader);
         } else {
             this.viewStates = ((ViewStates) state);
-            notifyDataSetChanged(); // TODO: is this needed? not if `restoreState()` is called before `instantiateItem()`
         }
     }
 
