@@ -3,8 +3,10 @@ package com.ataulm.basic;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +54,7 @@ public class MyActivity extends Activity {
         @Override
         protected View getView(ViewGroup container, int position) {
             TextView view = new ClickTextView(context);
+            view.setId(position);
             view.setText(What.values()[position].name());
             return view;
         }
@@ -81,6 +84,18 @@ public class MyActivity extends Activity {
                 }
 
             });
+        }
+
+        @Override
+        public Parcelable onSaveInstanceState() {
+            Log.e("WHATWHAT", "onSaveInstanceState()");
+            return super.onSaveInstanceState();
+        }
+
+        @Override
+        public void onRestoreInstanceState(Parcelable state) {
+            Log.e("WHATWHAT", "onRestoreInstanceState()");
+            super.onRestoreInstanceState(state);
         }
 
         private void updateText() {
