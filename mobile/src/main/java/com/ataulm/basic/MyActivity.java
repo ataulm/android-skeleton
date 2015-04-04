@@ -54,7 +54,7 @@ public class MyActivity extends Activity {
         @Override
         protected View getView(ViewGroup container, int position) {
             TextView view = new ClickTextView(context);
-            view.setId(position);
+            view.setId(position); // without a view ID, child state is not stored
             view.setText(What.values()[position].name());
             return view;
         }
@@ -67,6 +67,9 @@ public class MyActivity extends Activity {
     }
 
     static class ClickTextView extends TextView {
+
+        public static final String KEY_CLICKS = "CLICK_COUNT";
+        public static final String KEY_SUPER_STATE = "SUPER_STATE";
 
         private int clickCount;
         private CharSequence text;
@@ -88,14 +91,22 @@ public class MyActivity extends Activity {
 
         @Override
         public Parcelable onSaveInstanceState() {
-            Log.e("WHATWHAT", "onSaveInstanceState()");
-            return super.onSaveInstanceState();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(KEY_SUPER_STATE, super.onSaveInstanceState());
+            bundle.putInt(KEY_CLICKS, clickCount);
+            return bundle;
         }
 
         @Override
         public void onRestoreInstanceState(Parcelable state) {
-            Log.e("WHATWHAT", "onRestoreInstanceState()");
-            super.onRestoreInstanceState(state);
+            if (!(state instanceof Bundle) || !((Bundle) state).containsKey(KEY_SUPER_STATE)) {
+                super.onRestoreInstanceState(state);
+                return;
+            }
+            Bundle bundle = (Bundle) state;
+            super.onRestoreInstanceState(bundle.getParcelable(KEY_SUPER_STATE));
+            clickCount = bundle.getInt(KEY_CLICKS);
+            updateText();
         }
 
         private void updateText() {
