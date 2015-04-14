@@ -37,11 +37,11 @@ public class MyActivity extends Activity {
         }
 
         String getSecondLine() {
-            return "..." + name() + "...";
+            return "2_" + name() + "_2";
         }
     }
 
-    private static class MyAdapter extends PagerAdapter {
+    private static class MyAdapter extends PagerAdapter implements PagerSlidingTabStrip.CustomTabProvider {
 
         @Override
         public int getCount() {
@@ -71,6 +71,15 @@ public class MyActivity extends Activity {
         @Override
         public CharSequence getPageTitle(int position) {
             return MyData.values()[position].getFirstLine();
+        }
+
+        @Override
+        public View getCustomTabView(ViewGroup viewGroup, int position) {
+            LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
+            MyCustomTabView tabView = (MyCustomTabView) layoutInflater.inflate(R.layout.view_custom_tab, viewGroup, false);
+            tabView.setFirstLineText(MyData.values()[position].getFirstLine());
+            tabView.setSecondLineTextView(MyData.values()[position].getSecondLine());
+            return tabView;
         }
 
     }
