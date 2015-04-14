@@ -69,11 +69,6 @@ public class MyActivity extends Activity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
-            return MyData.values()[position].getFirstLine();
-        }
-
-        @Override
         public View getCustomTabView(ViewGroup viewGroup, int position) {
             LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
             MyCustomTabView tabView = (MyCustomTabView) layoutInflater.inflate(R.layout.view_custom_tab, viewGroup, false);
