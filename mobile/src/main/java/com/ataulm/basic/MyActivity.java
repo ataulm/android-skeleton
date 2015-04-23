@@ -43,8 +43,8 @@ public class MyActivity extends Activity {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            int colorRes = i % 2 == 0 ? R.color.background_color_one : R.color.background_color_two;
-            viewHolder.bind("Item " + i, colorRes);
+            int backgroundRes = i % 2 == 0 ? R.drawable.item_evens_background : R.drawable.item_odds_background;
+            viewHolder.bind("Item " + i, backgroundRes);
         }
 
         @Override
@@ -73,8 +73,8 @@ public class MyActivity extends Activity {
                 this.moreActionTwoTextView = (TextView) itemView.findViewById(R.id.text_more_action_two);
             }
 
-            void bind(final String text, @DrawableRes int background) {
-                itemView.setBackgroundResource(background);
+            void bind(final String text, @DrawableRes int backgroundRes) {
+                itemView.setBackgroundResource(backgroundRes);
                 titleTextView.setText(text);
 
                 itemView.setOnClickListener(new View.OnClickListener() {

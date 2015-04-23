@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="background_color_one">#f2f2f2</color>
-  <color name="background_color_two">#d9d9d9</color>
+  <color name="item_odds_background_pressed">#f2f2f2</color>
+  <color name="item_odds_background_focused">#f2f2f2</color>
+  <color name="item_odds_background_default">#f2f2f2</color>
+
+  <color name="item_evens_background_pressed">#d9d9d9</color>
+  <color name="item_evens_background_focused">#d9d9d9</color>
+  <color name="item_evens_background_default">#d9d9d9</color>
 </resources>
