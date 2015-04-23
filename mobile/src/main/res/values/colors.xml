@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="item_odds_background_pressed">#EDC2C2</color>
-  <color name="item_odds_background_focused">#E6DADA</color>
-  <color name="item_odds_background_default">#f2f2f2</color>
-
   <color name="item_evens_background_pressed">#EFFAB6</color>
   <color name="item_evens_background_focused">#E0E6C5</color>
   <color name="item_evens_background_default">#d9d9d9</color>

@@ -1,10 +1,7 @@
 package com.ataulm.basic;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MyActivity extends Activity {
 
@@ -43,8 +39,7 @@ public class MyActivity extends Activity {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            int backgroundRes = i % 2 == 0 ? R.drawable.item_evens_background : R.drawable.item_odds_background;
-            viewHolder.bind("Item " + i, backgroundRes);
+            viewHolder.bind("Item " + i);
         }
 
         @Override
@@ -73,8 +68,7 @@ public class MyActivity extends Activity {
                 this.moreActionTwoTextView = (TextView) itemView.findViewById(R.id.text_more_action_two);
             }
 
-            void bind(final String text, @DrawableRes int backgroundRes) {
-                itemView.setBackgroundResource(backgroundRes);
+            void bind(final String text) {
                 titleTextView.setText(text);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
