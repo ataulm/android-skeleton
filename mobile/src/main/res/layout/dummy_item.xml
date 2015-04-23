@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/dummy_item_parent"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:padding="8dp"
   android:orientation="horizontal"
   android:focusable="true"
+  android:nextFocusRight="@+id/text_more_action_one"
   android:background="@drawable/item_background">
 
   <TextView
@@ -20,19 +22,25 @@
     android:orientation="vertical">
 
     <TextView
-      android:id="@+id/text_more_action_one"
+      android:id="@id/text_more_action_one"
       android:layout_width="wrap_content"
       android:layout_height="0dp"
       android:layout_weight="50"
       android:padding="4dp"
-      android:text="Action 1" />
+      android:text="Action 1"
+      android:background="@drawable/item_background"
+      android:nextFocusLeft="@id/dummy_item_parent"
+      android:focusable="true" />
 
     <TextView
       android:id="@+id/text_more_action_two"
       android:layout_width="wrap_content"
       android:layout_height="0dp"
       android:layout_weight="50"
+      android:nextFocusLeft="@id/dummy_item_parent"
+      android:background="@drawable/item_background"
       android:padding="4dp"
-      android:text="Action 2" />
+      android:text="Action 2"
+      android:focusable="true" />
   </LinearLayout>
 </LinearLayout>
