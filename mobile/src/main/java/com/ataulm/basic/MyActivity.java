@@ -2,6 +2,8 @@ package com.ataulm.basic;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.method.KeyListener;
 import android.view.KeyEvent;
@@ -19,43 +21,43 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        AbsListView listview = (AbsListView) findViewById(R.id.listview);
-        listview.setAdapter(new DummyAdapter(getLayoutInflater()));
+        RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
+        listview.setLayoutManager(new GridLayoutManager(this, 2));
+        listview.setAdapter(new DummyRecyclerAdapter(getLayoutInflater()));
     }
 
-    private static class DummyAdapter extends BaseAdapter {
+    private static class DummyRecyclerAdapter extends RecyclerView.Adapter {
 
         private static final int COUNT = 25;
 
         private final LayoutInflater layoutInflater;
 
-        DummyAdapter(LayoutInflater layoutInflater) {
+        DummyRecyclerAdapter(LayoutInflater layoutInflater) {
             this.layoutInflater = layoutInflater;
         }
 
         @Override
-        public int getCount() {
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = layoutInflater.inflate(R.layout.dummy_item, parent, false);
+            return new DummyViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            ((TextView) holder.itemView).setText("Item " + position);
+        }
+
+        @Override
+        public int getItemCount() {
             return COUNT;
         }
 
-        @Override
-        public String getItem(int position) {
-            return "Item " + position;
-        }
+        static class DummyViewHolder extends RecyclerView.ViewHolder {
 
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = convertView;
-            if (view == null) {
-                view = layoutInflater.inflate(R.layout.dummy_item, parent, false);
+            public DummyViewHolder(View itemView) {
+                super(itemView);
             }
-            ((TextView) view).setText(getItem(position));
-            return view;
+
         }
 
     }
