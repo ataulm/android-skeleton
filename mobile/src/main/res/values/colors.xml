@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <color name="item_evens_background_pressed">#EFFAB6</color>
-  <color name="item_evens_background_focused">#E0E6C5</color>
-  <color name="item_evens_background_default">#d9d9d9</color>
-</resources>
