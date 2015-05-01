@@ -17,10 +17,20 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
 
         RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
-        int spanCount = 3;
+        final int spanCount = 3;
         listview.setLayoutManager(new GridLayoutManager(this, spanCount));
         int spacing = getResources().getDimensionPixelSize(R.dimen.spacing);
-        listview.addItemDecoration(new SpacesItemDecoration(spacing, spacing, spanCount));
+        listview.addItemDecoration(new SpacesItemDecoration(spacing, spacing, new SpacesItemDecoration.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return 1;
+            }
+
+            @Override
+            public int getSpanCount() {
+                return spanCount;
+            }
+        }));
         listview.setAdapter(new DummyRecyclerAdapter(getLayoutInflater()));
     }
 
