@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ataulm.basic.ItemView xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/dummy_item_parent"
   android:layout_width="match_parent"
   android:layout_height="150dp"
   android:gravity="center"
   android:focusable="true"
   android:clickable="true"
+  android:textColor="@color/dummy_item_text"
   android:background="@drawable/item_background" />

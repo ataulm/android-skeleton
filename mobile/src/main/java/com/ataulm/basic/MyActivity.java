@@ -4,14 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.method.KeyListener;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class MyActivity extends Activity {
@@ -22,7 +17,10 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
 
         RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
-        listview.setLayoutManager(new GridLayoutManager(this, 2));
+        int spanCount = 3;
+        listview.setLayoutManager(new GridLayoutManager(this, spanCount));
+        int spacing = getResources().getDimensionPixelSize(R.dimen.spacing);
+        listview.addItemDecoration(new SpacesItemDecoration(spacing, spacing, spanCount));
         listview.setAdapter(new DummyRecyclerAdapter(getLayoutInflater()));
     }
 
@@ -44,7 +42,7 @@ public class MyActivity extends Activity {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            ((TextView) holder.itemView).setText("Item " + position);
+            ((ItemView) holder.itemView).update(position);
         }
 
         @Override
