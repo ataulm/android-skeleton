@@ -1,7 +1,6 @@
 package com.ataulm.basic;
 
 import android.graphics.Rect;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -19,6 +18,12 @@ class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        if (spanSizeLookup.getSpanCount() == 1) {
+            outRect.top = verticalSpacing / 2;
+            outRect.bottom = verticalSpacing / 2;
+            return;
+        }
+
         int position = parent.getChildPosition(view);
 
         outRect.left = horizontalSpacing / 2;
