@@ -2,4 +2,9 @@
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/listview"
   android:layout_width="match_parent"
-  android:layout_height="match_parent" />
+  android:layout_height="match_parent"
+  android:paddingLeft="@dimen/halfspacing"
+  android:paddingTop="@dimen/halfspacing"
+  android:paddingRight="@dimen/halfspacing"
+  android:paddingBottom="@dimen/halfspacing"
+  android:clipToPadding="false" />
