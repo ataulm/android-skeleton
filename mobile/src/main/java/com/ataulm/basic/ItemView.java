@@ -7,6 +7,7 @@ import android.widget.TextView;
 public class ItemView extends TextView {
 
     private int position;
+    private String place;
 
     public ItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -24,12 +25,18 @@ public class ItemView extends TextView {
         update(position);
     }
 
+    void update(String place) {
+        this.place = place;
+    }
+
     void update(int position) {
         this.position = position;
         String state = isPressed() ? "pressed" : isFocused() ? "focused" : "default";
         setText("Item " + position +
-                "\nwidth: " + getMeasuredWidth() +
-                "\nstate: " + state);
+                "\nw: " + getMeasuredWidth() +
+                "\nh: " + getMeasuredHeight() +
+                "\n" + place +
+                "\n" + state);
     }
 
 }

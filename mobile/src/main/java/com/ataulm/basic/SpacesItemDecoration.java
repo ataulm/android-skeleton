@@ -1,6 +1,5 @@
 package com.ataulm.basic;
 
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,11 +18,6 @@ class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        if (spanSizeLookup.getSpanCount() == 1) {
-            outRect.top = verticalSpacing / 2;
-            outRect.bottom = verticalSpacing / 2;
-            return;
-        }
         int position = parent.getChildPosition(view);
 
         outRect.left = horizontalSpacing / 2;
@@ -31,30 +25,74 @@ class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         outRect.right = horizontalSpacing / 2;
         outRect.bottom = verticalSpacing / 2;
 
+        StringBuilder place = new StringBuilder();
         if (itemIsInFirstColumn(position)) {
             outRect.left = 0;
+            place.append("fc,");
         }
         if (itemIsInLastColumn(position)) {
             outRect.right = 0;
+            place.append("lc,");
         }
+        if (itemIsInFirstRow(position)) {
+            outRect.top = 0;
+            place.append("fr,");
+        }
+        if (itemIsInLastRow(position, parent.getAdapter().getItemCount())) {
+            outRect.bottom = 0;
+            place.append("lr,");
+        }
+        if (place.length() > 0) {
+            ((ItemView) view).update(place.substring(0, place.length() - 1));
+        } else {
+            ((ItemView) view).update("");
+        }
+    }
+
+    private boolean itemIsInFirstRow(int position) {
+        int spanCount = spanSizeLookup.getSpanCount();
+        int spanTally = 0;
+        for (int i = 0; i <= position; i++) {
+            spanTally += spanSizeLookup.getSpanSize(i);
+            if (spanTally > spanCount) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean itemIsInLastRow(int position, int itemCount) {
+        int spanCount = spanSizeLookup.getSpanCount();
+
+        int rowWithItem = 0;
+        int rowCount = itemCount > 0 ? 1 : 0;
+        int spansInLatestKnownRow = 0;
+
+        for (int i = 0; i < itemCount; i++) {
+            int spanSize = spanSizeLookup.getSpanSize(i);
+            if (spansInLatestKnownRow + spanSize > spanCount) {
+                rowCount++;
+                spansInLatestKnownRow = spanSize;
+            } else {
+                spansInLatestKnownRow += spanSize;
+            }
+            if (i == position) {
+                rowWithItem = rowCount;
+            }
+        }
+        return rowWithItem == rowCount;
     }
 
     private boolean itemIsInFirstColumn(int position) {
-        int spanCount = spanSizeLookup.getSpanCount();
-
-        int spanTally = 0;
-        for (int i = 0; i <= position; i++) {
-            spanTally += spanSizeLookup.getSpanSize(i);
-            if (spanTally == spanCount) {
-                spanTally = 0;
-            }
-        }
-        return spanTally - spanSizeLookup.getSpanSize(position) == 0;
+        return tallySpans(position) - spanSizeLookup.getSpanSize(position) == 0;
     }
 
     private boolean itemIsInLastColumn(int position) {
-        int spanCount = spanSizeLookup.getSpanCount();
+        return tallySpans(position) == 0;
+    }
 
+    private int tallySpans(int position) {
+        int spanCount = spanSizeLookup.getSpanCount();
         int spanTally = 0;
         for (int i = 0; i <= position; i++) {
             spanTally += spanSizeLookup.getSpanSize(i);
@@ -62,7 +100,7 @@ class SpacesItemDecoration extends RecyclerView.ItemDecoration {
                 spanTally = 0;
             }
         }
-        return spanTally == 0;
+        return spanTally;
     }
 
     public interface SpanSizeLookup {

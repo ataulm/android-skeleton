@@ -17,7 +17,7 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
 
         RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
-        final int spanCount = 5;
+        final int spanCount = 1;
         listview.setLayoutManager(new GridLayoutManager(this, spanCount));
         int spacing = getResources().getDimensionPixelSize(R.dimen.spacing);
         listview.addItemDecoration(new SpacesItemDecoration(spacing, spacing, new SpacesItemDecoration.SpanSizeLookup() {
