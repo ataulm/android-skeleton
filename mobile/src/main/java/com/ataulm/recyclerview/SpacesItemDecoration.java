@@ -20,34 +20,66 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        applyDefaultOffsets(outRect, horizontalSpacing, verticalSpacing);
+        applyDefaultVerticalOffsets(outRect, verticalSpacing);
 
         Grid grid = Grid.newInstance(parent.getAdapter().getItemCount(), spanSizeLookup);
+        int maxSpansInRow = spanSizeLookup.getSpanCount();
+        int numberOfGaps = maxSpansInRow - 1;
+        int majorSpace = (int) (1f * numberOfGaps / maxSpansInRow * horizontalSpacing);
+        int halfSpace = (int) (horizontalSpacing * 0.5);
+        int minorSpace = horizontalSpacing - majorSpace;
+
         int position = parent.getChildPosition(view);
-        adjustOffsets(grid, position, outRect);
+        adjustOffsets(grid, position, outRect, minorSpace, halfSpace, majorSpace);
 
         updateDebugInfo(grid, position, (ItemView) view);
     }
 
-    private static void applyDefaultOffsets(Rect outRect, int horizontalSpacing, int verticalSpacing) {
-        outRect.left = horizontalSpacing / 2;
+    private static void applyDefaultVerticalOffsets(Rect outRect, int verticalSpacing) {
         outRect.top = verticalSpacing / 2;
-        outRect.right = horizontalSpacing / 2;
         outRect.bottom = verticalSpacing / 2;
     }
 
-    private static void adjustOffsets(Grid grid, int itemPosition, Rect outRect) {
-        if (grid.itemIsInFirstColumn(itemPosition)) {
-            outRect.left = 0;
-        }
-        if (grid.itemIsInLastColumn(itemPosition)) {
-            outRect.right = 0;
-        }
+    private static void adjustOffsets(Grid grid, int itemPosition, Rect outRect, int minorItemMarginSpace, int halfSpace, int majorItemMarginSpace) {
+        adjustHorizontalOffsets(grid, itemPosition, outRect, minorItemMarginSpace, halfSpace, majorItemMarginSpace);
+
         if (grid.itemIsInFirstRow(itemPosition)) {
-            outRect.top = 0;
+            outRect.top = 0; // TODO
         }
         if (grid.itemIsInLastRow(itemPosition)) {
-            outRect.bottom = 0;
+            outRect.bottom = 0; // TODO
+        }
+    }
+
+    private static void adjustHorizontalOffsets(Grid grid, int itemPosition, Rect outRect, int minorItemMarginSpace, int halfSpace, int majorItemMarginSpace) {
+        if (grid.itemIsInFirstColumn(itemPosition) && grid.itemIsInLastColumn(itemPosition)) {
+            outRect.left = 0;
+            outRect.right = 0;
+            return;
+        }
+
+        if (grid.itemIsInFirstColumn(itemPosition)) {
+            outRect.left = 0;
+            outRect.right = majorItemMarginSpace;
+            return;
+        }
+
+        if (grid.itemIsInLastColumn(itemPosition)) {
+            outRect.left = majorItemMarginSpace;
+            outRect.right = 0;
+            return;
+        }
+
+        if (grid.itemIsNextToItemInFirstColumn(itemPosition)) {
+            outRect.left = minorItemMarginSpace;
+        } else {
+            outRect.left = halfSpace;
+        }
+
+        if (grid.itemIsNextToItemInLastColumn(itemPosition)) {
+            outRect.right = minorItemMarginSpace;
+        } else {
+            outRect.right = halfSpace;
         }
     }
 

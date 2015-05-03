@@ -62,6 +62,14 @@ final class Row {
         return spanStart(adapterPosition) + cell.size == rowSize;
     }
 
+    boolean itemIsNextToItemInFirstColumn(int adapterPosition) {
+        return hasCell(adapterPosition - 1) && itemStartsInFirstColumn(adapterPosition - 1);
+    }
+
+    boolean itemIsNextToItemInLastColumn(int adapterPosition) {
+        return hasCell(adapterPosition + 1) && itemEndsInLastColumn(adapterPosition + 1);
+    }
+
     static IndexOutOfBoundsException outOfBounds(int adapterPosition) {
         return new IndexOutOfBoundsException("Couldn't find adapterPosition: " + adapterPosition);
     }

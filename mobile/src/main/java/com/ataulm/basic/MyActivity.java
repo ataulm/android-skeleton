@@ -19,7 +19,7 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
 
         RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
-        final int spanCount = 1;
+        final int spanCount = 4;
         final SpanSizeLookup spanSizeLookup = new SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -50,7 +50,7 @@ public class MyActivity extends Activity {
 
     private static class DummyRecyclerAdapter extends RecyclerView.Adapter {
 
-        private static final int COUNT = 25;
+        private static final int COUNT = 4;
 
         private final LayoutInflater layoutInflater;
 

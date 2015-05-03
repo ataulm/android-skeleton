@@ -51,6 +51,16 @@ final class Grid {
         return row.itemEndsInLastColumn(adapterPosition);
     }
 
+    boolean itemIsNextToItemInFirstColumn(int adapterPosition) {
+        Row row = findRowWith(adapterPosition);
+        return row.itemIsNextToItemInFirstColumn(adapterPosition);
+    }
+
+    boolean itemIsNextToItemInLastColumn(int adapterPosition) {
+        Row row = findRowWith(adapterPosition);
+        return row.itemIsNextToItemInLastColumn(adapterPosition);
+    }
+
     private int rowIndexWith(int adapterPosition) {
         for (int i = 0; i < rows.size(); i++) {
             if (rows.get(i).hasCell(adapterPosition)) {
