@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 public class MyActivity extends Activity {
 
@@ -18,9 +17,7 @@ public class MyActivity extends Activity {
 
         RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
         final int spanCount = 3;
-        listview.setLayoutManager(new GridLayoutManager(this, spanCount));
-        int spacing = getResources().getDimensionPixelSize(R.dimen.spacing);
-        listview.addItemDecoration(new SpacesItemDecoration(spacing, spacing, new SpacesItemDecoration.SpanSizeLookup() {
+        final SpacesItemDecoration.SpanSizeLookup spanSizeLookup = new SpacesItemDecoration.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 return 1;
@@ -30,7 +27,21 @@ public class MyActivity extends Activity {
             public int getSpanCount() {
                 return spanCount;
             }
-        }));
+        };
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this, spanCount);
+        layoutManager.setSpanSizeLookup(
+                new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        return spanSizeLookup.getSpanSize(position);
+                    }
+                }
+        );
+        listview.setLayoutManager(layoutManager);
+
+        int spacing = getResources().getDimensionPixelSize(R.dimen.spacing);
+        listview.addItemDecoration(new SpacesItemDecoration(spacing, spacing, spanSizeLookup));
         listview.setAdapter(new DummyRecyclerAdapter(getLayoutInflater()));
     }
 
