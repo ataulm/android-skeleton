@@ -84,23 +84,33 @@ class SpacesItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private boolean itemIsInFirstColumn(int position) {
-        return tallySpans(position) - spanSizeLookup.getSpanSize(position) == 0;
-    }
-
-    private boolean itemIsInLastColumn(int position) {
-        return tallySpans(position) == 0;
-    }
-
-    private int tallySpans(int position) {
         int spanCount = spanSizeLookup.getSpanCount();
         int spanTally = 0;
         for (int i = 0; i <= position; i++) {
+            if (i == position && spanTally == 0) {
+                return true;
+            }
             spanTally += spanSizeLookup.getSpanSize(i);
             if (spanTally == spanCount) {
                 spanTally = 0;
             }
         }
-        return spanTally;
+        return false;
+    }
+
+    private boolean itemIsInLastColumn(int position) {
+        int spanCount = spanSizeLookup.getSpanCount();
+        int spansInLatestKnownRow = 0;
+        for (int i = 0; i <= position; i++) {
+            spansInLatestKnownRow += spanSizeLookup.getSpanSize(i);
+            if (i == position && spansInLatestKnownRow == spanCount) {
+                return true;
+            }
+            if (spansInLatestKnownRow == spanCount) {
+                spansInLatestKnownRow = 0;
+            }
+        }
+        return false;
     }
 
     public interface SpanSizeLookup {
