@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ataulm.recyclerview.SpacesItemDecoration;
+import com.ataulm.recyclerview.SpanSizeLookup;
+
 public class MyActivity extends Activity {
 
     @Override
@@ -16,8 +19,8 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
 
         RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
-        final int spanCount = 3;
-        final SpacesItemDecoration.SpanSizeLookup spanSizeLookup = new SpacesItemDecoration.SpanSizeLookup() {
+        final int spanCount = 1;
+        final SpanSizeLookup spanSizeLookup = new SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 return 1;

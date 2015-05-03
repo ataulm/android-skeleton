@@ -25,11 +25,11 @@ public class ItemView extends TextView {
         update(position);
     }
 
-    void update(String place) {
+    public void update(String place) {
         this.place = place;
     }
 
-    void update(int position) {
+    public void update(int position) {
         this.position = position;
         String state = isPressed() ? "pressed" : isFocused() ? "focused" : "default";
         setText("Item " + position +
