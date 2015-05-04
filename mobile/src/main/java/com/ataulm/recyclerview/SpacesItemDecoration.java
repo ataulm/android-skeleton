@@ -6,30 +6,46 @@ import android.view.View;
 
 import com.ataulm.basic.ItemView;
 
-public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+public final class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
-    private final int horizontalSpacing;
     private final int verticalSpacing;
     private final SpanSizeLookup spanSizeLookup;
 
-    public SpacesItemDecoration(int horizontalSpacing, int verticalSpacing, SpanSizeLookup spanSizeLookup) {
-        this.horizontalSpacing = horizontalSpacing;
+    private final int horizontalSpacingMinor;
+    private final int horizontalSpacingHalf;
+    private final int horizontalSpacingMajor;
+
+    private Grid grid;
+
+    public static SpacesItemDecoration newInstance(int horizontalSpacing, int verticalSpacing, SpanSizeLookup spanSizeLookup) {
+        int maxSpansInRow = spanSizeLookup.getSpanCount();
+        int numberOfGaps = maxSpansInRow - 1;
+        int horizontalSpacingMajor = (int) (1f * numberOfGaps * horizontalSpacing / maxSpansInRow);
+        int horizontalSpacingHalf = (int) (horizontalSpacing * 0.5);
+        int horizontalSpacingMinor = horizontalSpacing - horizontalSpacingMajor;
+
+        return new SpacesItemDecoration(verticalSpacing, spanSizeLookup, horizontalSpacingMinor, horizontalSpacingHalf, horizontalSpacingMajor);
+    }
+
+    private SpacesItemDecoration(int verticalSpacing, SpanSizeLookup spanSizeLookup, int horizontalSpacingMinor, int horizontalSpacingHalf, int horizontalSpacingMajor) {
         this.verticalSpacing = verticalSpacing;
         this.spanSizeLookup = spanSizeLookup;
+        this.horizontalSpacingMinor = horizontalSpacingMinor;
+        this.horizontalSpacingHalf = horizontalSpacingHalf;
+        this.horizontalSpacingMajor = horizontalSpacingMajor;
+    }
+
+    public void onDatasetChanged() {
+        grid = null;
     }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        Grid grid = Grid.newInstance(parent.getAdapter().getItemCount(), spanSizeLookup);
-        int maxSpansInRow = spanSizeLookup.getSpanCount();
-        int numberOfGaps = maxSpansInRow - 1;
-        int majorSpace = (int) (1f * numberOfGaps / maxSpansInRow * horizontalSpacing);
-        int halfSpace = (int) (horizontalSpacing * 0.5);
-        int minorSpace = horizontalSpacing - majorSpace;
-
+        if (grid == null) {
+            grid = Grid.newInstance(parent.getAdapter().getItemCount(), spanSizeLookup);
+        }
         int position = parent.getChildPosition(view);
-        adjustOffsets(grid, position, outRect, minorSpace, halfSpace, majorSpace, verticalSpacing);
-
+        adjustOffsets(grid, position, outRect, horizontalSpacingMinor, horizontalSpacingHalf, horizontalSpacingMajor, verticalSpacing);
         updateDebugInfo(grid, position, (ItemView) view);
     }
 

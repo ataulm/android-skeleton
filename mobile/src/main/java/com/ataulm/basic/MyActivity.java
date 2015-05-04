@@ -56,7 +56,7 @@ public class MyActivity extends Activity {
         listview.setLayoutManager(layoutManager);
 
         int spacing = getResources().getDimensionPixelSize(R.dimen.spacing);
-        listview.addItemDecoration(new SpacesItemDecoration(spacing, spacing, SPAN_SIZE_LOOKUP));
+        listview.addItemDecoration(SpacesItemDecoration.newInstance(spacing, spacing, SPAN_SIZE_LOOKUP));
         listview.setAdapter(new DummyRecyclerAdapter(getLayoutInflater()));
     }
 
