@@ -15,7 +15,7 @@ import com.ataulm.recyclerview.SpanSizeLookup;
 
 public class MyActivity extends Activity {
 
-    private static final boolean USE_RECYCLER_VIEW = false;
+    private static final boolean USE_RECYCLER_VIEW = true;
     private static final int DUMMY_ITEM_COUNT = 25;
     private static final int SPAN_COUNT = 4;
 

@@ -20,8 +20,6 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        applyDefaultVerticalOffsets(outRect, verticalSpacing);
-
         Grid grid = Grid.newInstance(parent.getAdapter().getItemCount(), spanSizeLookup);
         int maxSpansInRow = spanSizeLookup.getSpanCount();
         int numberOfGaps = maxSpansInRow - 1;
@@ -30,24 +28,24 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         int minorSpace = horizontalSpacing - majorSpace;
 
         int position = parent.getChildPosition(view);
-        adjustOffsets(grid, position, outRect, minorSpace, halfSpace, majorSpace);
+        adjustOffsets(grid, position, outRect, minorSpace, halfSpace, majorSpace, verticalSpacing);
 
         updateDebugInfo(grid, position, (ItemView) view);
     }
 
-    private static void applyDefaultVerticalOffsets(Rect outRect, int verticalSpacing) {
-        outRect.top = verticalSpacing / 2;
-        outRect.bottom = verticalSpacing / 2;
-    }
-
-    private static void adjustOffsets(Grid grid, int itemPosition, Rect outRect, int minorItemMarginSpace, int halfSpace, int majorItemMarginSpace) {
+    private static void adjustOffsets(Grid grid, int itemPosition, Rect outRect, int minorItemMarginSpace, int halfSpace, int majorItemMarginSpace, int verticalSpacing) {
         adjustHorizontalOffsets(grid, itemPosition, outRect, minorItemMarginSpace, halfSpace, majorItemMarginSpace);
 
         if (grid.itemIsInFirstRow(itemPosition)) {
-            outRect.top = 0; // TODO
+            outRect.top = 0;
+        } else {
+            outRect.top = verticalSpacing / 2;
         }
+
         if (grid.itemIsInLastRow(itemPosition)) {
-            outRect.bottom = 0; // TODO
+            outRect.bottom = 0;
+        } else {
+            outRect.bottom = verticalSpacing / 2;
         }
     }
 
