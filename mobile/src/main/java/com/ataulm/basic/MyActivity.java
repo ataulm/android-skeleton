@@ -9,7 +9,6 @@ public class MyActivity extends Activity {
 
     private BreakfastBarLayout breakfastBarLayout;
     private Toast toast;
-    private int count;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,5 +74,7 @@ public class MyActivity extends Activity {
         toast = Toast.makeText(MyActivity.this, message, Toast.LENGTH_SHORT);
         toast.show();
     }
+
+
 
 }
