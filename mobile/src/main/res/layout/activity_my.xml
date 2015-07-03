@@ -6,6 +6,7 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:nextFocusDown="@+id/breakfast_bar"
     android:orientation="vertical">
 
     <TextView
@@ -51,12 +52,14 @@
   </LinearLayout>
 
   <com.ataulm.basic.BreakfastBarLayout
-    android:id="@+id/breakfast_bar"
+    android:id="@id/breakfast_bar"
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:layout_gravity="bottom"
-    android:background="@color/breakfast_bar_background"
-    android:focusable="true"
+    android:background="@drawable/breakfast_bar_background"
+    android:focusable="false"
+    android:nextFocusDown="@+id/breakfast_bar_text_action"
+    android:nextFocusRight="@+id/breakfast_bar_text_action"
     android:visibility="gone">
 
     <TextView
@@ -74,7 +77,7 @@
       android:layout_weight="100" />
 
     <TextView
-      android:id="@+id/breakfast_bar_text_action"
+      android:id="@id/breakfast_bar_text_action"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:layout_gravity="center"

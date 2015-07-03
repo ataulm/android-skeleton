@@ -28,6 +28,7 @@ public class MyActivity extends Activity {
                         itemOne.setVisibility(View.VISIBLE);
                         itemTwo.setVisibility(View.VISIBLE);
                         itemThree.setVisibility(View.VISIBLE);
+                        breakfastBarLayout.setVisibility(View.GONE);
                     }
                 }
         );
@@ -64,7 +65,7 @@ public class MyActivity extends Activity {
         breakfastBarLayout.setMessage(message);
         breakfastBarLayout.setAction("UNDO", undoClickListener);
         breakfastBarLayout.setVisibility(View.VISIBLE);
-        breakfastBarLayout.requestFocus();
+
     }
 
     private void toast(String message) {
