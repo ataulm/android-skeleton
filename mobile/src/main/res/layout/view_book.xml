@@ -7,3 +7,12 @@
   android:gravity="center"
   android:padding="16dp"
   android:background="@drawable/book_background" />
+
+<TextView
+  android:layout_width="match_parent"
+  android:layout_height="150dp"
+  android:focusable="true"
+android:textSize="20sp"
+android:gravity="center"
+android:padding="16dp"
+android:background="@drawable/book_background" />
