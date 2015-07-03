@@ -24,7 +24,7 @@ class BooksAdapter extends RecyclerView.Adapter<BookViewHolder> {
 
     @Override
     public void onBindViewHolder(BookViewHolder holder, int position) {
-        String book = bookProvider.getBook(position);
+        String book = bookProvider.getBook(position).getBookName();
         holder.bind(book, listener);
     }
 
