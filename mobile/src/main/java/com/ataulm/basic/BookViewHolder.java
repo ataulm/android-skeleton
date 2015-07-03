@@ -20,13 +20,13 @@ final class BookViewHolder extends RecyclerView.ViewHolder {
         this.titleView = titleView;
     }
 
-    public void bind(final String bookname, final BookInteractionsListener listener) {
-        titleView.setText(bookname);
+    public void bind(final Book book, final BookInteractionsListener listener) {
+        titleView.setText(book.getBookName());
         titleView.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        listener.onClickBook(bookname);
+                        listener.onClickBook(book.getBookName());
                     }
                 }
         );
