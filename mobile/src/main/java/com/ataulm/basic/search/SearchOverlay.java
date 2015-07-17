@@ -29,7 +29,7 @@ public class SearchOverlay extends FrameLayout {
     }
 
     private void initialiseViews() {
-        View backButton = findViewById(R.id.search_overlay_back);
+        View backButton = findViewById(R.id.search_overlay_dismiss);
         backButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

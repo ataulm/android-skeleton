@@ -10,10 +10,10 @@
     android:background="@android:color/holo_blue_dark">
 
     <ImageView
-      android:id="@+id/search_overlay_back"
+      android:id="@+id/search_overlay_dismiss"
       android:layout_width="48dp"
       android:layout_height="48dp"
-      android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
+      android:src="@drawable/ic_search_dismiss" />
 
     <EditText
       android:id="@+id/search_overlay_input"
@@ -26,7 +26,7 @@
       android:id="@+id/search_overlay_clear_text"
       android:layout_width="48dp"
       android:layout_height="48dp"
-      android:src="@drawable/abc_ic_clear_mtrl_alpha" />
+      android:src="@drawable/ic_search_clear" />
 
   </LinearLayout>
 
