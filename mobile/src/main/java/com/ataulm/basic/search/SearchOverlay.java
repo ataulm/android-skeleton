@@ -1,7 +1,10 @@
 package com.ataulm.basic.search;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -11,6 +14,8 @@ import com.ataulm.basic.R;
 public class SearchOverlay extends FrameLayout {
 
     private EditText inputEditText;
+    private RecyclerView searchSuggestionsRecyclerView;
+    private SearchSuggestionAdapter suggestionsAdapter;
 
     public SearchOverlay(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,6 +44,22 @@ public class SearchOverlay extends FrameLayout {
                 clearQuery();
             }
         });
+        searchSuggestionsRecyclerView = (RecyclerView) findViewById(R.id.search_overlay_list_suggestions);
+        searchSuggestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    public void update(SearchSuggestions searchSuggestions) {
+        if (searchSuggestionsRecyclerView.getAdapter() == null) {
+            suggestionsAdapter = new SearchSuggestionAdapter(layoutInflater());
+            suggestionsAdapter.update(searchSuggestions);
+            searchSuggestionsRecyclerView.setAdapter(suggestionsAdapter);
+        } else {
+            suggestionsAdapter.update(searchSuggestions);
+        }
+    }
+
+    private LayoutInflater layoutInflater() {
+        return LayoutInflater.from(getContext());
     }
 
     private void dismissSearchOverlay() {
