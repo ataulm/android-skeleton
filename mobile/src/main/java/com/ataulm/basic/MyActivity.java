@@ -40,33 +40,43 @@ public class MyActivity extends AppCompatActivity {
 
     private static class ListSearchSuggestions implements SearchSuggestions {
 
-        private static List<SearchSuggestion> SUGGESTIONS = Arrays.asList(
-                searchSuggestionFrom("foo"),
-                searchSuggestionFrom("bar"),
-                searchSuggestionFrom("what"),
-                searchSuggestionFrom("ladida"),
-                searchSuggestionFrom("blah"),
-                searchSuggestionFrom("mlem"),
-                searchSuggestionFrom("lorem")
+        private static List<SearchSuggestion> HISTORY_SUGGESTIONS = Arrays.asList(
+                searchSuggestionFrom("Arrow", SearchSuggestion.Type.HISTORY),
+                searchSuggestionFrom("Modern Family", SearchSuggestion.Type.HISTORY),
+                searchSuggestionFrom("Doctor Who", SearchSuggestion.Type.HISTORY),
+                searchSuggestionFrom("Flash", SearchSuggestion.Type.HISTORY)
         );
 
-        private static SearchSuggestion searchSuggestionFrom(final String name) {
+        private static List<SearchSuggestion> DOC_SUGGESTIONS = Arrays.asList(
+                searchSuggestionFrom("Doctor Who", SearchSuggestion.Type.HISTORY),
+                searchSuggestionFrom("Doc", SearchSuggestion.Type.API_KNOWN_RESULT),
+                searchSuggestionFrom("Doc Corkie", SearchSuggestion.Type.API_KNOWN_RESULT),
+                searchSuggestionFrom("Doctor", SearchSuggestion.Type.WORD_COMPLETION),
+                searchSuggestionFrom("Doctors", SearchSuggestion.Type.API_KNOWN_RESULT)
+        );
+
+        private static SearchSuggestion searchSuggestionFrom(final String name, final SearchSuggestion.Type type) {
             return new SearchSuggestion() {
                 @Override
                 public String getName() {
                     return name;
+                }
+
+                @Override
+                public Type getType() {
+                    return type;
                 }
             };
         }
 
         @Override
         public SearchSuggestion getItem(int position) {
-            return SUGGESTIONS.get(position);
+            return HISTORY_SUGGESTIONS.get(position);
         }
 
         @Override
         public int getItemCount() {
-            return SUGGESTIONS.size();
+            return HISTORY_SUGGESTIONS.size();
         }
 
     }
