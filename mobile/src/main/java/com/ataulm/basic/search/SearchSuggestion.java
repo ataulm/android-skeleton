@@ -1,6 +1,6 @@
 package com.ataulm.basic.search;
 
-interface SearchSuggestion {
+public interface SearchSuggestion {
 
     String getName();
 

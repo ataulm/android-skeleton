@@ -1,6 +1,6 @@
 package com.ataulm.basic.search;
 
-interface SearchSuggestions {
+public interface SearchSuggestions {
 
     SearchSuggestion getItem(int position);
 
