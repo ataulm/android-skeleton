@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ataulm.basic.search.SearchOverlay;
 import com.ataulm.basic.search.SearchSuggestion;
@@ -17,6 +18,7 @@ import java.util.List;
 public class MyActivity extends AppCompatActivity {
 
     private SearchOverlay searchOverlay;
+    private Toast toast;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,9 +31,27 @@ public class MyActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
+    private void toast(String message) {
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
     private void onCreateSearchOverlay() {
         searchOverlay = ((SearchOverlay) findViewById(R.id.search_overlay));
-        searchOverlay.update(dummySearchSuggestions());
+        searchOverlay.update(dummySearchSuggestions(), new SearchOverlay.SearchListener() {
+            @Override
+            public void onQueryUpdated(String query) {
+                toast("update: " + query);
+            }
+
+            @Override
+            public void onQuerySubmitted(String query) {
+                toast("submit: " + query);
+            }
+        });
     }
 
     private SearchSuggestions dummySearchSuggestions() {
