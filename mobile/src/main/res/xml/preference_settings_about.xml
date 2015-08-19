@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory
+    android:key="key_about"
+    android:title="About">
+
+    <Preference
+      android:key="key_about_lorem"
+      android:title="Lorem" />
+
+    <Preference
+      android:key="key_about_ipsum"
+      android:title="Ipsum" />
+
+  </PreferenceCategory>
+
+</PreferenceScreen>
+
