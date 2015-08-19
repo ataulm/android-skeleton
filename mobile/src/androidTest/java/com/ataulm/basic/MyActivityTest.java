@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -16,11 +17,20 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class MyActivityTest {
 
     @Rule
-    public ActivityTestRule<MyActivity> mActivityRule = new ActivityTestRule<>(MyActivity.class);
+    public ActivityTestRule<MyActivity> activityRule = new ActivityTestRule<>(MyActivity.class);
 
     @Test
     public void loremPreferenceIsDisplayed() {
         onView(withText("Lorem"))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void clickingLoremPreferenceOpensDialog() {
+        onView(withText("Lorem"))
+                .perform(click());
+
+        onView(withText("hello world"))
                 .check(matches(isDisplayed()));
     }
 
