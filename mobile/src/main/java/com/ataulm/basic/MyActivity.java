@@ -3,7 +3,6 @@ package com.ataulm.basic;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.RadioButton;
 
 public class MyActivity extends Activity {
 
@@ -20,22 +18,6 @@ public class MyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-    }
-
-    public static class HelloWorldDialogFragment extends DialogFragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.dialog_fragment_hello_world, container);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            Dialog dialog = super.onCreateDialog(savedInstanceState);
-            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-            return dialog;
-        }
-
     }
 
     public static class SettingsFragment extends PreferenceFragment {
@@ -58,6 +40,22 @@ public class MyActivity extends Activity {
 
             });
 
+        }
+
+    }
+
+    public static class HelloWorldDialogFragment extends DialogFragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.dialog_fragment_hello_world, container);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Dialog dialog = super.onCreateDialog(savedInstanceState);
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+            return dialog;
         }
 
     }
