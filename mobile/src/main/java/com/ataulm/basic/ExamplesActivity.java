@@ -1,10 +1,12 @@
 package com.ataulm.basic;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,8 +18,39 @@ public class ExamplesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examples);
 
+        /*
+            ListView supports dpad navigation by default (focus states, API-specific styles) but you need to use
+            setOnItemClickListener because using setOnClickListener on item views is only partially supported: touch
+            clicks will work, but not dpad clicks
+         */
         ListView exampleList = (ListView) findViewById(R.id.example_list);
+        exampleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Class<? extends Activity> activityClass = Example.values()[position].getActivityClass();
+                Intent intent = new Intent(ExamplesActivity.this, activityClass);
+                startActivity(intent);
+            }
+
+        });
         exampleList.setAdapter(new Examples(getLayoutInflater()));
+    }
+
+    private enum Example {
+
+        LINEAR_LAYOUT_MANAGER(LinearRecyclerViewActivity.class);
+
+        private final Class<? extends Activity> activityClass;
+
+        Example(Class<? extends Activity> activityClass) {
+            this.activityClass = activityClass;
+        }
+
+        Class<? extends Activity> getActivityClass() {
+            return activityClass;
+        }
+
     }
 
     private static class Examples extends BaseAdapter {
@@ -59,12 +92,8 @@ public class ExamplesActivity extends Activity {
         }
 
         private void bindView(int position, TextView view) {
-            view.setText(getItem(position).name());
-        }
-
-        private enum Example {
-            FOO,
-            BAR
+            Example item = getItem(position);
+            view.setText(item.name());
         }
 
     }
