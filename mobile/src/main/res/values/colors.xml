@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+  <color name="list_item_background_pressed">#9C9C9C</color>
+  <color name="list_item_background_focused">#CDCDCD</color>
+  <color name="list_item_background_default">@android:color/transparent</color>
+</resources>

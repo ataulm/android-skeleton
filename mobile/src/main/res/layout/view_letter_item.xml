@@ -8,4 +8,5 @@
   android:paddingTop="8dp"
   android:paddingRight="16dp"
   android:paddingBottom="8dp"
-  android:focusable="true" />
+  android:focusable="true"
+  android:background="@drawable/list_item_background" />

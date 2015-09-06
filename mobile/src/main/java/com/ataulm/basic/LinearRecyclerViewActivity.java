@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LinearRecyclerViewActivity extends Activity {
 
@@ -26,6 +27,7 @@ public class LinearRecyclerViewActivity extends Activity {
     private static class Examples extends RecyclerView.Adapter<Examples.LetterViewHolder> {
 
         private final LayoutInflater layoutInflater;
+        private Toast toast;
 
         Examples(LayoutInflater layoutInflater) {
             this.layoutInflater = layoutInflater;
@@ -39,9 +41,21 @@ public class LinearRecyclerViewActivity extends Activity {
 
         @Override
         public void onBindViewHolder(LetterViewHolder holder, int position) {
-            Character item = getItem(position);
+            final Character item = getItem(position);
             ((TextView) holder.itemView).setText(item.getTelephony());
             holder.itemView.setContentDescription(item.getPhonicPronunciation());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (toast != null) {
+                        toast.cancel();
+                    }
+                    toast = Toast.makeText(v.getContext(), "clicked: " + item.name(), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
+            });
         }
 
         @Override
