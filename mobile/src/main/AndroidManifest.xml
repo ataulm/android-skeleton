@@ -9,6 +9,8 @@
 
     <activity android:name=".ExamplesActivity" />
     <activity android:name=".LinearRecyclerViewActivity" />
+    <activity android:name=".GridRecyclerViewActivity" />
+    <activity android:name=".BigGridRecyclerViewActivity" />
 
     <activity-alias
       android:name="activity.primary_launcher"

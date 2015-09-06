@@ -2,6 +2,7 @@ package com.ataulm.basic;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,17 +11,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LinearRecyclerViewActivity extends Activity {
+public class GridRecyclerViewActivity extends Activity {
+
+    private static final int SPAN_COUNT = 3;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_linear_recycler_view);
+        setContentView(R.layout.activity_grid_recycler_view);
 
         RecyclerView list = (RecyclerView) findViewById(R.id.list);
         RecyclerView.Adapter adapter = new Examples(getLayoutInflater());
         adapter.setHasStableIds(true);
-        list.setLayoutManager(new LinearLayoutManager(this));
+        list.setLayoutManager(new GridLayoutManager(this, SPAN_COUNT));
         list.setAdapter(adapter);
     }
 

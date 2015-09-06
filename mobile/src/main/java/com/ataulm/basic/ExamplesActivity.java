@@ -39,7 +39,9 @@ public class ExamplesActivity extends Activity {
 
     private enum Example {
 
-        LINEAR_LAYOUT_MANAGER(LinearRecyclerViewActivity.class);
+        LINEAR_LAYOUT_MANAGER(LinearRecyclerViewActivity.class),
+        GRID_LAYOUT_MANAGER(GridRecyclerViewActivity.class),
+        BIG_GRID_LAYOUT_MANAGER(BigGridRecyclerViewActivity.class);
 
         private final Class<? extends Activity> activityClass;
 
