@@ -41,7 +41,8 @@ public class ExamplesActivity extends Activity {
 
         LINEAR_LAYOUT_MANAGER(LinearRecyclerViewActivity.class),
         GRID_LAYOUT_MANAGER(GridRecyclerViewActivity.class),
-        BIG_GRID_LAYOUT_MANAGER(BigGridRecyclerViewActivity.class);
+        BIG_GRID_LAYOUT_MANAGER(BigGridRecyclerViewActivity.class),
+        GRID_WITH_ACTIONS_LAYOUT_MANAGER(GridWithActionsRecyclerViewActivity.class);
 
         private final Class<? extends Activity> activityClass;
 

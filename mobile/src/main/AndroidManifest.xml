@@ -11,6 +11,7 @@
     <activity android:name=".LinearRecyclerViewActivity" />
     <activity android:name=".GridRecyclerViewActivity" />
     <activity android:name=".BigGridRecyclerViewActivity" />
+    <activity android:name=".GridWithActionsRecyclerViewActivity" />
 
     <activity-alias
       android:name="activity.primary_launcher"
