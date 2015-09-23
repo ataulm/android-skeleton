@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class ExamplesActivity extends Activity {
 
     @Override
@@ -39,6 +41,9 @@ public class ExamplesActivity extends Activity {
 
     private enum Example {
 
+        TRIVIAL(TrivialActivity.class),
+        LOTS_OF_TEXT_IN_SINGLE_VIEW(LongTextActivity.class),
+        NON_FOCUSABLE_RV(NonFocusableItemRecyclerViewActivity.class),
         LINEAR_LAYOUT_MANAGER(LinearRecyclerViewActivity.class),
         GRID_LAYOUT_MANAGER(GridRecyclerViewActivity.class),
         BIG_GRID_LAYOUT_MANAGER(BigGridRecyclerViewActivity.class),
@@ -96,7 +101,7 @@ public class ExamplesActivity extends Activity {
 
         private void bindView(int position, TextView view) {
             Example item = getItem(position);
-            view.setText(item.name());
+            view.setText(item.name().replace('_', ' ').toLowerCase(Locale.UK));
         }
 
     }

@@ -34,8 +34,7 @@
       android:layout_height="48dp"
       android:padding="8dp"
       android:src="@drawable/star"
-      android:tint="#fad951"
-      android:contentDescription="Favourite" />
+      android:tint="#fad951" />
 
   </LinearLayout>
 

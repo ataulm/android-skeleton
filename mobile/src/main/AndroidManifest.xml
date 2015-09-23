@@ -8,8 +8,11 @@
     android:theme="@style/AppTheme">
 
     <activity android:name=".ExamplesActivity" />
+    <activity android:name=".TrivialActivity" />
+    <activity android:name=".LongTextActivity" />
     <activity android:name=".LinearRecyclerViewActivity" />
     <activity android:name=".GridRecyclerViewActivity" />
+    <activity android:name=".NonFocusableItemRecyclerViewActivity" />
     <activity android:name=".BigGridRecyclerViewActivity" />
     <activity android:name=".GridWithActionsRecyclerViewActivity" />
 
