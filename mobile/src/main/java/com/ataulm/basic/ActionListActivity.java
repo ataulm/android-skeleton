@@ -15,9 +15,12 @@ import com.ataulm.rv.SpacesItemDecoration;
 
 public class ActionListActivity extends Activity implements CharacterClickListener {
 
-    public static final int VARIANT_DEFAULT = 0;
-    public static final int VARIANT_CLICKABLE_TRUE = 1;
-    public static final int VARIANT_CLICK_LISTENER = 2;
+    public static final int VARIANT_NO_CLICK = 0;
+    public static final int VARIANT_NO_CLICK_FOO_IMAGE = 1;
+    public static final int VARIANT_CLICKABLE_TRUE = 2;
+    public static final int VARIANT_WITH_CLICK = 3;
+    public static final int VARIANT_WITH_CLICK_FOO_IMAGE = 4;
+    public static final int VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE = 5;
 
     private View characterView;
     private ImageView characterImageView;
@@ -38,7 +41,7 @@ public class ActionListActivity extends Activity implements CharacterClickListen
         RecyclerView actionListView = (RecyclerView) findViewById(R.id.action_list_view);
         actionListView.setLayoutManager(new LinearLayoutManager(this));
         actionListView.addItemDecoration(SpacesItemDecoration.newInstance(4, 4, 1));
-        actionListView.setAdapter(new ActionListAdapter(getLayoutInflater(), getIntent().getIntExtra(ExamplesActivity.EXTRA_VARIANT, VARIANT_DEFAULT), this));
+        actionListView.setAdapter(new ActionListAdapter(getLayoutInflater(), getIntent().getIntExtra(ExamplesActivity.EXTRA_VARIANT, VARIANT_NO_CLICK), this));
     }
 
     @Override
@@ -83,27 +86,63 @@ public class ActionListActivity extends Activity implements CharacterClickListen
             holder.setSublabel(character.getDescription());
 
             setClickListener(holder, character);
+            setImageContentDescription(holder);
+            setImageImportantForAccessibility(holder);
+        }
+
+        private void setImageContentDescription(ActionListItemViewHolder holder) {
+            if (shouldSetFooContentDescription()) {
+                holder.iconView.setContentDescription("foo");
+                return;
+            }
+        }
+
+        private void setImageImportantForAccessibility(ActionListItemViewHolder holder) {
+            if (shouldSetImportantForAccessibilityNo()) {
+                holder.iconView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+                return;
+            }
+        }
+
+        private boolean shouldSetImportantForAccessibilityNo() {
+            return variant == ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE;
+        }
+
+        private boolean shouldSetFooContentDescription() {
+            return variant == ActionListActivity.VARIANT_NO_CLICK_FOO_IMAGE | variant == ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE | variant == ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE;
         }
 
         private void setClickListener(ActionListItemViewHolder holder, final Character character) {
-            switch (variant) {
-                case ActionListActivity.VARIANT_CLICKABLE_TRUE:
-                    holder.itemView.setClickable(true);
-                    return;
-                case ActionListActivity.VARIANT_CLICK_LISTENER:
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            listener.onClick(character);
-                        }
-                    });
-                    return;
-                case ActionListActivity.VARIANT_DEFAULT:
-                    // do nothing
-                    return;
-                default:
-                    throw new IllegalStateException("Unexpected variant: " + variant);
+            if (shouldHaveNoClickNorBeClickable()) {
+                return;
             }
+
+            if (shouldBeClickable()) {
+                holder.itemView.setClickable(true);
+                return;
+            }
+
+            if (shouldAddClickListener()) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onClick(character);
+                    }
+                });
+                return;
+            }
+        }
+
+        private boolean shouldHaveNoClickNorBeClickable() {
+            return variant == VARIANT_NO_CLICK || variant == VARIANT_NO_CLICK_FOO_IMAGE;
+        }
+
+        private boolean shouldBeClickable() {
+            return variant == VARIANT_CLICKABLE_TRUE;
+        }
+
+        private boolean shouldAddClickListener() {
+            return variant == VARIANT_WITH_CLICK || variant == VARIANT_WITH_CLICK_FOO_IMAGE || variant == VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE;
         }
 
         @Override

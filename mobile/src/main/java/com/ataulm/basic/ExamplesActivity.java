@@ -38,9 +38,12 @@ public class ExamplesActivity extends Activity {
     private enum Example {
 
         HELLO("Hello", HelloActivity.class),
-        DEFAULT_ACTION_LIST("List with no actions", ActionListActivity.class, ActionListActivity.VARIANT_DEFAULT),
-        CLICKABLE_ACTION_LIST("List (clickable=\"true\")", ActionListActivity.class, ActionListActivity.VARIANT_CLICKABLE_TRUE),
-        CLICK_LISTENER_ACTION_LIST("List (actual click listener)", ActionListActivity.class, ActionListActivity.VARIANT_CLICK_LISTENER);
+        DEFAULT_ACTION_LIST("List with no click", ActionListActivity.class, ActionListActivity.VARIANT_NO_CLICK),
+        NO_CLICK_FOO_IMAGE_ACTION_LIST("List with no click, but foo image", ActionListActivity.class, ActionListActivity.VARIANT_NO_CLICK_FOO_IMAGE),
+        CLICKABLE_ACTION_LIST("List (clickable=\"true\" attr)", ActionListActivity.class, ActionListActivity.VARIANT_CLICKABLE_TRUE),
+        CLICK_LISTENER_ACTION_LIST("List (real click listener)", ActionListActivity.class, ActionListActivity.VARIANT_WITH_CLICK),
+        FOO_IMAGE_ACTION_LIST("List (imageview with foo content description)", ActionListActivity.class, ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE),
+        FOO_NOT_IMPORTANT_IMAGE_ACTION_LIST("List (imageview with foo content description, and not important)", ActionListActivity.class, ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE);
 
         private final String name;
         private final Class<? extends Activity> activityClass;
