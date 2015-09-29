@@ -15,6 +15,10 @@ import com.ataulm.rv.SpacesItemDecoration;
 
 public class ActionListActivity extends Activity implements CharacterClickListener {
 
+    public static final int VARIANT_DEFAULT = 0;
+    public static final int VARIANT_CLICKABLE_TRUE = 1;
+    public static final int VARIANT_CLICK_LISTENER = 2;
+
     private View characterView;
     private ImageView characterImageView;
     private TextView characterLabelTextView;
@@ -34,7 +38,7 @@ public class ActionListActivity extends Activity implements CharacterClickListen
         RecyclerView actionListView = (RecyclerView) findViewById(R.id.action_list_view);
         actionListView.setLayoutManager(new LinearLayoutManager(this));
         actionListView.addItemDecoration(SpacesItemDecoration.newInstance(4, 4, 1));
-        actionListView.setAdapter(new ActionListAdapter(getLayoutInflater(), this));
+        actionListView.setAdapter(new ActionListAdapter(getLayoutInflater(), getIntent().getIntExtra(ExamplesActivity.EXTRA_VARIANT, VARIANT_DEFAULT), this));
     }
 
     @Override
@@ -57,10 +61,12 @@ public class ActionListActivity extends Activity implements CharacterClickListen
     private static class ActionListAdapter extends RecyclerView.Adapter<ActionListItemViewHolder> {
 
         private final LayoutInflater layoutInflater;
+        private final int variant;
         private final CharacterClickListener listener;
 
-        ActionListAdapter(LayoutInflater layoutInflater, CharacterClickListener listener) {
+        ActionListAdapter(LayoutInflater layoutInflater, int variant, CharacterClickListener listener) {
             this.layoutInflater = layoutInflater;
+            this.variant = variant;
             this.listener = listener;
         }
 
@@ -76,12 +82,28 @@ public class ActionListActivity extends Activity implements CharacterClickListen
             holder.setLabel(character.getName());
             holder.setSublabel(character.getDescription());
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClick(character);
-                }
-            });
+            setClickListener(holder, character);
+        }
+
+        private void setClickListener(ActionListItemViewHolder holder, final Character character) {
+            switch (variant) {
+                case ActionListActivity.VARIANT_CLICKABLE_TRUE:
+                    holder.itemView.setClickable(true);
+                    return;
+                case ActionListActivity.VARIANT_CLICK_LISTENER:
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            listener.onClick(character);
+                        }
+                    });
+                    return;
+                case ActionListActivity.VARIANT_DEFAULT:
+                    // do nothing
+                    return;
+                default:
+                    throw new IllegalStateException("Unexpected variant: " + variant);
+            }
         }
 
         @Override

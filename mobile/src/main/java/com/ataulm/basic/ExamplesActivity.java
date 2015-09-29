@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public class ExamplesActivity extends Activity {
 
+    public static final String EXTRA_VARIANT = "VARIANT";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class ExamplesActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Class<? extends Activity> activityClass = Example.values()[position].getActivityClass();
                 Intent intent = new Intent(ExamplesActivity.this, activityClass)
-                        .putExtra("VARIANT", Example.values()[position].getVariant());
+                        .putExtra(EXTRA_VARIANT, Example.values()[position].getVariant());
                 startActivity(intent);
             }
 
@@ -35,8 +37,10 @@ public class ExamplesActivity extends Activity {
 
     private enum Example {
 
-        HELLO("Hello (1)", HelloActivity.class),
-        ACTION_LIST("RecyclerView", ActionListActivity.class);
+        HELLO("Hello", HelloActivity.class),
+        DEFAULT_ACTION_LIST("List with no actions", ActionListActivity.class, ActionListActivity.VARIANT_DEFAULT),
+        CLICKABLE_ACTION_LIST("List (clickable=\"true\")", ActionListActivity.class, ActionListActivity.VARIANT_CLICKABLE_TRUE),
+        CLICK_LISTENER_ACTION_LIST("List (actual click listener)", ActionListActivity.class, ActionListActivity.VARIANT_CLICK_LISTENER);
 
         private final String name;
         private final Class<? extends Activity> activityClass;
