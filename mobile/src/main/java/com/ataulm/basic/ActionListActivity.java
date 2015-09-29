@@ -2,6 +2,7 @@ package com.ataulm.basic;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,6 +42,11 @@ public class ActionListActivity extends Activity implements CharacterClickListen
         Intent intent = new Intent(this, CharacterActivity.class);
         intent.putExtra(CharacterActivity.EXTRA_CHARACTER, character);
         startActivity(intent);
+    }
+
+    @Override
+    public void onClickAction(Character character) {
+        Toaster.display(this, "clicked: " + character.name());
     }
 
     private static class ActionListAdapter extends RecyclerView.Adapter<ActionListItemViewHolder> {
@@ -126,6 +132,14 @@ public class ActionListActivity extends Activity implements CharacterClickListen
                         listener.onClick(character);
                     }
                 });
+                holder.actionImageView.setVisibility(View.VISIBLE);
+                holder.actionImageView.setContentDescription("action " + character.getName());
+                holder.actionImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onClickAction(character);
+                    }
+                });
                 return;
             }
         }
@@ -157,20 +171,24 @@ public class ActionListActivity extends Activity implements CharacterClickListen
         private final View iconView;
         private final TextView labelTextView;
         private final TextView sublabelTextView;
+        private final ImageView actionImageView;
 
         static ActionListItemViewHolder inflate(LayoutInflater layoutInflater, ViewGroup root) {
             View view = layoutInflater.inflate(R.layout.view_action_list_item, root, false);
             View iconView = view.findViewById(R.id.action_list_item_view_icon);
             TextView labelTextView = (TextView) view.findViewById(R.id.action_list_item_text_label);
             TextView sublabelTextView = (TextView) view.findViewById(R.id.action_list_item_text_sublabel);
-            return new ActionListItemViewHolder(view, iconView, labelTextView, sublabelTextView);
+            ImageView actionImageView = (ImageView) view.findViewById(R.id.action_list_item_image_action);
+            actionImageView.setBackgroundColor(Color.parseColor("#3DF2B1"));
+            return new ActionListItemViewHolder(view, iconView, labelTextView, sublabelTextView, actionImageView);
         }
 
-        private ActionListItemViewHolder(View itemView, View iconView, TextView labelTextView, TextView sublabelTextView) {
+        private ActionListItemViewHolder(View itemView, View iconView, TextView labelTextView, TextView sublabelTextView, ImageView actionImageView) {
             super(itemView);
             this.iconView = iconView;
             this.labelTextView = labelTextView;
             this.sublabelTextView = sublabelTextView;
+            this.actionImageView = actionImageView;
         }
 
         public void setIconColor(@ColorInt int color) {
