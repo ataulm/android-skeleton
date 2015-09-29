@@ -6,4 +6,5 @@ interface CharacterClickListener {
 
     void onClickAction(Character character);
 
+    void onLongClick(Character character);
 }

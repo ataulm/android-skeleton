@@ -1,10 +1,12 @@
 package com.ataulm.basic;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ public class ActionListActivity extends Activity implements CharacterClickListen
     public static final int VARIANT_WITH_CLICK_FOO_IMAGE = 4;
     public static final int VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE = 5;
     public static final int VARIANT_WITH_CLICK_CD_ON_ITEM_FOO_IMAGE = 6;
+    private AccessibilityEnabledChecker accessibilityEnabledChecker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,9 @@ public class ActionListActivity extends Activity implements CharacterClickListen
         RecyclerView actionListView = (RecyclerView) findViewById(R.id.action_list_view);
         actionListView.setLayoutManager(new LinearLayoutManager(this));
         actionListView.addItemDecoration(SpacesItemDecoration.newInstance(4, 4, 1));
-        actionListView.setAdapter(new ActionListAdapter(getLayoutInflater(), getIntent().getIntExtra(ExamplesActivity.EXTRA_VARIANT, VARIANT_NO_CLICK), this));
+
+        accessibilityEnabledChecker = AccessibilityEnabledChecker.newInstance(this);
+        actionListView.setAdapter(new ActionListAdapter(getLayoutInflater(), getIntent().getIntExtra(ExamplesActivity.EXTRA_VARIANT, VARIANT_NO_CLICK), this, accessibilityEnabledChecker));
     }
 
     @Override
@@ -46,19 +51,38 @@ public class ActionListActivity extends Activity implements CharacterClickListen
 
     @Override
     public void onClickAction(Character character) {
-        Toaster.display(this, "clicked: " + character.name());
+        Toaster.display(this, "inline action pressed for " + character.getName());
     }
+
+    @Override
+    public void onLongClick(final Character character) {
+        new AlertDialog.Builder(this)
+                .setItems(DIALOG_ITEMS, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if ("cancel".equals(DIALOG_ITEMS[which])) {
+                            dialog.dismiss();
+                        }
+                        Toaster.display(ActionListActivity.this, character.getName() + " click " + DIALOG_ITEMS[which]);
+                    }
+                })
+                .show();
+    }
+
+    private static final CharSequence[] DIALOG_ITEMS = {"Add to favourites", "Share", "Cancel"};
 
     private static class ActionListAdapter extends RecyclerView.Adapter<ActionListItemViewHolder> {
 
         private final LayoutInflater layoutInflater;
         private final int variant;
         private final CharacterClickListener listener;
+        private final AccessibilityEnabledChecker accessibilityEnabledChecker;
 
-        ActionListAdapter(LayoutInflater layoutInflater, int variant, CharacterClickListener listener) {
+        ActionListAdapter(LayoutInflater layoutInflater, int variant, CharacterClickListener listener, AccessibilityEnabledChecker accessibilityEnabledChecker) {
             this.layoutInflater = layoutInflater;
             this.variant = variant;
             this.listener = listener;
+            this.accessibilityEnabledChecker = accessibilityEnabledChecker;
         }
 
         @Override
@@ -127,20 +151,41 @@ public class ActionListActivity extends Activity implements CharacterClickListen
 
             if (shouldAddClickListener()) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
                         listener.onClick(character);
                     }
+
                 });
+
                 holder.actionImageView.setVisibility(View.VISIBLE);
                 holder.actionImageView.setContentDescription("action " + character.getName());
                 holder.actionImageView.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
                         listener.onClickAction(character);
                     }
+
                 });
-                return;
+
+                if (accessibilityEnabledChecker.isTouchExplorationEnabled()) {
+                    holder.actionImageView.setVisibility(View.GONE);
+                    // alternative!
+                    holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+
+                        @Override
+                        public boolean onLongClick(View v) {
+                            listener.onLongClick(character);
+                            return true;
+                        }
+
+                    });
+                } else {
+                    holder.actionImageView.setVisibility(View.VISIBLE);
+                }
+
             }
         }
 
