@@ -11,8 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 public class ExamplesActivity extends Activity {
 
     @Override
@@ -20,18 +18,14 @@ public class ExamplesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examples);
 
-        /*
-            ListView supports dpad navigation by default (focus states, API-specific styles) but you need to use
-            setOnItemClickListener because using setOnClickListener on item views is only partially supported: touch
-            clicks will work, but not dpad clicks
-         */
         ListView exampleList = (ListView) findViewById(R.id.example_list);
         exampleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Class<? extends Activity> activityClass = Example.values()[position].getActivityClass();
-                Intent intent = new Intent(ExamplesActivity.this, activityClass);
+                Intent intent = new Intent(ExamplesActivity.this, activityClass)
+                        .putExtra("VARIANT", Example.values()[position].getVariant());
                 startActivity(intent);
             }
 
@@ -41,22 +35,33 @@ public class ExamplesActivity extends Activity {
 
     private enum Example {
 
-        TRIVIAL(TrivialActivity.class),
-        LOTS_OF_TEXT_IN_SINGLE_VIEW(LongTextActivity.class),
-        NON_FOCUSABLE_RV(NonFocusableItemRecyclerViewActivity.class),
-        LINEAR_LAYOUT_MANAGER(LinearRecyclerViewActivity.class),
-        GRID_LAYOUT_MANAGER(GridRecyclerViewActivity.class),
-        BIG_GRID_LAYOUT_MANAGER(BigGridRecyclerViewActivity.class),
-        GRID_WITH_ACTIONS_LAYOUT_MANAGER(GridWithActionsRecyclerViewActivity.class);
+        HELLO("Hello (1)", HelloActivity.class),
+        ACTION_LIST("RecyclerView", ActionListActivity.class);
 
+        private final String name;
         private final Class<? extends Activity> activityClass;
+        private final int variant;
 
-        Example(Class<? extends Activity> activityClass) {
+        Example(String name, Class<? extends Activity> activityClass) {
+            this(name, activityClass, 0);
+        }
+
+        Example(String name, Class<? extends Activity> activityClass, int variant) {
+            this.name = name;
             this.activityClass = activityClass;
+            this.variant = variant;
+        }
+
+        String getName() {
+            return name;
         }
 
         Class<? extends Activity> getActivityClass() {
             return activityClass;
+        }
+
+        int getVariant() {
+            return variant;
         }
 
     }
@@ -101,7 +106,7 @@ public class ExamplesActivity extends Activity {
 
         private void bindView(int position, TextView view) {
             Example item = getItem(position);
-            view.setText(item.name().replace('_', ' ').toLowerCase(Locale.UK));
+            view.setText(item.getName());
         }
 
     }

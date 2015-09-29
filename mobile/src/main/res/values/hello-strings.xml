@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="hello_toggle_visibility">Show/hide content</string>
+  <string name="hello_instructions">Click on the button below to say \"hello\" to Android, and it\'ll respond!</string>
+  <string name="hello_android">Hello Android</string>
+
+</resources>
