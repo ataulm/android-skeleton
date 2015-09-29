@@ -43,7 +43,8 @@ public class ExamplesActivity extends Activity {
         CLICKABLE_ACTION_LIST("List (clickable=\"true\" attr)", ActionListActivity.class, ActionListActivity.VARIANT_CLICKABLE_TRUE),
         CLICK_LISTENER_ACTION_LIST("List (real click listener)", ActionListActivity.class, ActionListActivity.VARIANT_WITH_CLICK),
         FOO_IMAGE_ACTION_LIST("List (imageview with foo content description)", ActionListActivity.class, ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE),
-        FOO_NOT_IMPORTANT_IMAGE_ACTION_LIST("List (imageview with foo content description, and not important)", ActionListActivity.class, ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE);
+        FOO_NOT_IMPORTANT_IMAGE_ACTION_LIST("List (imageview with foo content description, and not important)", ActionListActivity.class, ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE),
+        CD_ITEM_FOO_IMAGE_ACTION_LIST("List (item with cd, imageview with foo content description)", ActionListActivity.class, ActionListActivity.VARIANT_WITH_CLICK_CD_ON_ITEM_FOO_IMAGE);
 
         private final String name;
         private final Class<? extends Activity> activityClass;

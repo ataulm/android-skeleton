@@ -9,6 +9,7 @@
 
     <activity android:name=".ExamplesActivity" />
     <activity android:name=".HelloActivity" />
+    <activity android:name=".CharacterActivity" />
     <activity android:name=".ActionListActivity" />
 
     <activity-alias

@@ -1,6 +1,7 @@
 package com.ataulm.basic;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,22 +22,13 @@ public class ActionListActivity extends Activity implements CharacterClickListen
     public static final int VARIANT_WITH_CLICK = 3;
     public static final int VARIANT_WITH_CLICK_FOO_IMAGE = 4;
     public static final int VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE = 5;
-
-    private View characterView;
-    private ImageView characterImageView;
-    private TextView characterLabelTextView;
-    private TextView characterSublabelTextView;
+    public static final int VARIANT_WITH_CLICK_CD_ON_ITEM_FOO_IMAGE = 6;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Action List");
         setContentView(R.layout.activity_action_list);
-
-        characterView = findViewById(R.id.character_view);
-        characterImageView = (ImageView) characterView.findViewById(R.id.character_image);
-        characterLabelTextView = (TextView) characterView.findViewById(R.id.character_text_label);
-        characterSublabelTextView = (TextView) characterView.findViewById(R.id.character_text_sublabel);
 
         RecyclerView actionListView = (RecyclerView) findViewById(R.id.action_list_view);
         actionListView.setLayoutManager(new LinearLayoutManager(this));
@@ -46,19 +38,9 @@ public class ActionListActivity extends Activity implements CharacterClickListen
 
     @Override
     public void onClick(Character character) {
-        characterImageView.setBackgroundColor(character.getIconColor());
-        characterLabelTextView.setText(character.getName());
-        characterSublabelTextView.setText(character.getDescription());
-        characterView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (characterView.getVisibility() == View.VISIBLE) {
-            characterView.setVisibility(View.GONE);
-        } else {
-            super.onBackPressed();
-        }
+        Intent intent = new Intent(this, CharacterActivity.class);
+        intent.putExtra(CharacterActivity.EXTRA_CHARACTER, character);
+        startActivity(intent);
     }
 
     private static class ActionListAdapter extends RecyclerView.Adapter<ActionListItemViewHolder> {
@@ -88,6 +70,18 @@ public class ActionListActivity extends Activity implements CharacterClickListen
             setClickListener(holder, character);
             setImageContentDescription(holder);
             setImageImportantForAccessibility(holder);
+            setItemContentDescription(holder, character);
+        }
+
+        private void setItemContentDescription(ActionListItemViewHolder holder, Character character) {
+            if (shouldSetItemContentDescription()) {
+                holder.itemView.setContentDescription(character.getName());
+                return;
+            }
+        }
+
+        private boolean shouldSetItemContentDescription() {
+            return variant == VARIANT_WITH_CLICK_CD_ON_ITEM_FOO_IMAGE;
         }
 
         private void setImageContentDescription(ActionListItemViewHolder holder) {
@@ -105,11 +99,14 @@ public class ActionListActivity extends Activity implements CharacterClickListen
         }
 
         private boolean shouldSetImportantForAccessibilityNo() {
-            return variant == ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE;
+            return variant == VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE;
         }
 
         private boolean shouldSetFooContentDescription() {
-            return variant == ActionListActivity.VARIANT_NO_CLICK_FOO_IMAGE | variant == ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE | variant == ActionListActivity.VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE;
+            return variant == VARIANT_NO_CLICK_FOO_IMAGE
+                    || variant == VARIANT_WITH_CLICK_FOO_IMAGE
+                    || variant == VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE
+                    || variant == VARIANT_WITH_CLICK_CD_ON_ITEM_FOO_IMAGE;
         }
 
         private void setClickListener(ActionListItemViewHolder holder, final Character character) {
@@ -142,7 +139,10 @@ public class ActionListActivity extends Activity implements CharacterClickListen
         }
 
         private boolean shouldAddClickListener() {
-            return variant == VARIANT_WITH_CLICK || variant == VARIANT_WITH_CLICK_FOO_IMAGE || variant == VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE;
+            return variant == VARIANT_WITH_CLICK
+                    || variant == VARIANT_WITH_CLICK_FOO_IMAGE
+                    || variant == VARIANT_WITH_CLICK_FOO_IMAGE_NOT_IMPORTANT_IMAGE
+                    || variant == VARIANT_WITH_CLICK_CD_ON_ITEM_FOO_IMAGE;
         }
 
         @Override
