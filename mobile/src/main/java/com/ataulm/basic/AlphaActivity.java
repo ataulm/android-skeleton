@@ -10,6 +10,7 @@ public class AlphaActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(Example.ALPHA.getTitle());
         setContentView(R.layout.activity_alpha);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
