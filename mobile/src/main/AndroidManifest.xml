@@ -7,11 +7,12 @@
     android:icon="@drawable/ic_launcher"
     android:theme="@style/AppTheme">
 
+    <activity android:name=".ExamplesActivity" />
     <activity android:name=".AlphaActivity" />
 
     <activity-alias
       android:name="activity.primary_launcher"
-      android:targetActivity=".AlphaActivity">
+      android:targetActivity=".ExamplesActivity">
 
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
