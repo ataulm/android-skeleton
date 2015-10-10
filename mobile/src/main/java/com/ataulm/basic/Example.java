@@ -5,7 +5,8 @@ import android.content.Intent;
 
 enum Example {
 
-    ALPHA("Alpha", "Simple activity with label and button, nothing extra done", AlphaActivity.class);
+    ALPHA("Alpha", "Simple activity with label and button, nothing extra done", AlphaActivity.class),
+    BRAVO("Bravo", "", BravoActivity.class);
 
     private final String title;
     private final String description;
