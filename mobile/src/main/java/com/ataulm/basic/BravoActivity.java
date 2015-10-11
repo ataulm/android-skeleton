@@ -11,24 +11,36 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ataulm.rv.SpacesItemDecoration;
+
 public class BravoActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(Example.BRAVO.getTitle());
         setContentView(R.layout.activity_bravo);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new AdventureTimeSeasonOneAdapter(new AdventureTimeSeasonOneAdapter.ViewHolder.Listener() {
+        recyclerView.addItemDecoration(SpacesItemDecoration.newInstance(itemSpacing(), itemSpacing(), 1));
+        recyclerView.setAdapter(
+                new AdventureTimeSeasonOneAdapter(
+                        new AdventureTimeSeasonOneAdapter.ViewHolder.Listener() {
 
-            @Override
-            public void onClick(Episode episode) {
-                Toaster.display(BravoActivity.this, "click: " + episode.getTitle());
-            }
+                            @Override
+                            public void onClick(Episode episode) {
+                                Toaster.display(BravoActivity.this, "click: " + episode.getTitle());
+                            }
 
-        }));
+                        }
+                )
+        );
+    }
+
+    private int itemSpacing() {
+        return getResources().getDimensionPixelSize(R.dimen.bravo_item_spacing);
     }
 
     public static class AdventureTimeSeasonOneAdapter extends RecyclerView.Adapter<AdventureTimeSeasonOneAdapter.ViewHolder> {
@@ -83,14 +95,14 @@ public class BravoActivity extends AppCompatActivity {
                 titleImageView.setImageResource(episode.getTitleCard());
                 titleTextView.setText(episode.getTitle());
                 descriptionTextView.setText(episode.getDescription());
-                itemView.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        listener.onClick(episode);
-                    }
-
-                });
+//                itemView.setOnClickListener(new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        listener.onClick(episode);
+//                    }
+//
+//                });
             }
 
             interface Listener {

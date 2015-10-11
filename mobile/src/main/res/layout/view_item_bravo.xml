@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:paddingLeft="16dp"
-  android:paddingTop="4dp"
-  android:paddingRight="16dp"
-  android:paddingBottom="4dp"
-  android:orientation="vertical">
-
-  <ImageView
-    android:id="@+id/item_bravo_image_title"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+  android:padding="8dp"
+  android:background="@android:color/black">
 
   <TextView
     android:id="@+id/item_bravo_text_title"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textSize="20sp" />
+
+  <ImageView
+    android:id="@+id/item_bravo_image_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_below="@id/item_bravo_text_title" />
 
   <TextView
     android:id="@+id/item_bravo_text_description"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_alignTop="@id/item_bravo_image_title"
+    android:layout_toRightOf="@id/item_bravo_image_title" />
 
-</LinearLayout>
+</RelativeLayout>
