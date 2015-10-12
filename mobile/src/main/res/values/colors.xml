@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="alphabet_background_pressed">#353535</color>
+  <color name="alphabet_background_focused">#2D2D2D</color>
+  <color name="alphabet_background_default">@android:color/black</color>
+
+  <color name="alphabet_text_activated">@android:color/holo_orange_dark</color>
+  <color name="alphabet_text_default">@android:color/white</color>
+</resources>
