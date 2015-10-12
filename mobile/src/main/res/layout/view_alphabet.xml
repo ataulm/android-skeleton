@@ -8,4 +8,5 @@
   android:paddingRight="16dp"
   android:paddingBottom="4dp"
   android:textColor="@color/alphabet_text"
+  android:focusable="true"
   android:background="@drawable/alphabet_background" />

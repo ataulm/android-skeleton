@@ -58,7 +58,6 @@ public class MyActivity extends Activity {
         public void onBindViewHolder(AlphabetViewHolder holder, final int position) {
             Alphabet alphabet = Alphabet.values()[position];
             ((TextView) holder.itemView).setText(alphabet.title());
-            holder.itemView.setActivated(position == positionActivated);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -67,6 +66,13 @@ public class MyActivity extends Activity {
                 }
 
             });
+
+            if (position == positionActivated) {
+                holder.itemView.setActivated(true);
+                holder.itemView.requestFocus();
+            } else {
+                holder.itemView.setActivated(false);
+            }
         }
 
         @Override
