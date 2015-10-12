@@ -12,6 +12,7 @@ public class MyActivity extends Activity {
 
     private RecyclerView master;
     private TextView detail;
+    private AlphabetAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,14 +21,33 @@ public class MyActivity extends Activity {
 
         master = (RecyclerView) findViewById(R.id.master);
         master.setLayoutManager(new LinearLayoutManager(this));
-        master.setAdapter(new AlphabetAdapter());
+        adapter = new AlphabetAdapter(new OnActivatedListener() {
+            @Override
+            public void onActivated(int position) {
+                adapter.setActivated(position);
+                detail.setText(Alphabet.values()[position].description());
+            }
+        });
+        master.setAdapter(adapter);
 
         detail = (TextView) findViewById(R.id.detail);
     }
 
+    public interface OnActivatedListener {
+
+        void onActivated(int position);
+
+    }
+
     private static class AlphabetAdapter extends RecyclerView.Adapter<AlphabetViewHolder> {
 
+        private final OnActivatedListener listener;
+
         private int positionActivated;
+
+        AlphabetAdapter(OnActivatedListener listener) {
+            this.listener = listener;
+        }
 
         @Override
         public AlphabetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,9 +55,18 @@ public class MyActivity extends Activity {
         }
 
         @Override
-        public void onBindViewHolder(AlphabetViewHolder holder, int position) {
+        public void onBindViewHolder(AlphabetViewHolder holder, final int position) {
             Alphabet alphabet = Alphabet.values()[position];
             ((TextView) holder.itemView).setText(alphabet.title());
+            holder.itemView.setActivated(position == positionActivated);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    listener.onActivated(position);
+                }
+
+            });
         }
 
         @Override
@@ -45,6 +74,13 @@ public class MyActivity extends Activity {
             return Alphabet.values().length;
         }
 
+        public void setActivated(int positionActivated) {
+            int oldPositionActivated = this.positionActivated;
+            this.positionActivated = positionActivated;
+
+            notifyItemChanged(oldPositionActivated);
+            notifyItemChanged(positionActivated);
+        }
     }
 
     private enum Alphabet {

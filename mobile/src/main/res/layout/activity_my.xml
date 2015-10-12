@@ -8,12 +8,14 @@
     android:id="@+id/master"
     android:layout_width="0dp"
     android:layout_height="match_parent"
-    android:layout_weight="30" />
+    android:layout_weight="30"
+    android:background="@android:color/black" />
 
   <TextView
     android:id="@+id/detail"
     android:layout_width="0dp"
     android:layout_height="match_parent"
-    android:layout_weight="70" />
+    android:layout_weight="70"
+    android:gravity="center" />
 
 </LinearLayout>
