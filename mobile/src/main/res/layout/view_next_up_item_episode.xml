@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent" />
+  android:layout_height="wrap_content"
+  android:orientation="horizontal">
+
+  <TextView
+    android:id="@+id/next_up_episode_text_name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="100" />
+
+  <ImageView
+    android:id="@+id/next_up_episode_image_watched"
+    android:layout_width="48dp"
+    android:layout_height="48dp" />
+
+</LinearLayout>
