@@ -18,21 +18,212 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:gravity="center"
+      android:padding="16dp"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Not connected to the Internet" />
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:layout_marginBottom="2dp"
+      android:gravity="center"
+      android:orientation="horizontal"
+      >
 
-    <Button
-      android:id="@+id/button"
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="4dp"
+        android:orientation="vertical"
+        android:layout_marginRight="2dp"
+        android:clickable="true"
+        android:contentDescription="foo"
+        android:background="@android:color/white">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@android:color/black"
+          android:text="1" />
+
+
+        <ImageView
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:background="@android:color/holo_red_dark" />
+
+        <Button
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="hello" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="4dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:background="@android:color/white">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@android:color/black"
+          android:text="2" />
+
+        <ImageView
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:background="@android:color/holo_red_dark" />
+
+        <Button
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="hello" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="2dp"
+        android:padding="4dp"
+        android:orientation="vertical"
+        android:contentDescription="fooo"
+        android:background="@android:color/white">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@android:color/black"
+          android:text="3" />
+
+        <ImageView
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:background="@android:color/holo_red_dark" />
+
+        <Button
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="hello" />
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:text="Try again" />
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:layout_marginTop="2dp"
+      android:gravity="center"
+      android:orientation="horizontal">
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="4dp"
+        android:orientation="vertical"
+        android:layout_marginRight="2dp"
+        android:background="@android:color/white">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@android:color/black"
+          android:text="4" />
+
+        <ImageView
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:background="@android:color/holo_red_dark" />
+
+        <Button
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="hello" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="4dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:background="@android:color/white">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@android:color/black"
+          android:text="5" />
+
+        <ImageView
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:background="@android:color/holo_red_dark" />
+
+        <Button
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="hello" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="2dp"
+        android:padding="4dp"
+        android:orientation="vertical"
+        android:contentDescription="fooo"
+        android:background="@android:color/white">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@android:color/black"
+          android:text="6" />
+
+        <ImageView
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:background="@android:color/holo_red_dark" />
+
+        <Button
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="hello" />
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Not connected to the Internet" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/button"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:text="Try again" />-->
 
   </LinearLayout>
 

@@ -14,14 +14,14 @@ public class AlphaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alpha);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Toaster.display(AlphaActivity.this, "Refreshing");
-            }
-
-        });
+//        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Toaster.display(AlphaActivity.this, "Refreshing");
+//            }
+//
+//        });
     }
 
 }

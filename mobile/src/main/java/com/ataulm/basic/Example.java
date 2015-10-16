@@ -6,7 +6,7 @@ import android.content.Intent;
 enum Example {
 
     ALPHA("Simple", "A label and button", AlphaActivity.class),
-    BRAVO("Lists", "RecyclerView with clickable items, containing 3 views each", BravoActivity.class);
+    BRAVO("Adventure Time Season 1", "RecyclerView with clickable items, containing 3 views each", BravoActivity.class);
 
     private final String title;
     private final String description;

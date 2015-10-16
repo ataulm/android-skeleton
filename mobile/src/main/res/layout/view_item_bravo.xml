@@ -3,7 +3,8 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:padding="8dp"
-  android:background="@android:color/black">
+  android:background="@android:color/black"
+  android:focusable="true">
 
   <TextView
     android:id="@+id/item_bravo_text_title"
@@ -13,11 +14,20 @@
     android:textSize="20sp" />
 
   <ImageView
+    android:id="@+id/item_bravo_button_star"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_alignParentRight="true"
+    android:src="@drawable/ic_star_empty" />
+
+  <ImageView
     android:id="@+id/item_bravo_image_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
-    android:layout_below="@id/item_bravo_text_title" />
+    android:importantForAccessibility="no"
+    android:clickable="true"
+    android:layout_below="@id/item_bravo_button_star" />
 
   <TextView
     android:id="@+id/item_bravo_text_description"
