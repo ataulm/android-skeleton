@@ -1,6 +1,6 @@
 package com.ataulm.basic;
 
-public interface Bar {
+public interface Adder {
 
     int add(int x, int y);
 
