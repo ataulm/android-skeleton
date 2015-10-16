@@ -7,10 +7,14 @@ import java.util.List;
 
 class NextUpAdapter extends RecyclerView.Adapter<NextUpViewHolder> {
 
-    private List<NextUpItem> data;
+    private final List<NextUpItem> data;
+    private final WatchStatusProvider watchStatusProvider;
+    private final EpisodeClickListener clickListener;
 
-    public NextUpAdapter(List<NextUpItem> data) {
+    public NextUpAdapter(List<NextUpItem> data, WatchStatusProvider watchStatusProvider, EpisodeClickListener clickListener) {
         this.data = data;
+        this.watchStatusProvider = watchStatusProvider;
+        this.clickListener = clickListener;
         super.setHasStableIds(true);
     }
 
@@ -30,7 +34,7 @@ class NextUpAdapter extends RecyclerView.Adapter<NextUpViewHolder> {
         if (viewType == ViewType.HEADER.ordinal()) {
             return HeaderNextUpViewHolder.inflate(parent);
         } else if (viewType == ViewType.EPISODE.ordinal()) {
-            return EpisodeNextUpViewHolder.inflate(parent);
+            return EpisodeNextUpViewHolder.inflate(parent, watchStatusProvider, clickListener);
         } else {
             throw new IllegalArgumentException("Unknown viewType: " + viewType);
         }
