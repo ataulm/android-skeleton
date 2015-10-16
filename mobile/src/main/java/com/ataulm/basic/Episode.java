@@ -21,4 +21,8 @@ public class Episode {
         this.airDate = airDate;
     }
 
+    public String getName() {
+        return name;
+    }
+
 }

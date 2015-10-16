@@ -10,8 +10,6 @@ import java.util.List;
  */
 public final class NextUp {
 
-    public static final List<NextUpItem> MOCK_DATA = collateItems();
-
     // http://gravityfalls.wikia.com/wiki/Season_1
     private static final List<Episode> GRAVITY_FALLS = Arrays.asList(
             new Episode("Tourist Trapped", R.drawable.gf_01_01, "S01E01", "15 June 2012"),
@@ -49,23 +47,23 @@ public final class NextUp {
     private static List<NextUpItem> collateItems() {
         List<NextUpItem> list = new ArrayList<>();
         list.add(header("Brooklyn Nine-Nine"));
-        list.addAll(header(BROOKLYN_NINE_NINE));
+        list.addAll(episodes(BROOKLYN_NINE_NINE));
         list.add(header("Steven Universe"));
-        list.addAll(header(STEVEN_UNIVERSE));
+        list.addAll(episodes(STEVEN_UNIVERSE));
         list.add(header("Gravity Falls"));
-        list.addAll(header(GRAVITY_FALLS));
+        list.addAll(episodes(GRAVITY_FALLS));
         list.add(header("The Newsroom"));
-        list.addAll(header(NEWSROOM));
+        list.addAll(episodes(NEWSROOM));
         list.add(header("Daria"));
-        list.addAll(header(DARIA));
+        list.addAll(episodes(DARIA));
         return list;
     }
 
     private static NextUpItem<String> header(final String title) {
         return new NextUpItem<String>() {
             @Override
-            public boolean isHeader() {
-                return true;
+            public ViewType viewType() {
+                return ViewType.HEADER;
             }
 
             @Override
@@ -75,23 +73,25 @@ public final class NextUp {
         };
     }
 
-    private static List<NextUpItem> header(List<Episode> episodes) {
+    private static List<NextUpItem> episodes(List<Episode> episodes) {
         List<NextUpItem> nextUpItems = new ArrayList<>();
         for (final Episode episode : episodes) {
-            new NextUpItem<Episode>() {
+            nextUpItems.add(new NextUpItem<Episode>() {
                 @Override
-                public boolean isHeader() {
-                    return false;
+                public ViewType viewType() {
+                    return ViewType.EPISODE;
                 }
 
                 @Override
                 public Episode get() {
                     return episode;
                 }
-            };
+            });
         }
         return nextUpItems;
     }
+
+    public static final List<NextUpItem> MOCK_DATA = collateItems();
 
     private NextUp() {
         // just used as a data holder for mock data
