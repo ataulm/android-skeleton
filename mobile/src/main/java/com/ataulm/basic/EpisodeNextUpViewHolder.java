@@ -11,21 +11,24 @@ final class EpisodeNextUpViewHolder extends NextUpViewHolder {
 
     private final WatchStatusProvider watchStatusProvider;
     private final EpisodeClickListener clickListener;
+    private final ImageView titlecardImageView;
     private final TextView nameTextView;
     private final ImageView watchedImageView;
 
     static EpisodeNextUpViewHolder inflate(ViewGroup parent, WatchStatusProvider watchStatusProvider, EpisodeClickListener clickListener) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.view_next_up_item_episode, parent, false);
+        ImageView titlecardImageView = (ImageView) view.findViewById(R.id.next_up_episode_image_titlecard);
         TextView nameTextView = (TextView) view.findViewById(R.id.next_up_episode_text_name);
         ImageView watchedImageView = (ImageView) view.findViewById(R.id.next_up_episode_image_watched);
-        return new EpisodeNextUpViewHolder(view, watchStatusProvider, clickListener, nameTextView, watchedImageView);
+        return new EpisodeNextUpViewHolder(view, watchStatusProvider, clickListener, titlecardImageView, nameTextView, watchedImageView);
     }
 
-    private EpisodeNextUpViewHolder(View itemView, WatchStatusProvider watchStatusProvider, EpisodeClickListener clickListener, TextView nameTextView, ImageView watchedImageView) {
+    private EpisodeNextUpViewHolder(View itemView, WatchStatusProvider watchStatusProvider, EpisodeClickListener clickListener, ImageView titlecardImageView, TextView nameTextView, ImageView watchedImageView) {
         super(itemView);
         this.watchStatusProvider = watchStatusProvider;
         this.clickListener = clickListener;
+        this.titlecardImageView = titlecardImageView;
         this.nameTextView = nameTextView;
         this.watchedImageView = watchedImageView;
     }
@@ -34,6 +37,7 @@ final class EpisodeNextUpViewHolder extends NextUpViewHolder {
     public void bind(NextUpItem item) {
         Episode episode = (Episode) item.get();
         nameTextView.setText(episode.getName());
+        titlecardImageView.setImageResource(episode.getTitlecard());
         updateWatchedButtonResource(episode);
         setWatchButtonClickListener(episode);
         setItemViewClickListener(episode);

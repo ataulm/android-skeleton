@@ -25,4 +25,9 @@ public class Episode {
         return name;
     }
 
+    @DrawableRes
+    public int getTitlecard() {
+        return titleCard;
+    }
+
 }

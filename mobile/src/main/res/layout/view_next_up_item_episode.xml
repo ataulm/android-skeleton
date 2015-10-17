@@ -4,6 +4,11 @@
   android:layout_height="wrap_content"
   android:orientation="horizontal">
 
+  <ImageView
+    android:id="@+id/next_up_episode_image_titlecard"
+    android:layout_width="150dp"
+    android:layout_height="96dp" />
+
   <TextView
     android:id="@+id/next_up_episode_text_name"
     android:layout_width="0dp"
