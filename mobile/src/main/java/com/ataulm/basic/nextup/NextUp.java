@@ -1,4 +1,6 @@
-package com.ataulm.basic;
+package com.ataulm.basic.nextup;
+
+import com.ataulm.basic.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

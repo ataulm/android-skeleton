@@ -1,7 +1,9 @@
-package com.ataulm.basic;
+package com.ataulm.basic.nextup;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.ataulm.basic.BuildConfig;
 
 final class WatchedRepository implements WatchStatusProvider {
 

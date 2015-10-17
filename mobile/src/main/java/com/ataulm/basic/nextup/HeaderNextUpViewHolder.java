@@ -1,9 +1,11 @@
-package com.ataulm.basic;
+package com.ataulm.basic.nextup;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.ataulm.basic.R;
 
 final class HeaderNextUpViewHolder extends NextUpViewHolder {
 
