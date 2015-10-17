@@ -5,4 +5,14 @@
     <!-- Customize your theme here. -->
   </style>
 
+
+  <style name="Wutson" />
+  <style name="Wutson.NextUp" />
+  <style name="Wutson.NextUp.Item" />
+  <style name="Wutson.NextUp.Item.Header">
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:background">@color/android:black</item>
+    <item name="android:textColor">@color/android:white</item>
+  </style>
+
 </resources>
