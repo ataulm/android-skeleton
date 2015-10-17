@@ -30,4 +30,12 @@ public class Episode {
         return titleCard;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public String getAirDate() {
+        return airDate;
+    }
+
 }
