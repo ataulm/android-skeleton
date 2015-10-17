@@ -40,4 +40,5 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude module: 'recyclerview-v7'
     }
+    androidTestCompile 'org.easytesting:fest-assert-core:2.0M10'
 }
