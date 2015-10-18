@@ -60,11 +60,10 @@ final class EpisodeNextUpViewHolder extends NextUpViewHolder {
     }
 
     private void updateWatchedButtonResource(Episode episode) {
-        // TODO: replace with image resources
         if (watchStatusProvider.isWatched(episode)) {
-            watchedImageView.setBackgroundColor(Color.BLACK);
+            watchedImageView.setImageResource(R.drawable.img_watched_filled);
         } else {
-            watchedImageView.setBackgroundColor(Color.BLUE);
+            watchedImageView.setImageResource(R.drawable.img_watched_empty);
         }
     }
 

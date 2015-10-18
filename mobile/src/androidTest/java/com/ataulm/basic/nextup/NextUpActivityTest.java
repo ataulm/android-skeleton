@@ -83,9 +83,12 @@ public class NextUpActivityTest {
         };
     }
 
+    // The better way to do this is to ensure a fixed state at start of tests, and have two tests:
+    // - one for the initial state
+    // - another for clicking and asserting the drawable is correct for the opposite state
     private static class EpisodeWatchedButtonDrawableChangedAssertion {
-        private static Drawable drawable;
 
+        private static Drawable drawable;
         private static boolean started;
 
         public static ViewAssertion cacheDrawablePreAction() {
@@ -105,7 +108,7 @@ public class NextUpActivityTest {
                 @Override
                 public void check(View view, NoMatchingViewException e) {
                     if (!started) {
-                        throw new IllegalStateException("cacheDrawablePreAction must be called before, else how can you compare?");
+                        throw new IllegalStateException("cacheDrawablePreAction must be called before assertDrawableChangedPostAction, else how can you compare?");
                     }
                     View button = view.findViewById(R.id.next_up_episode_image_watched);
                     assertThat(drawable != button.getBackground());
