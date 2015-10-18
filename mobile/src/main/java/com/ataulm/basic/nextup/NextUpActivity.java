@@ -42,6 +42,14 @@ public class NextUpActivity extends Activity implements EpisodeClickListener {
                         } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_NAVIGATE_NEXT || keyCode == KeyEvent.KEYCODE_TAB) {
                             scrollToPosition(getPosition(view) + 1);
                         }
+
+                        if (keyCode == KeyEvent.KEYCODE_TAB && getPosition(view) == getItemCount() - 1) {
+                            // TODO: maybe display dialog here instead:
+                            // "Focus on AppBar"
+                            // "Scroll to top of list"
+                            // "Cancel"
+                            scrollToPosition(0);
+                        }
                         return false;
                     }
 
