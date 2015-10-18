@@ -27,7 +27,7 @@ final class HeaderNextUpViewHolder extends NextUpViewHolder {
     @Override
     public void bind(NextUpItem item) {
         String header = (String) item.get();
-        ((TextView) itemView).setText(header);
+        ((TextView) itemView).setText(header + " heading");
 
         if (accessibilityChecker.isSpokenFeedbackEnabled()) {
             itemView.setFocusable(true);
