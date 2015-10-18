@@ -9,7 +9,8 @@ import java.util.List;
 
 public class KeyDownToaster implements KeyEvent.Callback {
 
-    private static final List<String> DOTS = Arrays.asList(".  ", ".. ", "...", ".. ");
+    private static final List<String> DOTS = Arrays.asList(",    ", ",~   ", ",~*  ", ",~*~ ", ",~*~,", " ~*~,", "  *~,", "   ~,", "    ,");
+
     private static Iterator<String> dotsIterator = DOTS.iterator();
 
     private final Context context;
@@ -23,7 +24,7 @@ public class KeyDownToaster implements KeyEvent.Callback {
         if (!dotsIterator.hasNext()) {
             dotsIterator = DOTS.iterator();
         }
-        Toaster.display(context, "press: " + keyPressed(keyCode) + " " + dotsIterator.next());
+        Toaster.display(context, dotsIterator.next() + " | " + keyPressed(keyCode));
         return false;
     }
 
