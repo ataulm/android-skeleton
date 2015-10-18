@@ -48,6 +48,7 @@ final class EpisodeNextUpViewHolder extends NextUpViewHolder {
     @Override
     public void bind(NextUpItem item) {
         Episode episode = (Episode) item.get();
+        itemView.setContentDescription(episode.getName());
         nameTextView.setText(episode.getName());
         numberTextView.setText(episode.getNumber());
         airdateTextView.setText(episode.getAirDate());
