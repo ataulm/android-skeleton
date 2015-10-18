@@ -37,6 +37,7 @@
   <ImageView
     android:id="@+id/next_up_episode_image_watched"
     android:layout_width="48dp"
-    android:layout_height="48dp" />
+    android:layout_height="48dp"
+    android:importantForAccessibility="no" />
 
 </LinearLayout>
