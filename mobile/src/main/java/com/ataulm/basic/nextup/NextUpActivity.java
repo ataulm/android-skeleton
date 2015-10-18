@@ -37,9 +37,9 @@ public class NextUpActivity extends Activity implements EpisodeClickListener {
                             return false;
                         }
 
-                        if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                        if (keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_NAVIGATE_PREVIOUS) {
                             scrollToPosition(getPosition(view) - 1);
-                        } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                        } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_NAVIGATE_NEXT || keyCode == KeyEvent.KEYCODE_TAB) {
                             scrollToPosition(getPosition(view) + 1);
                         }
                         return false;
