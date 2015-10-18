@@ -63,6 +63,18 @@ final class EpisodeNextUpViewHolder extends NextUpViewHolder {
     }
 
     private void setWatchButtonClickListener(final Episode episode) {
+        if (itemView.isInTouchMode()) {
+            itemView.setOnLongClickListener(null);
+        } else {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    clickListener.onClickToggleWatched(episode);
+                    return true;
+                }
+            });
+        }
+
         watchedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
