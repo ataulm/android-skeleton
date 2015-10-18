@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.ataulm.basic.KeyDownToaster;
 import com.ataulm.basic.R;
 import com.ataulm.basic.Toaster;
 
@@ -15,11 +16,13 @@ public class NextUpActivity extends Activity implements EpisodeClickListener {
     private WatchedRepository watchedRepository;
     private NextUpAdapter adapter;
     private RecyclerView nextUpRecyclerView;
+    private KeyDownToaster keyDownToaster;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next_up);
+        keyDownToaster = new KeyDownToaster(this);
 
         watchedRepository = WatchedRepository.newInstance(this);
 
@@ -77,6 +80,11 @@ public class NextUpActivity extends Activity implements EpisodeClickListener {
         } else {
             nextUpRecyclerView.announceForAccessibility("Marked " + episode.getName() + " as not watched.");
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return keyDownToaster.onKeyDown(keyCode, event);
     }
 
 }
