@@ -14,6 +14,7 @@ public class NextUpActivity extends Activity implements EpisodeClickListener {
 
     private WatchedRepository watchedRepository;
     private NextUpAdapter adapter;
+    private RecyclerView nextUpRecyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class NextUpActivity extends Activity implements EpisodeClickListener {
 
         watchedRepository = WatchedRepository.newInstance(this);
 
-        RecyclerView nextUpRecyclerView = ((RecyclerView) findViewById(R.id.next_up_list));
+        nextUpRecyclerView = ((RecyclerView) findViewById(R.id.next_up_list));
         nextUpRecyclerView.setLayoutManager(new LinearLayoutManager(this) {
 
             @Override
@@ -62,6 +63,12 @@ public class NextUpActivity extends Activity implements EpisodeClickListener {
     public void onClickToggleWatched(Episode episode) {
         watchedRepository.toggledWatched(episode);
         adapter.notifyDataSetChanged();
+
+        if (watchedRepository.isWatched(episode)) {
+            nextUpRecyclerView.announceForAccessibility("Marked " + episode.getName() + " as watched.");
+        } else {
+            nextUpRecyclerView.announceForAccessibility("Marked " + episode.getName() + " as not watched.");
+        }
     }
 
 }
