@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.ataulm.basic.R;
 import com.ataulm.basic.Toaster;
@@ -38,6 +39,12 @@ public class NextUpActivity extends AppCompatActivity implements EpisodeClickLis
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_next_up, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toaster.display(this, "clicked " + item.getTitle());
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
