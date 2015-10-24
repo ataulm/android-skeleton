@@ -14,9 +14,12 @@
 
   <style name="Wutson.NextUp.Item.Header">
     <item name="android:gravity">center_vertical</item>
-    <item name="android:background">@color/android:black</item>
-    <item name="android:textColor">@color/android:white</item>
+    <item name="android:background">@color/next_up_item_header_background</item>
+    <item name="android:textColor">@color/next_up_item_header_text</item>
     <item name="textFont">robotoRegular</item>
   </style>
+
+  <color name="next_up_item_header_text">#DDFFFFFF</color>
+  <color name="next_up_item_header_background">#282828</color>
 
 </resources>
