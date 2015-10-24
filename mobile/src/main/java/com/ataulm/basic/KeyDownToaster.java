@@ -42,6 +42,8 @@ public class KeyDownToaster implements KeyEvent.Callback {
                 return "right";
             case KeyEvent.KEYCODE_DPAD_DOWN:
                 return "down";
+            case KeyEvent.KEYCODE_TAB:
+                return "tab";
             default:
                 return "dunno";
         }

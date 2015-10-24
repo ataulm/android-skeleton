@@ -38,6 +38,7 @@ public class NextUpActivity extends AppCompatActivity implements EpisodeClickLis
             @Override
             public void addView(View child) {
                 super.addView(child);
+                // This doesn't work so hot because often the view to which you want to scroll to isn't inflated
                 child.setOnKeyListener(new View.OnKeyListener() {
 
                     @Override
@@ -47,9 +48,9 @@ public class NextUpActivity extends AppCompatActivity implements EpisodeClickLis
                         }
 
                         if (keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_NAVIGATE_PREVIOUS) {
-                            scrollToPosition(getPosition(view) - 1);
+                            scrollToPosition(getPosition(view) - 2);
                         } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_NAVIGATE_NEXT || keyCode == KeyEvent.KEYCODE_TAB) {
-                            scrollToPosition(getPosition(view) + 1);
+                            scrollToPosition(getPosition(view) + 2);
                         }
 
                         if (keyCode == KeyEvent.KEYCODE_TAB && getPosition(view) == getItemCount() - 1) {
