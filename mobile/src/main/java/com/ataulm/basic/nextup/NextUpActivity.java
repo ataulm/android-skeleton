@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.View;
 
 import com.ataulm.basic.KeyDownToaster;
@@ -70,6 +71,12 @@ public class NextUpActivity extends AppCompatActivity implements EpisodeClickLis
 
         adapter = new NextUpAdapter(NextUp.MOCK_DATA, watchedRepository, this);
         nextUpRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_next_up, menu);
+        return true;
     }
 
     @Override

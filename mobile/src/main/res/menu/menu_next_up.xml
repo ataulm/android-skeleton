@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+    android:id="@+id/next_up_menu_item_1"
+    android:icon="@drawable/ic_action_one"
+    android:title="menu action 1"
+    app:showAsAction="always" />
+
+  <item
+    android:id="@+id/next_up_menu_item_2"
+    android:icon="@drawable/ic_action_two"
+    android:title="menu action 2"
+    app:showAsAction="always" />
+
+  <item
+    android:id="@+id/next_up_menu_item_3"
+    android:icon="@drawable/ic_action_three"
+    android:title="menu action 3"
+    app:showAsAction="never" />
+
+</menu>
