@@ -17,17 +17,17 @@
     android:layout_weight="100"
     android:orientation="vertical">
 
-    <TextView
+    <com.ataulm.basic.FontTextView
       android:id="@+id/next_up_episode_text_name"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
 
-    <TextView
+    <com.ataulm.basic.FontTextView
       android:id="@+id/next_up_episode_text_number"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
 
-    <TextView
+    <com.ataulm.basic.FontTextView
       android:id="@+id/next_up_episode_text_airdate"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />

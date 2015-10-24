@@ -7,12 +7,16 @@
 
 
   <style name="Wutson" />
+
   <style name="Wutson.NextUp" />
+
   <style name="Wutson.NextUp.Item" />
+
   <style name="Wutson.NextUp.Item.Header">
     <item name="android:gravity">center_vertical</item>
     <item name="android:background">@color/android:black</item>
     <item name="android:textColor">@color/android:white</item>
+    <item name="textFont">robotoRegular</item>
   </style>
 
 </resources>
