@@ -16,10 +16,19 @@
     <item name="android:gravity">center_vertical</item>
     <item name="android:background">@color/next_up_item_header_background</item>
     <item name="android:textColor">@color/next_up_item_header_text</item>
+    <item name="android:paddingLeft">@dimen/next_up_item_header_padding_left</item>
+    <item name="android:paddingTop">@dimen/next_up_item_header_padding_top</item>
+    <item name="android:paddingRight">@dimen/next_up_item_header_padding_right</item>
+    <item name="android:paddingBottom">@dimen/next_up_item_header_padding_bottom</item>
     <item name="textFont">robotoRegular</item>
   </style>
 
   <color name="next_up_item_header_text">#DDFFFFFF</color>
   <color name="next_up_item_header_background">#282828</color>
+  
+  <dimen name="next_up_item_header_padding_left">16dp</dimen>
+  <dimen name="next_up_item_header_padding_top">16dp</dimen>
+  <dimen name="next_up_item_header_padding_right">16dp</dimen>
+  <dimen name="next_up_item_header_padding_bottom">16dp</dimen>
 
 </resources>
