@@ -1,6 +1,5 @@
 package com.ataulm.basic.nextup;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,20 +85,20 @@ final class EpisodeNextUpViewHolder extends NextUpViewHolder {
     }
 
     private void setItemViewLongClickListener(final Episode episode) {
-        if (shouldSetItemViewLongClickListenerAsEpisodeWatchedToggle()) {
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (longClickShouldToggleEpisodeWatched()) {
                     clickListener.onClickToggleWatched(episode);
                     return true;
+                } else {
+                    return false;
                 }
-            });
-        } else {
-            itemView.setOnLongClickListener(null);
-        }
+            }
+        });
     }
 
-    private boolean shouldSetItemViewLongClickListenerAsEpisodeWatchedToggle() {
+    private boolean longClickShouldToggleEpisodeWatched() {
         return accessibilityChecker.isInNonTouchMode(itemView) || accessibilityChecker.isSpokenFeedbackEnabled();
     }
 
