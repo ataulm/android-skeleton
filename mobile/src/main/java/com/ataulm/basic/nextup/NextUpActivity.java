@@ -1,9 +1,10 @@
 package com.ataulm.basic.nextup;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -11,7 +12,7 @@ import com.ataulm.basic.KeyDownToaster;
 import com.ataulm.basic.R;
 import com.ataulm.basic.Toaster;
 
-public class NextUpActivity extends Activity implements EpisodeClickListener {
+public class NextUpActivity extends AppCompatActivity implements EpisodeClickListener {
 
     private WatchedRepository watchedRepository;
     private NextUpAdapter adapter;
@@ -22,6 +23,11 @@ public class NextUpActivity extends Activity implements EpisodeClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next_up);
+
+        setTitle("Wutson");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_toolbar);
+        setSupportActionBar(toolbar);
+
         keyDownToaster = new KeyDownToaster(this);
 
         watchedRepository = WatchedRepository.newInstance(this);
