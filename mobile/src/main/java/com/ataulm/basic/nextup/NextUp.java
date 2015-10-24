@@ -47,6 +47,12 @@ public final class NextUp {
     );
 
     private static List<NextUpItem> collateItems() {
+        // if you have enough non-focusable views (a really tall one),
+        // then DPAD_DOWN/UP won't go to the next focusable item view
+        // it'll give up and go up to the AppBar.
+        // the easy fix (but a design/business decision) is to make sure the non-focusable view is
+        // focusable, with some indicator - but it really only makes sense if you can click it and
+        // the click does something :/
         List<NextUpItem> list = new ArrayList<>();
         list.add(header("Brooklyn Nine-Nine"));
         list.addAll(episodes(BROOKLYN_NINE_NINE));
