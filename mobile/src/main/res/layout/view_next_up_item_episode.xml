@@ -10,7 +10,7 @@
     android:id="@+id/next_up_episode_image_titlecard"
     style="@style/Wutson.NextUp.Item.Episode.Titlecard"
     android:layout_width="150dp"
-    android:layout_height="96dp" />
+    android:layout_height="match_parent" />
 
   <LinearLayout
     android:layout_width="0dp"
