@@ -23,12 +23,54 @@
     <item name="textFont">robotoRegular</item>
   </style>
 
-  <color name="next_up_item_header_text">#DDFFFFFF</color>
+  <color name="next_up_item_header_text">#DEFFFFFF</color>
   <color name="next_up_item_header_background">#282828</color>
-  
+
   <dimen name="next_up_item_header_padding_left">16dp</dimen>
   <dimen name="next_up_item_header_padding_top">16dp</dimen>
   <dimen name="next_up_item_header_padding_right">16dp</dimen>
   <dimen name="next_up_item_header_padding_bottom">16dp</dimen>
+
+  <style name="Wutson.NextUp.Item.Episode" />
+
+  <style name="Wutson.NextUp.Item.Episode.View">
+    <item name="android:background">@drawable/next_up_item_episode_background</item>
+  </style>
+
+  <color name="next_up_item_episode_background_ripple">#A3A3A3</color>
+  <color name="next_up_item_episode_background_pressed">#A3A3A3</color>
+  <color name="next_up_item_episode_background_focused">#D3D3D3</color>
+  <color name="next_up_item_episode_background_default">#FFFFFF</color>
+
+  <style name="Wutson.NextUp.Item.Episode.Name">
+    <item name="android:textColor">@color/next_up_item_episode_name_text</item>
+    <item name="android:textSize">@dimen/next_up_item_episode_name_text</item>
+    <item name="textFont">robotoMedium</item>
+  </style>
+
+  <color name="next_up_item_episode_name_text">#DE000000</color>
+  <dimen name="next_up_item_episode_name_text">14sp</dimen>
+
+  <style name="Wutson.NextUp.Item.Episode.Number">
+    <item name="android:textColor">@color/next_up_item_episode_number_text</item>
+    <item name="android:textSize">@dimen/next_up_item_episode_number_text</item>
+    <item name="textFont">robotoMedium</item>
+  </style>
+
+  <color name="next_up_item_episode_number_text">#DE000000</color>
+  <dimen name="next_up_item_episode_number_text">12sp</dimen>
+
+  <style name="Wutson.NextUp.Item.Episode.AirDate">
+    <item name="android:textColor">@color/next_up_item_episode_airdate_text</item>
+    <item name="android:textSize">@dimen/next_up_item_episode_airdate_text</item>
+    <item name="textFont">robotoMedium</item>
+  </style>
+
+  <color name="next_up_item_episode_airdate_text">#8A000000</color>
+  <dimen name="next_up_item_episode_airdate_text">12sp</dimen>
+
+  <style name="Wutson.NextUp.Item.Episode.Titlecard">
+    <item name="android:scaleType">centerCrop</item>
+  </style>
 
 </resources>

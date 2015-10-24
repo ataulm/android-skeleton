@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-  android:color="@android:color/holo_red_light">
+  android:color="@color/next_up_item_episode_background_ripple">
+
+  <item>
+    <color android:color="@color/next_up_item_episode_background_default" />
+  </item>
+
   <item
     android:id="@android:id/mask"
     android:drawable="@android:color/white" />
+
 </ripple>

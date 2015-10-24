@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Wutson.NextUp.Item.Episode.View"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/next_up_item_episode_background"
   android:focusable="true"
   android:orientation="horizontal">
 
   <ImageView
     android:id="@+id/next_up_episode_image_titlecard"
+    style="@style/Wutson.NextUp.Item.Episode.Titlecard"
     android:layout_width="150dp"
     android:layout_height="96dp" />
 
@@ -15,20 +16,27 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_weight="100"
+    android:layout_marginTop="12dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginBottom="12dp"
     android:orientation="vertical">
 
     <com.ataulm.basic.FontTextView
       android:id="@+id/next_up_episode_text_name"
+      style="@style/Wutson.NextUp.Item.Episode.Name"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
 
     <com.ataulm.basic.FontTextView
       android:id="@+id/next_up_episode_text_number"
+      style="@style/Wutson.NextUp.Item.Episode.Number"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp" />
 
     <com.ataulm.basic.FontTextView
       android:id="@+id/next_up_episode_text_airdate"
+      style="@style/Wutson.NextUp.Item.Episode.AirDate"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
 
