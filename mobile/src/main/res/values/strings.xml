@@ -1,3 +1,5 @@
 <resources>
   <string name="app_name">Basic</string>
+  <string name="nav_drawer_open_content_description">Open main menu</string>
+  <string name="nav_drawer_close_content_description">Close main menu</string>
 </resources>

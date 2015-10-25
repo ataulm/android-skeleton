@@ -7,11 +7,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.ataulm.basic.MockWutsonActivity;
+import com.ataulm.basic.NavigationDrawerActivity;
 import com.ataulm.basic.R;
 import com.ataulm.basic.Toaster;
 
-public class NextUpActivity extends MockWutsonActivity implements EpisodeClickListener {
+public class NextUpActivity extends NavigationDrawerActivity implements EpisodeClickListener {
 
     private WatchedRepository watchedRepository;
     private NextUpAdapter adapter;
@@ -38,7 +38,11 @@ public class NextUpActivity extends MockWutsonActivity implements EpisodeClickLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Toaster.display(this, "clicked " + item.getTitle());
+        if (item.getItemId() == android.R.id.home) {
+            Toaster.display(this, "clicked up/drawer toggle");
+        } else {
+            Toaster.display(this, "clicked " + item.getTitle());
+        }
         return super.onOptionsItemSelected(item);
     }
 
