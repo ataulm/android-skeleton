@@ -7,6 +7,8 @@ import android.view.MenuItem;
 
 public abstract class MockWutsonActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +20,7 @@ public abstract class MockWutsonActivity extends AppCompatActivity {
         if (hasNoAppBar()) {
             return;
         }
-        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.appbar_toolbar);
         setAppBar(toolbar);
     }
 
@@ -41,6 +43,10 @@ public abstract class MockWutsonActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected Toolbar getToolbar() {
+        return toolbar;
     }
 
     protected boolean hasNoAppBar() {
