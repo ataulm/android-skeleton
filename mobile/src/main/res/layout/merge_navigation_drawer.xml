@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <com.ataulm.basic.navigation.NavigationDrawerHeaderView
+    android:id="@+id/navigation_drawer_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/navigation_drawer_header_background" />
+
+  <com.ataulm.basic.navigation.NavigationDrawerPrimaryItemView
+    android:id="@+id/navigation_drawer_item_my_shows"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true" />
+
+  <com.ataulm.basic.navigation.NavigationDrawerPrimaryItemView
+    android:id="@+id/navigation_drawer_item_discover"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true" />
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/darker_gray" />
+
+  <com.ataulm.basic.navigation.NavigationDrawerActionItemView
+    android:id="@+id/navigation_drawer_item_downloaded_only"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true" />
+
+</LinearLayout>

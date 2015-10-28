@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal">
+
+  <ImageView
+    android:id="@+id/navigation_drawer_item_top_level_image_icon"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_gravity="center_vertical" />
+
+  <com.ataulm.basic.FontTextView
+    android:id="@+id/navigation_drawer_item_top_level_text_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical" />
+
+</LinearLayout>

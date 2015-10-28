@@ -7,9 +7,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.ataulm.basic.NavigationDrawerActivity;
+import com.ataulm.basic.navigation.NavigationDrawerActivity;
 import com.ataulm.basic.R;
 import com.ataulm.basic.Toaster;
+import com.ataulm.basic.navigation.NavigationDrawerView;
 
 public class NextUpActivity extends NavigationDrawerActivity implements EpisodeClickListener {
 
@@ -37,11 +38,20 @@ public class NextUpActivity extends NavigationDrawerActivity implements EpisodeC
     }
 
     @Override
+    protected void syncCurrentPageWith(NavigationDrawerView navigationDrawerView) {
+        // this is weird - we usually have an ENUM with NavigationDrawer items, and this
+        // protected method would be something like `protected NavItem getCurrentPage()`
+        // where the activity just returns the current page. I didn't do the enums for this demo though
+
+        // this is to highlight the correct entry in the nav drawer
+        navigationDrawerView.setMyShowsAsCurrentPage();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            Toaster.display(this, "clicked up/drawer toggle");
-        } else {
+        if (item.getItemId() != android.R.id.home) {
             Toaster.display(this, "clicked " + item.getTitle());
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,13 +1,21 @@
-package com.ataulm.basic;
+package com.ataulm.basic.navigation;
 
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.ataulm.basic.R;
+import com.ataulm.basic.Toaster;
 
 public abstract class NavigationDrawerActivity extends MockWutsonActivity {
 
@@ -29,7 +37,7 @@ public abstract class NavigationDrawerActivity extends MockWutsonActivity {
 
     @Override
     protected int getNavigationIcon() {
-        return R.drawable.ic_drawer;
+        return R.drawable.ic_action_drawer;
     }
 
     private void populateNavigationDrawer() {
@@ -63,9 +71,49 @@ public abstract class NavigationDrawerActivity extends MockWutsonActivity {
 
         });
 
-        NavigationView navigationView = (NavigationView) drawerLayout.findViewById(R.id.navigation_drawer);
-        // TODO: setup nav view
+        NavigationDrawerView navigationView = (NavigationDrawerView) drawerLayout.findViewById(R.id.navigation_drawer);
+        syncCurrentPageWith(navigationView);
+        navigationView.setListener(new Listener() {
+            @Override
+            public void onClickCloseNavigationDrawerButton() {
+                closeDrawer();
+            }
+
+            @Override
+            public void onClickChooseAccounts() {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                DialogFragment newFragment = new AddAccountDialog();
+                newFragment.show(ft, "dialog");
+            }
+
+            @Override
+            public void onClickItem(String item) {
+                Toaster.display(NavigationDrawerActivity.this, "clicked " + item);
+            }
+        });
+
     }
+
+    private static class AddAccountDialog extends DialogFragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            getDialog().setTitle("Choose an account");
+
+            View view = inflater.inflate(R.layout.view_choose_account_dialog, container, false);
+            ((ChooseAccountItemView) view.findViewById(R.id.choose_account_dialog_item_louise)).update(R.drawable.louise, "Louise Belcher");
+            ((ChooseAccountItemView) view.findViewById(R.id.choose_account_dialog_item_gene)).update(R.drawable.gene, "Gene Belcher");
+            ((ChooseAccountItemView) view.findViewById(R.id.choose_account_dialog_item_add_new)).update(R.drawable.account_add, "Add new account");
+            return view;
+        }
+
+    }
+
+    protected abstract void syncCurrentPageWith(NavigationDrawerView navigationDrawerView);
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -79,7 +127,7 @@ public abstract class NavigationDrawerActivity extends MockWutsonActivity {
             drawerLayout.openDrawer(DRAWER_GRAVITY);
             return true;
         }
-        throw new IllegalArgumentException("Item id not implemented");
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

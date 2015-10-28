@@ -1,9 +1,11 @@
-package com.ataulm.basic;
+package com.ataulm.basic.navigation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import com.ataulm.basic.R;
 
 public abstract class MockWutsonActivity extends AppCompatActivity {
 
@@ -28,12 +30,13 @@ public abstract class MockWutsonActivity extends AppCompatActivity {
         if (hasNoAppBar()) {
             return;
         }
+        // todo: set the correct content description
         toolbar.setNavigationIcon(getNavigationIcon());
         super.setSupportActionBar(toolbar);
     }
 
     protected int getNavigationIcon() {
-        return R.drawable.ic_up;
+        return R.drawable.ic_action_back;
     }
 
     @Override
@@ -42,7 +45,7 @@ public abstract class MockWutsonActivity extends AppCompatActivity {
             finish();
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        throw new IllegalArgumentException("Item id not implemented");
     }
 
     protected Toolbar getToolbar() {

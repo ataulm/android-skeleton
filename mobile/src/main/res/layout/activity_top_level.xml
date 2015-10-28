@@ -10,12 +10,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
 
-  <android.support.design.widget.NavigationView
+  <com.ataulm.basic.navigation.NavigationDrawerView
     android:id="@+id/navigation_drawer"
-    android:layout_width="wrap_content"
+    style="@style/Wutson.NavDrawer.View"
+    android:layout_width="@dimen/nav_drawer_width"
     android:layout_height="match_parent"
-    android:layout_gravity="start"
-    android:background="@android:color/white"
-    app:menu="@menu/menu_nav_drawer" />
+    android:layout_gravity="start" />
 
 </android.support.v4.widget.DrawerLayout>

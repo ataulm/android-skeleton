@@ -8,6 +8,18 @@
 
   <style name="Wutson" />
 
+  <style name="Wutson.NavDrawer" />
+
+  <style name="Wutson.NavDrawer.View">
+    <item name="android:background">@color/nav_drawer_background</item>
+  </style>
+
+  <dimen name="nav_drawer_width">304dp</dimen>
+  <color name="navigation_drawer_header_background">#212121</color>
+  <color name="nav_drawer_background">@android:color/white</color>
+  <color name="navigation_drawer_item_text_activated">#4285f4</color>
+  <color name="navigation_drawer_item_text_default">#5D5D5D</color>
+
   <style name="Wutson.NextUp" />
 
   <style name="Wutson.NextUp.Item" />
