@@ -2,6 +2,9 @@
 
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="android:statusBarColor">@color/black_20</item>
   </style>
+
+  <color name="black_20">#33000000</color>
 
 </resources>

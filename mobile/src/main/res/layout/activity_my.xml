@@ -7,38 +7,68 @@
   <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+    app:layout_behavior="com.ataulm.basic.CustomAppBarLayout$ScrollingViewBehavior">
 
-    <TextView
+    <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:padding="16dp"
-      android:text="@string/veggie_ipsum" />
+      android:orientation="vertical">
 
+      <View
+        android:id="@+id/color"
+        android:layout_width="128dp"
+        android:layout_height="128dp" />
+
+      <View
+        android:id="@+id/shaded"
+        android:layout_width="128dp"
+        android:layout_height="128dp" />
+
+
+      <View
+        android:id="@+id/calculated_blue_with_black_twenty"
+        android:layout_width="128dp"
+        android:layout_height="128dp" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/veggie_ipsum" />
+
+    </LinearLayout>
   </android.support.v4.widget.NestedScrollView>
 
-  <android.support.design.widget.AppBarLayout
+  <com.ataulm.basic.CustomAppBarLayout
+    android:id="@+id/appbar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_blue_light"
+    android:fitsSystemWindows="true">
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/appbar_status_bar_offset_top"-->
+    <!--android:background="@android:color/holo_red_light"-->
+    <!--app:layout_scrollFlags="scroll|enterAlways" />-->
 
     <TextView
       android:layout_width="match_parent"
       android:layout_height="56dp"
-      android:background="@android:color/holo_blue_light"
       android:gravity="center_vertical"
       android:paddingLeft="16dp"
       android:paddingRight="16dp"
       android:text="@string/app_name"
       android:textColor="@android:color/white"
       android:textSize="18sp"
-      app:layout_scrollFlags="scroll|enterAlways" />
+      app:layout_scrollFlags="scroll|enterAlways|snap" />
 
     <TextView
       android:layout_width="match_parent"
       android:layout_height="56dp"
       android:background="@android:color/holo_green_light" />
 
-  </android.support.design.widget.AppBarLayout>
+  </com.ataulm.basic.CustomAppBarLayout>
 
 </android.support.design.widget.CoordinatorLayout>
 
