@@ -14,21 +14,32 @@
       android:layout_height="wrap_content"
       android:orientation="vertical">
 
-      <View
-        android:id="@+id/color"
-        android:layout_width="128dp"
-        android:layout_height="128dp" />
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-      <View
-        android:id="@+id/shaded"
-        android:layout_width="128dp"
-        android:layout_height="128dp" />
+        <Button
+          android:layout_width="0dp"
+          android:layout_weight="50"
+          android:layout_height="wrap_content"
+          android:text="show bar"
+          android:onClick="showBar" />
 
+        <Button
+          android:layout_width="0dp"
+          android:layout_weight="50"
+          android:layout_height="wrap_content"
+          android:text="hide bar"
+          android:onClick="hideBar" />
 
-      <View
-        android:id="@+id/calculated_blue_with_black_twenty"
-        android:layout_width="128dp"
-        android:layout_height="128dp" />
+      </LinearLayout>
+
+      <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ping 3 bars"
+        android:onClick="pingThreeBars" />
 
       <TextView
         android:layout_width="match_parent"
@@ -45,12 +56,6 @@
     android:layout_height="wrap_content"
     android:background="@android:color/holo_blue_light"
     android:fitsSystemWindows="true">
-
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/appbar_status_bar_offset_top"-->
-    <!--android:background="@android:color/holo_red_light"-->
-    <!--app:layout_scrollFlags="scroll|enterAlways" />-->
 
     <TextView
       android:layout_width="match_parent"

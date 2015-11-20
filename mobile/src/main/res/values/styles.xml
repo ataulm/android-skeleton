@@ -1,7 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="BreakfastBar" />
+
+  <style name="BreakfastBar.Message">
+    <item name="android:paddingLeft">@dimen/breakfast_bar_message_padding_left</item>
+    <item name="android:paddingRight">@dimen/breakfast_bar_message_padding_right</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:ellipsize">end</item>
+    <item name="android:textColor">@android:color/white</item>
   </style>
+
+  <style name="BreakfastBar.Action">
+    <item name="android:background">@drawable/breakfast_bar_action_background</item>
+    <item name="android:gravity">center</item>
+    <item name="android:paddingRight">@dimen/breakfast_bar_action_padding_right</item>
+    <item name="android:paddingLeft">@dimen/breakfast_bar_action_padding_left</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textAllCaps">true</item>
+  </style>
+
+  <style name="BreakfastBar.Dismiss">
+    <item name="android:background">@drawable/breakfast_bar_action_background</item>
+    <item name="android:gravity">center</item>
+    <item name="android:paddingRight">@dimen/breakfast_bar_dismiss_padding_right</item>
+    <item name="android:textColor">@android:color/white</item>
+  </style>
+
+  <dimen name="breakfast_bar_message_padding_left">24dp</dimen>
+  <dimen name="breakfast_bar_message_padding_right">24dp</dimen>
+  <dimen name="breakfast_bar_action_padding_left">24dp</dimen>
+  <dimen name="breakfast_bar_action_padding_right">24dp</dimen>
+
+  <dimen name="breakfast_bar_message_height">48dp</dimen>
+  <dimen name="breakfast_bar_dismiss_width">48dp</dimen>
+  <dimen name="breakfast_bar_dismiss_height">48dp</dimen>
+  <dimen name="breakfast_bar_dismiss_padding_right">24dp</dimen>
+
+  <color name="breakfast_bar_background_focused">@color/grey28</color>
+  <color name="breakfast_bar_background_default">@color/grey20</color>
+
+  <color name="breakfast_bar_action_background_pressed">@color/grey35</color>
+  <color name="breakfast_bar_action_background_focused">@color/grey28</color>
+  <color name="breakfast_bar_action_background_default">@color/transparent</color>
+
+  <color name="grey20">#333333</color>
+  <color name="grey28">#474747</color>
+  <color name="grey35">#595959</color>
+  <color name="transparent">#00000000</color>
 
 </resources>
