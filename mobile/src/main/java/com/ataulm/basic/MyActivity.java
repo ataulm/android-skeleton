@@ -1,9 +1,9 @@
 package com.ataulm.basic;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class MyActivity extends Activity {
+public class MyActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
