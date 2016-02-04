@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <item name="action_toast_secret_one"
+  <item name="action_secret_one"
+    type="id" />
+  <item name="action_secret_two"
     type="id" />
 </resources>
