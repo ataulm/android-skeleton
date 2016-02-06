@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <TextView
+    android:id="@+id/tweet_summary_text_author"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:textColor="@android:color/white" />
+
+  <TextView
+    android:id="@+id/tweet_summary_text_data"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:textColor="@android:color/white"
+    android:textSize="20sp" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:importantForAccessibility="noHideDescendants"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/tweet_summary_button_reply"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="33"
+      android:text="Reply" />
+
+    <Button
+      android:id="@+id/tweet_summary_button_retweet"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="33"
+      android:text="Retweet" />
+
+    <Button
+      android:id="@+id/tweet_summary_button_like"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="33"
+      android:text="Like" />
+
+  </LinearLayout>
+
+</merge>
