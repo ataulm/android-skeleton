@@ -2,12 +2,22 @@ package com.ataulm.basic;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.support.v4.view.AccessibilityDelegateCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.accessibility.AccessibilityEvent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class TweetSummaryView extends LinearLayout {
 
@@ -20,6 +30,7 @@ public class TweetSummaryView extends LinearLayout {
     public TweetSummaryView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(VERTICAL);
+        setFocusable(true);
         setBackgroundResource(android.R.color.holo_red_light);
     }
 
@@ -59,69 +70,199 @@ public class TweetSummaryView extends LinearLayout {
             }
         });
 
+        final ActionsProvider actionsProvider = createNewActionsProviderFor(tweet, actions);
+
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: actions.onClick(tweet)
-                showActionsDialog(tweet, actions);
+                // TODO: don't kill `actions.onClick(tweet)` for non-talkback
+                showActionsDialog(actionsProvider);
             }
         });
+
+        ViewCompat.setAccessibilityDelegate(this, new ActionsAccessibilityDelegate(getResources(), actionsProvider));
     }
 
-    enum Action {
+    private ActionsProvider createNewActionsProviderFor(final Tweet tweet, final ActionListener actionListener) {
+        return new ActionsProvider(
+                Arrays.asList(
+                        new ActionItem(R.id.tweet_summary_action_open_detail, R.string.tweet_summary_action_open_detail, new Runnable() {
+                            @Override
+                            public void run() {
+                                actionListener.onClick(tweet);
+                            }
+                        }),
+                        new ActionItem(R.id.tweet_summary_action_reply, R.string.tweet_summary_action_reply, new Runnable() {
+                            @Override
+                            public void run() {
+                                actionListener.onClickReplyTo(tweet);
+                            }
+                        }),
+                        new ActionItem(R.id.tweet_summary_action_retweet, R.string.tweet_summary_action_retweet, new Runnable() {
+                            @Override
+                            public void run() {
+                                actionListener.onClickRetweet(tweet);
+                            }
+                        }),
+                        new ActionItem(R.id.tweet_summary_action_like, R.string.tweet_summary_action_like, new Runnable() {
+                            @Override
+                            public void run() {
+                                actionListener.onClickLike(tweet);
+                            }
+                        })
+                )
+        );
+    }
 
-        OPEN_DETAIL("Open detail"),
-        REPLY("Reply"),
-        RETWEET("Re-tweet"),
-        LIKE("Like");
+    private static class ActionsProvider {
 
-        private final String label;
+        private final List<ActionItem> actions;
 
-        Action(String label) {
-            this.label = label;
+        ActionsProvider(List<ActionItem> actions) {
+            this.actions = actions;
         }
 
-        public static CharSequence[] labels() {
-            CharSequence[] labels = new CharSequence[values().length];
-            for (int i = 0; i < values().length; i++) {
-                labels[i] = values()[i].label;
+        public int getCount() {
+            return actions.size();
+        }
+
+        public ActionItem getActionItem(int position) {
+            return actions.get(position);
+        }
+
+        @Nullable
+        public ActionItem getActionItemWithId(@IdRes int id) {
+            for (ActionItem actionItem : actions) {
+                if (actionItem.getId() == id) {
+                    return actionItem;
+                }
             }
-            return labels;
-        }
-
-        public static Action atPosition(int actionId) {
-            return values()[actionId];
+            return null;
         }
 
     }
 
-    private void showActionsDialog(final Tweet tweet, final ActionListener actions) {
+    private static class ActionItem {
+
+        @IdRes
+        private final int id;
+
+        @StringRes
+        private final int labelRes;
+
+        private final Runnable action;
+
+        ActionItem(int id, int labelRes, Runnable action) {
+            this.id = id;
+            this.labelRes = labelRes;
+            this.action = action;
+        }
+
+        @IdRes
+        public int getId() {
+            return id;
+        }
+
+        @StringRes
+        public int getLabelRes() {
+            return labelRes;
+        }
+
+        public void doAction() {
+            action.run();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            ActionItem action = (ActionItem) o;
+
+            if (id != action.id) {
+                return false;
+            }
+            if (labelRes != action.labelRes) {
+                return false;
+            }
+            return this.action.equals(action.action);
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = id;
+            result = 31 * result + labelRes;
+            result = 31 * result + action.hashCode();
+            return result;
+        }
+
+    }
+
+    private static class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
+
+        private final Resources resources;
+        private final ActionsProvider actionsProvider;
+
+        public ActionsAccessibilityDelegate(Resources resources, ActionsProvider actionsProvider) {
+            this.resources = resources;
+            this.actionsProvider = actionsProvider;
+        }
+
+        @Override
+        public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
+            super.onInitializeAccessibilityNodeInfo(host, info);
+            for (int i = 0; i < actionsProvider.getCount(); i++) {
+                ActionItem actionItem = actionsProvider.getActionItem(i);
+                String label = resources.getString(actionItem.getLabelRes());
+                info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(actionItem.getId(), label));
+            }
+        }
+
+        @Override
+        public boolean performAccessibilityAction(View host, int action, Bundle args) {
+            ActionItem actionItemWithId = actionsProvider.getActionItemWithId(action);
+            if (actionItemWithId == null) {
+                return super.performAccessibilityAction(host, action, args);
+            } else {
+                actionItemWithId.doAction();
+                return true;
+            }
+        }
+
+    }
+
+    private void showActionsDialog(ActionsProvider actionsProvider) {
+        CharSequence[] itemLabels = new CharSequence[actionsProvider.getCount()];
+        for (int i = 0; i < actionsProvider.getCount(); i++) {
+            itemLabels[i] = getResources().getString(actionsProvider.getActionItem(i).getLabelRes());
+        }
+
         new AlertDialog.Builder(getContext())
                 .setTitle("Tweet options")
-                .setItems(Action.labels(), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int item) {
-                        switch (Action.atPosition(item)) {
-                            case OPEN_DETAIL:
-                                actions.onClick(tweet);
-                                break;
-                            case REPLY:
-                                actions.onClickReplyTo(tweet);
-                                break;
-                            case RETWEET:
-                                actions.onClickRetweet(tweet);
-                                break;
-                            case LIKE:
-                                actions.onClickLike(tweet);
-                                break;
-                            default:
-                                throw new RuntimeException("Unknown Action item: " + Action.atPosition(item));
-                        }
-                        dialog.dismiss();
-                    }
-                })
+                .setItems(itemLabels, new ActionItemClickListener(actionsProvider))
                 .create()
                 .show();
+    }
+
+    private static class ActionItemClickListener implements DialogInterface.OnClickListener {
+
+        private final ActionsProvider actionProvider;
+
+        ActionItemClickListener(ActionsProvider actionsProvider) {
+            this.actionProvider = actionsProvider;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int item) {
+            actionProvider.getActionItem(item).doAction();
+            dialog.dismiss();
+        }
+
     }
 
     public interface ActionListener {

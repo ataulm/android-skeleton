@@ -4,4 +4,16 @@
     type="id" />
   <item name="action_secret_two"
     type="id" />
+
+  <item name="tweet_summary_action_open_detail"
+    type="id" />
+
+  <item name="tweet_summary_action_reply"
+    type="id" />
+
+  <item name="tweet_summary_action_retweet"
+    type="id" />
+
+  <item name="tweet_summary_action_like"
+    type="id" />
 </resources>
