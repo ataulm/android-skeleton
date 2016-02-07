@@ -1,8 +1,11 @@
 package com.ataulm.basic;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -59,9 +62,66 @@ public class TweetSummaryView extends LinearLayout {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                actions.onClick(tweet);
+                // TODO: actions.onClick(tweet)
+                showActionsDialog(tweet, actions);
             }
         });
+    }
+
+    enum Action {
+
+        OPEN_DETAIL("Open detail"),
+        REPLY("Reply"),
+        RETWEET("Re-tweet"),
+        LIKE("Like");
+
+        private final String label;
+
+        Action(String label) {
+            this.label = label;
+        }
+
+        public static CharSequence[] labels() {
+            CharSequence[] labels = new CharSequence[values().length];
+            for (int i = 0; i < values().length; i++) {
+                labels[i] = values()[i].label;
+            }
+            return labels;
+        }
+
+        public static Action atPosition(int actionId) {
+            return values()[actionId];
+        }
+
+    }
+
+    private void showActionsDialog(final Tweet tweet, final ActionListener actions) {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Tweet options")
+                .setItems(Action.labels(), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        switch (Action.atPosition(item)) {
+                            case OPEN_DETAIL:
+                                actions.onClick(tweet);
+                                break;
+                            case REPLY:
+                                actions.onClickReplyTo(tweet);
+                                break;
+                            case RETWEET:
+                                actions.onClickRetweet(tweet);
+                                break;
+                            case LIKE:
+                                actions.onClickLike(tweet);
+                                break;
+                            default:
+                                throw new RuntimeException("Unknown Action item: " + Action.atPosition(item));
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .create()
+                .show();
     }
 
     public interface ActionListener {
