@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 
 public class MyActivity extends AppCompatActivity {
 
+    private final LondonUndergroundRemoteApi api = new LondonUndergroundRemoteApi();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
