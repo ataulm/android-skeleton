@@ -1,6 +1,6 @@
 package com.ataulm.basic;
 
-class LondonUndergroundRemoteApi {
+public class LondonUndergroundRemoteApi {
 
     public String getUndergroundLinesJson() {
         simulateDelayFromNetworkCall();
