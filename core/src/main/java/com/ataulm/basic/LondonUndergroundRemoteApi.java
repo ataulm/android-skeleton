@@ -1,14 +1,6 @@
 package com.ataulm.basic;
 
-import com.ataulm.basic.model.line.Line;
-import com.ataulm.basic.model.line.RemoteLineGateway;
-import com.ataulm.basic.model.line.Station;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-public class LondonUndergroundRemoteApi implements RemoteLineGateway{
+public class LondonUndergroundRemoteApi {
 
     public String getUndergroundLinesJson() {
         simulateDelayFromNetworkCall();
@@ -134,9 +126,4 @@ public class LondonUndergroundRemoteApi implements RemoteLineGateway{
             "  ]\n" +
             "}";
 
-    @Override
-    public List<Line> getLines() {
-        List<Station> stations = Collections.singletonList(new Station(123, "Hendo Central"));
-        return Collections.singletonList(new Line(1, "Northen", stations));
-    }
 }
