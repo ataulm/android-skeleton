@@ -16,6 +16,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     ItemAdapter(List<Item> items, ItemClickListener itemClickListener) {
         this.items = items;
         this.itemClickListener = itemClickListener;
+        setHasStableIds(true);
     }
 
     @Override
@@ -34,11 +35,24 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         return items.size();
     }
 
-    public void update(List<Item> items) {
+    @Override
+    public long getItemId(int position) {
+        return items.get(position).id;
+    }
+
+    public void update(List<Item> backingData) {
         this.items.clear();
-        this.items.addAll(items);
+        this.items.addAll(backingData);
 
         notifyDataSetChanged();
+    }
+
+    public void update(List<Item> backingData, Item changedItem) {
+        this.items.clear();
+        this.items.addAll(backingData);
+
+        int i = backingData.indexOf(changedItem);
+        notifyItemChanged(i);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

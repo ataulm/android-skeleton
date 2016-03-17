@@ -76,6 +76,6 @@ public class MyActivity extends AppCompatActivity implements ItemClickListener {
         Collections.sort(copy);
 
         items = copy;
-        itemAdapter.update(items);
+        itemAdapter.update(items, itemToChange);
     }
 }
