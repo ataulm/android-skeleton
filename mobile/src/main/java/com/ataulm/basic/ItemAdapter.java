@@ -11,9 +11,9 @@ import java.util.List;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private final List<Item> items;
-    private final MyActivity.ItemClickListener itemClickListener;
+    private final ItemClickListener itemClickListener;
 
-    ItemAdapter(List<Item> items, MyActivity.ItemClickListener itemClickListener) {
+    ItemAdapter(List<Item> items, ItemClickListener itemClickListener) {
         this.items = items;
         this.itemClickListener = itemClickListener;
     }
@@ -34,29 +34,42 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         return items.size();
     }
 
+    public void update(List<Item> items) {
+        this.items.clear();
+        this.items.addAll(items);
+
+        notifyDataSetChanged();
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView titleTextView;
-        private final TextView moreActionOneTextView;
-        private final TextView moreActionTwoTextView;
-        private final MyActivity.ItemClickListener itemClickListener;
+        private final TextView selectButton;
+        private final TextView deselectButton;
+        private final ItemClickListener itemClickListener;
 
-        static ViewHolder inflate(ViewGroup parent, MyActivity.ItemClickListener itemClickListener) {
+        static ViewHolder inflate(ViewGroup parent, ItemClickListener itemClickListener) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             return new ViewHolder(layoutInflater.inflate(R.layout.dummy_item, parent, false), itemClickListener);
         }
 
-        public ViewHolder(View itemView, MyActivity.ItemClickListener itemClickListener) {
+        public ViewHolder(View itemView, ItemClickListener itemClickListener) {
             super(itemView);
             this.itemClickListener = itemClickListener;
 
             this.titleTextView = (TextView) itemView.findViewById(R.id.text_title);
-            this.moreActionOneTextView = (TextView) itemView.findViewById(R.id.text_more_action_one);
-            this.moreActionTwoTextView = (TextView) itemView.findViewById(R.id.text_more_action_two);
+            this.selectButton = (TextView) itemView.findViewById(R.id.text_more_action_one);
+            this.deselectButton = (TextView) itemView.findViewById(R.id.text_more_action_two);
         }
 
         public void bind(final Item item) {
-            final String text = "Item " + item.id;
+            final String text;
+            if (item.selected) {
+                text = "Item " + item.id + " (selected)";
+            } else {
+                text = "Item " + item.id;
+            }
+
             titleTextView.setText(text);
 
             itemView.setOnClickListener(
@@ -69,7 +82,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
                     });
 
-            moreActionOneTextView.setOnClickListener(
+            selectButton.setOnClickListener(
                     new View.OnClickListener() {
 
                         @Override
@@ -79,7 +92,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
                     });
 
-            moreActionTwoTextView.setOnClickListener(
+            deselectButton.setOnClickListener(
                     new View.OnClickListener() {
 
                         @Override

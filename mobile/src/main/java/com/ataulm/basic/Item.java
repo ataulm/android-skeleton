@@ -1,6 +1,7 @@
 package com.ataulm.basic;
 
-class Item {
+class Item implements Comparable<Item> {
+
     public final int id;
     public final boolean selected;
 
@@ -8,4 +9,18 @@ class Item {
         this.id = id;
         this.selected = selected;
     }
+
+    @Override
+    public int compareTo(Item another) {
+        if (id == another.id) {
+            return 0;
+        }
+
+        if (id > another.id) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
 }

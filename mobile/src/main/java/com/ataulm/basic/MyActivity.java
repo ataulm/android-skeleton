@@ -6,51 +6,76 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class MyActivity extends AppCompatActivity {
+public class MyActivity extends AppCompatActivity implements ItemClickListener {
+
+    private ToastDisplayer toastDisplayer;
+    private ItemAdapter itemAdapter;
+    private List<Item> items;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+        toastDisplayer = new ToastDisplayer(this);
+
         RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
         listview.setLayoutManager(new LinearLayoutManager(this));
-        List<Item> items = createItems(20);
+        items = createItems(20);
 
-        final ToastDisplayer toastDisplayer = new ToastDisplayer(this);
-        listview.setAdapter(new ItemAdapter(items, new ItemClickListener() {
-                                @Override
-                                public void onClick(Item item) {
-                                    toastDisplayer.display("onClick " + item.id);
-                                }
-
-                                @Override
-                                public void onClickSelect(Item item) {
-                                    toastDisplayer.display("onClick select " + item.id);
-                                }
-
-                                @Override
-                                public void onClickDeselect(Item item) {
-                                    toastDisplayer.display("onClick deselect " + item.id);
-                                }
-                            })
-        );
+        itemAdapter = new ItemAdapter(items, this);
+        listview.setAdapter(itemAdapter);
     }
 
-    private List<Item> createItems(int count) {
+    private static List<Item> createItems(int count) {
         List<Item> items = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
             items.add(new Item(i, false));
         }
+        Collections.sort(items);
         return items;
     }
 
-    interface ItemClickListener {
-        void onClick(Item item);
-        void onClickSelect(Item item);
-        void onClickDeselect(Item item);
+    @Override
+    public void onClick(Item item) {
+        toastDisplayer.display("onClick " + item.id);
     }
 
+    @Override
+    public void onClickSelect(Item item) {
+        if (item.selected) {
+            toastDisplayer.display("item already selected");
+            return;
+        }
+
+        updateAdapterWithItemChanged(item, true);
+    }
+
+    @Override
+    public void onClickDeselect(Item item) {
+        if (!item.selected) {
+            toastDisplayer.display("item already deselected");
+            return;
+        }
+        updateAdapterWithItemChanged(item, false);
+    }
+
+    private void updateAdapterWithItemChanged(Item itemToChange, boolean selected) {
+        List<Item> copy = new ArrayList<>(items.size());
+        for (Item item : items) {
+            if (item.id == itemToChange.id) {
+                copy.add(new Item(item.id, selected));
+            } else {
+                copy.add(item);
+            }
+        }
+
+        Collections.sort(copy);
+
+        items = copy;
+        itemAdapter.update(items);
+    }
 }
