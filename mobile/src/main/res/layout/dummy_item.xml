@@ -27,7 +27,7 @@
       android:layout_height="0dp"
       android:layout_weight="50"
       android:padding="4dp"
-      android:text="Action 1"
+      android:text="Select"
       android:background="@drawable/item_background"
       android:nextFocusLeft="@id/dummy_item_parent"
       android:focusable="true" />
@@ -40,7 +40,7 @@
       android:nextFocusLeft="@id/dummy_item_parent"
       android:background="@drawable/item_background"
       android:padding="4dp"
-      android:text="Action 2"
+      android:text="Deselect"
       android:focusable="true" />
   </LinearLayout>
 </LinearLayout>
