@@ -23,6 +23,8 @@ public class MyActivity extends AppCompatActivity implements ItemClickListener {
         toastDisplayer = new ToastDisplayer(this);
 
         RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
+        listview.setItemAnimator(null);
+
         listview.setLayoutManager(new LinearLayoutManager(this));
         items = createItems(20);
 
