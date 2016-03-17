@@ -1,8 +1,7 @@
 package com.ataulm.basic;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MyActivity extends Activity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MyActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,16 +21,35 @@ public class MyActivity extends Activity {
 
         RecyclerView listview = (RecyclerView) findViewById(R.id.listview);
         listview.setLayoutManager(new LinearLayoutManager(this));
-        listview.setAdapter(new DummyAdapter(new ToastDisplayer(this)));
+        List<Item> items = createItems(20);
+        listview.setAdapter(new DummyAdapter(items, new ToastDisplayer(this)));
+    }
+
+    private List<Item> createItems(int count) {
+        List<Item> items = new ArrayList<>(count);
+        for (int i = 0; i < count; i++) {
+            items.add(new Item(i, false));
+        }
+        return items;
+    }
+
+    private static class Item {
+        public final int id;
+        public final boolean selected;
+
+        Item(int id, boolean selected) {
+            this.id = id;
+            this.selected = selected;
+        }
     }
 
     private static class DummyAdapter extends RecyclerView.Adapter<DummyAdapter.ViewHolder> {
 
-        private static final int COUNT = 25;
-
+        private final List<Item> items;
         private final ToastDisplayer toastDisplayer;
 
-        DummyAdapter(ToastDisplayer toastDisplayer) {
+        DummyAdapter(List<Item> items, ToastDisplayer toastDisplayer) {
+            this.items = items;
             this.toastDisplayer = toastDisplayer;
         }
 
@@ -39,12 +60,13 @@ public class MyActivity extends Activity {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            viewHolder.bind("Item " + i);
+            Item item = items.get(i);
+            viewHolder.bind(item);
         }
 
         @Override
         public int getItemCount() {
-            return COUNT;
+            return items.size();
         }
 
         static class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,37 +90,40 @@ public class MyActivity extends Activity {
                 this.moreActionTwoTextView = (TextView) itemView.findViewById(R.id.text_more_action_two);
             }
 
-            void bind(final String text) {
+            public void bind(Item item) {
+                final String text = "Item " + item.id;
                 titleTextView.setText(text);
 
-                itemView.setOnClickListener(new View.OnClickListener() {
+                itemView.setOnClickListener(
+                        new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        toastDisplayer.display("onClick " + text);
-                    }
+                            @Override
+                            public void onClick(View v) {
+                                toastDisplayer.display("onClick " + text);
+                            }
 
-                });
+                        });
 
-                moreActionOneTextView.setOnClickListener(new View.OnClickListener() {
+                moreActionOneTextView.setOnClickListener(
+                        new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        toastDisplayer.display("onClick " + text + " - action 1");
-                    }
+                            @Override
+                            public void onClick(View v) {
+                                toastDisplayer.display("onClick " + text + " - action 1");
+                            }
 
-                });
+                        });
 
-                moreActionTwoTextView.setOnClickListener(new View.OnClickListener() {
+                moreActionTwoTextView.setOnClickListener(
+                        new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        toastDisplayer.display("onClick " + text + " - action 2");
-                    }
+                            @Override
+                            public void onClick(View v) {
+                                toastDisplayer.display("onClick " + text + " - action 2");
+                            }
 
-                });
+                        });
             }
-
         }
 
     }
