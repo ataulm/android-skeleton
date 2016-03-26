@@ -2,6 +2,8 @@ package com.ataulm.basic;
 
 import android.content.Context;
 
+import com.ataulm.basic.demo.AppNameProvider;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;

@@ -1,4 +1,4 @@
-package com.ataulm.basic;
+package com.ataulm.basic.demo;
 
 import android.content.Context;
 

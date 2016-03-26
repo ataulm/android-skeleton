@@ -21,11 +21,12 @@ android {
 
 dependencies {
     compile project(":core")
+    compile project(":exception-what-exception")
 
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.android.support:support-v13:23.1.0'
-    compile 'com.android.support:recyclerview-v7:23.1.0'
-    compile 'com.android.support:design:23.1.0'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:support-v13:23.2.1'
+    compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'com.android.support:design:23.2.1'
 
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.9.5"

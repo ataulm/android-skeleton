@@ -1,2 +1,4 @@
+include ':exception-what-exception'
+
 include ':core'
 include ':mobile'
