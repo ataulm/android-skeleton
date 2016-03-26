@@ -4,6 +4,7 @@
   <application>
 
     <activity
+      android:theme="@style/Theme.AppCompat.Light.NoActionBar"
       android:name="com.ataulm.basic.UhOhActivity"
       android:label="@string/activity_label_uh_oh" />
 
