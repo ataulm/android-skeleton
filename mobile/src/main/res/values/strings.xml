@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">Basic</string>
+  <string name="view_id_logging_service_label">View logging service</string>
 </resources>
