@@ -5,4 +5,9 @@
     <!-- Customize your theme here. -->
   </style>
 
+  <style name="ScreenText">
+    <item name="android:textSize">72sp</item>
+    <item name="android:gravity">center</item>
+  </style>
+
 </resources>
