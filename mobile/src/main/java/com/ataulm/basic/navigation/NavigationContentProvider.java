@@ -1,7 +1,9 @@
-package com.ataulm.basic;
+package com.ataulm.basic.navigation;
 
 import android.net.Uri;
 import android.support.annotation.Nullable;
+
+import com.ataulm.basic.SimpleContentProvider;
 
 public class NavigationContentProvider extends SimpleContentProvider {
 

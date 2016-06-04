@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.ataulm.basic.navigation.Screen;
+import com.ataulm.basic.navigation.UriCreator;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

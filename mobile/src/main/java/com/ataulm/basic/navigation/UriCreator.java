@@ -1,13 +1,13 @@
-package com.ataulm.basic;
+package com.ataulm.basic.navigation;
 
 import android.content.Context;
 import android.net.Uri;
 
-class UriCreator {
+public class UriCreator {
 
     private final String authority;
 
-    static UriCreator create(Context context) {
+    public static UriCreator create(Context context) {
         return new UriCreator(context.getPackageName());
     }
 

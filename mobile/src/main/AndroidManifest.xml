@@ -27,7 +27,7 @@
     </activity-alias>
 
     <provider
-      android:name=".NavigationContentProvider"
+      android:name=".navigation.NavigationContentProvider"
       android:authorities="${packageName}"
       android:exported="false" />
 

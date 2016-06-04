@@ -1,4 +1,4 @@
-package com.ataulm.basic;
+package com.ataulm.basic.navigation;
 
 import android.content.Context;
 import android.net.Uri;

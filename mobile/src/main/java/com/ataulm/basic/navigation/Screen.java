@@ -1,6 +1,6 @@
-package com.ataulm.basic;
+package com.ataulm.basic.navigation;
 
-enum Screen {
+public enum Screen {
     A("screen_a"),
     B("screen_b"),
     C("screen_c");
