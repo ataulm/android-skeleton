@@ -14,7 +14,7 @@
     android:layout_width="304dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="@android:color/holo_red_light"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <Button
