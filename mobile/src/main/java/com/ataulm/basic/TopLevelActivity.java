@@ -3,6 +3,7 @@ package com.ataulm.basic;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -51,7 +52,21 @@ public class TopLevelActivity extends AppCompatActivity {
 
         setupButtons();
 
-        System.out.println("onCreate: " + getIntent().getData());
+        int layout = getScreenLayout(getIntent().getData());
+        contentViewSetter.setContentView(layout);
+    }
+
+    @LayoutRes
+    private int getScreenLayout(Uri data) {
+        if (userIsOnInitialScreen()) {
+            return R.layout.screen_a;
+        }
+
+        if (data.getPath().endsWith(Screen.B.getPath())) {
+            return R.layout.screen_b;
+        } else {
+            return R.layout.screen_c;
+        }
     }
 
     private void setupButtons() {
