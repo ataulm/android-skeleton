@@ -19,8 +19,9 @@ public class Navigator {
 
     public void navigateTo(Screen screen) {
         Intent intent = new Intent(Intent.ACTION_VIEW, uriCreator.createUriToView(screen));
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         activity.startActivity(intent);
-        activity.finish();
     }
 
 }

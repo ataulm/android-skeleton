@@ -1,5 +1,6 @@
 package com.ataulm.basic;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -52,6 +53,13 @@ public class TopLevelActivity extends AppCompatActivity {
 
         setupButtons();
 
+        displayCorrectScreen();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
         displayCorrectScreen();
     }
 
