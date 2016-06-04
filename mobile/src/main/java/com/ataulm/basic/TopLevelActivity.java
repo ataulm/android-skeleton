@@ -1,6 +1,5 @@
 package com.ataulm.basic;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.ataulm.basic.navigation.Navigator;
 import com.ataulm.basic.navigation.Screen;
 import com.ataulm.basic.navigation.UriCreator;
 
@@ -37,8 +37,8 @@ public class TopLevelActivity extends AppCompatActivity {
     @BindView(R.id.drawer_layout_content)
     FrameLayout contentFrame;
 
+    private Navigator navigator;
     private DrawerController drawerController;
-    private UriCreator uriCreator;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,8 @@ public class TopLevelActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         ContentViewSetter contentViewSetter = new ContentViewSetter(getLayoutInflater(), contentFrame);
+        navigator = Navigator.create(this);
         drawerController = new DrawerController(drawerLayout, Gravity.START);
-        uriCreator = UriCreator.create(this);
 
         setupButtons();
 
@@ -73,29 +73,23 @@ public class TopLevelActivity extends AppCompatActivity {
         buttonScreenA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNextActivity(Screen.A);
+                navigator.navigateTo(Screen.A);
             }
         });
 
         buttonScreenB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNextActivity(Screen.B);
+                navigator.navigateTo(Screen.B);
             }
         });
 
         buttonScreenC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNextActivity(Screen.C);
+                navigator.navigateTo(Screen.C);
             }
         });
-    }
-
-    private void startNextActivity(Screen screen) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, uriCreator.createUriToView(screen));
-        startActivity(intent);
-        finish();
     }
 
     @Override
@@ -115,7 +109,7 @@ public class TopLevelActivity extends AppCompatActivity {
     }
 
     private void goToInitialScreen() {
-        startNextActivity(Screen.A);
+        navigator.navigateTo(Screen.A);
     }
 
 }
