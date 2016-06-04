@@ -113,6 +113,7 @@ public class TopLevelActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (drawerController.isDrawerOpen()) {
             drawerController.closeDrawer();
+            // TODO: perhaps then give each screen a chance to handle?
         } else if (userIsOnInitialScreen()) {
             finish();
         } else {
