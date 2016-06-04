@@ -58,13 +58,13 @@ public class TopLevelActivity extends AppCompatActivity {
     @LayoutRes
     private int getScreenLayout(Uri data) {
         if (userIsOnInitialScreen()) {
-            return R.layout.screen_a;
+            return R.layout.view_screen_a;
         }
 
         if (data.getPath().endsWith(Screen.B.getPath())) {
-            return R.layout.screen_b;
+            return R.layout.view_screen_b;
         } else {
-            return R.layout.screen_c;
+            return R.layout.view_screen_c;
         }
     }
 
