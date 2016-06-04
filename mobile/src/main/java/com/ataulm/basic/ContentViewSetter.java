@@ -17,7 +17,6 @@ class ContentViewSetter {
     void setContentView(@LayoutRes int layout) {
         contentFrame.removeAllViews();
         layoutInflater.inflate(layout, contentFrame, true);
-        // TODO: if the `layout` is merge tags, what happens if attachToRoot == false?
     }
 
 }
