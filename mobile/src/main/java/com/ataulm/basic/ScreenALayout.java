@@ -25,6 +25,9 @@ public class ScreenALayout extends LinearLayout {
         super.onFinishInflate();
         View.inflate(getContext(), R.layout.merge_screen_a, this);
         ButterKnife.bind(this);
+
+        appBarWidget.setTitle("Screen A");
+        appBarWidget.showNavigationDrawerIcon();
     }
 
 }
