@@ -7,18 +7,29 @@
     android:icon="@drawable/ic_launcher"
     android:theme="@style/AppTheme">
 
-    <activity android:name="com.ataulm.basic.MyActivity" />
+    <activity android:name=".TopLevelActivity" />
 
     <activity-alias
       android:name="activity.primary_launcher"
-      android:targetActivity="com.ataulm.basic.MyActivity">
+      android:targetActivity=".TopLevelActivity">
 
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
 
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="vnd.android.cursor.item/vnd.${packageName}.toplevel" />
+      </intent-filter>
+
     </activity-alias>
+
+    <provider
+      android:name=".NavigationContentProvider"
+      android:authorities="${packageName}"
+      android:exported="false" />
 
   </application>
 

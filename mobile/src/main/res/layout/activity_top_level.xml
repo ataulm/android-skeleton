@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/drawer_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <FrameLayout
+    android:id="@+id/drawer_layout_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+  <LinearLayout
+    android:id="@+id/drawer"
+    android:layout_width="304dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@android:color/holo_red_light"
+    android:orientation="vertical">
+
+    <Button
+      android:id="@+id/button_screen_a"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Screen A" />
+
+    <Button
+      android:id="@+id/button_screen_b"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Screen B" />
+
+    <Button
+      android:id="@+id/button_screen_c"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Screen C" />
+
+  </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
