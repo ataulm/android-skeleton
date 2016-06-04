@@ -29,8 +29,29 @@ public class AppBarWidget extends AppBarLayout {
         }
     }
 
-    public Toolbar getToolbar() {
-        return toolbar;
+    public void setTitle(String title) {
+        toolbar.setTitle(title);
     }
+
+    public void showNavigationDrawerIcon() {
+        toolbar.setNavigationIcon(R.drawable.ic_action_navigation_menu);
+        toolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    public void showUpIcon() {
+        toolbar.setNavigationIcon(R.drawable.ic_action_up);
+        toolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
 
 }
