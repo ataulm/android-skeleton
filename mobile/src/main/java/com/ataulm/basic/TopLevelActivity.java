@@ -38,6 +38,7 @@ public class TopLevelActivity extends AppCompatActivity {
 
     private Navigator navigator;
     private DrawerController drawerController;
+    private ContentViewSetter contentViewSetter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,12 +46,16 @@ public class TopLevelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_top_level);
         ButterKnife.bind(this);
 
-        ContentViewSetter contentViewSetter = new ContentViewSetter(getLayoutInflater(), contentFrame);
+        contentViewSetter = new ContentViewSetter(getLayoutInflater(), contentFrame);
         navigator = Navigator.create(this);
         drawerController = new DrawerController(drawerLayout, Gravity.START);
 
         setupButtons();
 
+        displayCorrectScreen();
+    }
+
+    private void displayCorrectScreen() {
         int layout = getScreenLayout(getIntent().getData());
         contentViewSetter.setContentView(layout);
     }
