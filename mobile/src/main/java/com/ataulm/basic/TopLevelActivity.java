@@ -77,23 +77,28 @@ public class TopLevelActivity extends AppCompatActivity {
         buttonScreenA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigator.navigateTo(Screen.A);
+                closeDrawerAndNavigateTo(Screen.A);
             }
         });
 
         buttonScreenB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigator.navigateTo(Screen.B);
+                closeDrawerAndNavigateTo(Screen.B);
             }
         });
 
         buttonScreenC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigator.navigateTo(Screen.C);
+                closeDrawerAndNavigateTo(Screen.C);
             }
         });
+    }
+
+    private void closeDrawerAndNavigateTo(Screen screen) {
+        drawerController.closeDrawer();
+        navigator.navigateTo(screen);
     }
 
     @Override
