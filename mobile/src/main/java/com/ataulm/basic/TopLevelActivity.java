@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 
 import com.ataulm.basic.navigation.Navigator;
 import com.ataulm.basic.navigation.Screen;
-import com.ataulm.basic.navigation.UriCreator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
