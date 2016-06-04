@@ -33,25 +33,36 @@ public class AppBarWidget extends AppBarLayout {
         toolbar.setTitle(title);
     }
 
-    public void showNavigationDrawerIcon() {
+    public void showNavigationDrawerIcon(final NavDrawerIconClickListener listener) {
         toolbar.setNavigationIcon(R.drawable.ic_action_navigation_menu);
         toolbar.setNavigationOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                listener.onClick();
             }
         });
     }
 
-    public void showUpIcon() {
+    public void showUpIcon(final UpIconClickListener listener) {
         toolbar.setNavigationIcon(R.drawable.ic_action_up);
         toolbar.setNavigationOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                listener.onClick();
             }
         });
     }
 
+    public interface NavDrawerIconClickListener {
+
+        void onClick();
+
+    }
+
+    public interface UpIconClickListener {
+
+        void onClick();
+
+    }
 
 }
