@@ -53,17 +53,17 @@ public class TopLevelActivity extends AppCompatActivity {
 
         setupButtons();
 
-        displayCorrectScreen();
+        displayScreenSpecifiedByIntent();
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        displayCorrectScreen();
+        displayScreenSpecifiedByIntent();
     }
 
-    private void displayCorrectScreen() {
+    private void displayScreenSpecifiedByIntent() {
         int layout = getScreenLayout(getIntent().getData());
         contentViewSetter.setContentView(layout);
     }
@@ -117,7 +117,7 @@ public class TopLevelActivity extends AppCompatActivity {
         } else if (userIsOnInitialScreen()) {
             finish();
         } else {
-            goToInitialScreen();
+            displayInitialScreen();
         }
     }
 
@@ -126,7 +126,7 @@ public class TopLevelActivity extends AppCompatActivity {
         return data == null || data.getPath().endsWith(Screen.A.getPath());
     }
 
-    private void goToInitialScreen() {
+    private void displayInitialScreen() {
         navigator.navigateTo(Screen.A);
     }
 
