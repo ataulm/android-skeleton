@@ -2,7 +2,6 @@ package com.ataulm.basic;
 
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 class ContentViewSetter {
