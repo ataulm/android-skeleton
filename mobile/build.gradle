@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "com.ataulm.basic"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -23,11 +24,13 @@ android {
 dependencies {
     compile project(":core")
 
-    def supportVersion = '23.3.0'
+    def supportVersion = '24.0.0'
     compile "com.android.support:appcompat-v7:${supportVersion}"
     compile "com.android.support:support-v13:${supportVersion}"
     compile "com.android.support:recyclerview-v7:${supportVersion}"
     compile "com.android.support:design:${supportVersion}"
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') { transitive = true }
 
     compile 'com.jakewharton:butterknife:8.0.1'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
