@@ -1,4 +1,4 @@
-package com.ataulm.basic;
+package com.novoda.androidskeleton;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

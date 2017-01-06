@@ -1,4 +1,4 @@
-package com.ataulm.basic;
+package com.novoda.androidskeleton;
 
 import org.junit.Before;
 import org.junit.Test;
