@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 'android-O'
+    buildToolsVersion '26.0.0-rc1'
 
     defaultConfig {
         applicationId "com.novoda.androidskeleton"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 'O'
         versionCode 1
         versionName "1.0"
 
@@ -25,7 +25,7 @@ android {
 dependencies {
     compile project(":core")
 
-    def supportVersion = '25.2.0'
+    def supportVersion = '26.0.0-alpha1'
     compile "com.android.support:appcompat-v7:${supportVersion}"
     compile "com.android.support:support-v13:${supportVersion}"
     compile "com.android.support:recyclerview-v7:${supportVersion}"
