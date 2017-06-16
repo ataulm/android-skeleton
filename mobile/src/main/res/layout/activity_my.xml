@@ -5,24 +5,8 @@
     android:orientation="horizontal">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/column_a"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="33"
-        android:background="@android:color/holo_blue_dark" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/column_b"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="33"
-        android:background="@android:color/holo_orange_light" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/column_c"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="33"
-        android:background="@android:color/holo_red_light" />
+        android:id="@+id/recycler_View"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
