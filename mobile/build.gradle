@@ -6,7 +6,7 @@ android {
     buildToolsVersion versions.androidSdk.buildTools
 
     defaultConfig {
-        applicationId "com.novoda.androidskeleton"
+        applicationId "com.example.androidskeleton"
         minSdkVersion versions.androidSdk.min
         targetSdkVersion versions.androidSdk.target
         versionCode 1
