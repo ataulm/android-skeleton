@@ -29,6 +29,7 @@ dependencies {
     compile libraries.supportDesign
     compile libraries.supportRecyclerView
     compile libraries.supportV13
+    compile 'com.novoda:accessibilitools:1.4.1'
 
     compile libraries.butterknife
     apt libraries.butterknifeCompiler

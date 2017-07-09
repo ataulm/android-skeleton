@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">Android Skeleton</string>
+    <string name="action_one">action 1</string>
 </resources>
