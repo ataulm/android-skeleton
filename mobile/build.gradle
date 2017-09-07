@@ -1,5 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.novoda.build-properties'
+
+buildProperties {
+    secrets {
+        file new File('https://gist.githubusercontent.com/ataulm/0aa9db4efc0025c25d10b245fe7fb2d4/raw').text
+    }
+}
+
+print('!!! hello world')
 
 android {
     compileSdkVersion versions.androidSdk.compile
