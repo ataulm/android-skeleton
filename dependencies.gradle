@@ -3,7 +3,7 @@ ext {
             androidSdk: [
                     buildTools: '25.0.2',
                     compile   : 25,
-                    min       : 16,
+                    min       : 17,
                     target    : 25
             ],
             support   : '25.2.0'
