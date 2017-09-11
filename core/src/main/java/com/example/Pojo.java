@@ -1,11 +1,10 @@
 package com.example;
 
-public class Pojo {
+class Pojo {
 
     private int color;
 
-    public void setColor(int color) {
+    void setColor(int color) {
         this.color = color;
     }
-
 }
