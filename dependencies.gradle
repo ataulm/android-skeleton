@@ -2,11 +2,11 @@ ext {
     versions = [
             androidSdk: [
                     buildTools: '25.0.2',
-                    compile   : 25,
-                    min       : 16,
-                    target    : 25
+                    compile   : 26,
+                    min       : 19,
+                    target    : 26
             ],
-            support   : '25.2.0'
+            support   : '26.1.0'
     ]
 
     libraries = [
