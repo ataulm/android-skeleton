@@ -1,10 +1,12 @@
 intro to chromecast sender
 ==========================
 
-### Steps
+### Links
 
 - updating dependencies: https://developers.google.com/cast/docs/android_sender_setup
 - integrating v3 cast sdk: https://developers.google.com/cast/docs/android_sender_integrate
+
+- standalone codelab for android: https://codelabs.developers.google.com/codelabs/cast-videos-android/#0
 
 ### Notes
 
