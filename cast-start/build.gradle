@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion versions.androidSdk.compile
+    buildToolsVersion versions.androidSdk.buildTools
+
+    defaultConfig {
+        minSdkVersion versions.androidSdk.min
+        targetSdkVersion versions.androidSdk.target
+        applicationId "com.google.sample.cast.refplayer"
+    }
+    enforceUniquePackageName false
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    lintOptions.abortOnError false
+}
+
+dependencies {
+    compile libraries.supportAppCompatV7
+    compile libraries.supportMediaRouter
+    compile libraries.supportRecyclerView
+    compile libraries.androidQuery
+}

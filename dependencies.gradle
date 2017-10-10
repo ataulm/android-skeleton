@@ -16,6 +16,7 @@ ext {
             ],
             androidTestRules   : 'com.android.support.test:rules:0.5',
             androidTestRunner  : 'com.android.support.test:runner:0.5',
+            androidQuery       : 'com.googlecode.android-query:android-query:0.25.9',
             butterknife        : 'com.jakewharton:butterknife:8.0.1',
             butterknifeCompiler: 'com.jakewharton:butterknife-compiler:8.0.1',
             espressoCore       : 'com.android.support.test.espresso:espresso-core:2.2.2',
