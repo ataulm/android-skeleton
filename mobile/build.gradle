@@ -25,6 +25,7 @@ android {
 dependencies {
     compile project(":core")
 
+    compile libraries.androidLifecycleExtensions
     compile libraries.supportAppCompatV7
     compile libraries.supportDesign
     compile libraries.supportRecyclerView
