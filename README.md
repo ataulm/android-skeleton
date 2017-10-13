@@ -10,6 +10,10 @@ intro to chromecast sender
 
 ### Notes
 
+#### Commits
+
+- Initial video catalog with local playback 62ccdcaebcd40b983f424bc60db3b140df9784a0
+
 #### Overview
 
 The **Sender** is the mobile device or laptop that you're casting content from. It consists of the
