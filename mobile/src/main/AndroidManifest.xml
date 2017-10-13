@@ -8,6 +8,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="com.example.MyActivity" />
+        <activity android:name="com.example.SecondActivityInApp" />
 
         <activity-alias
             android:name="activity.primary_launcher"
