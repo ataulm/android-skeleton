@@ -18,23 +18,29 @@ public class MyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my);
 
         Lifecycle lifecycle = ProcessLifecycleOwner.get().getLifecycle();
-        lifecycle.addObserver(new LifecycleObserver() {
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_START)
-            public void onApplicationMovingToForeground() {
-                Log.d("!!! ", "onApplicationMovingToForeground");
-            }
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-            public void onApplicationMovingToBackground() {
-                Log.d("!!! ", "onApplicationMovingToBackground");
-            }
-
-        });
+        lifecycle.addObserver(new LoggingLifecycleObserver());
     }
 
     public void openSecondActivity(View view) {
         Intent intent = new Intent(this, SecondActivityInApp.class);
         startActivity(intent);
+    }
+
+    private static class LoggingLifecycleObserver implements LifecycleObserver {
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_START)
+        public void onApplicationMovedToForeground() {
+            Log.d("!!! ", "onApplicationMovingToForeground");
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        public void onApplicationMovedToBackground() {
+            Log.d("!!! ", "onApplicationMovingToBackground");
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        public void onApplicationDestroyed() {
+            Log.d("!!! ", "onApplicationDestroyed");
+        }
     }
 }
