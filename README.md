@@ -5,14 +5,18 @@ intro to chromecast sender
 
 - updating dependencies: https://developers.google.com/cast/docs/android_sender_setup
 - integrating v3 cast sdk: https://developers.google.com/cast/docs/android_sender_integrate
-
+- cast design checklist: https://developers.google.com/cast/docs/design_checklist/
 - standalone codelab for android: https://codelabs.developers.google.com/codelabs/cast-videos-android/#0
 
 ### Notes
 
+- The app fetches a list of videos from a remote server and displays them in `VideoBrowserActivity`.
+- The user can select to play one of these videos locally in `LocalPlayerActivity`.
+
 #### Commits
 
 - Initial video catalog with local playback 62ccdcaebcd40b983f424bc60db3b140df9784a0
+- Cast button added b29fc06c6974f5c35b74b8c119316d101d958a85
 
 #### Overview
 
