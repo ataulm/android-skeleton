@@ -22,4 +22,5 @@ dependencies {
     compile libraries.supportMediaRouter
     compile libraries.supportRecyclerView
     compile libraries.androidQuery
+    compile libraries.playServicesCast
 }
