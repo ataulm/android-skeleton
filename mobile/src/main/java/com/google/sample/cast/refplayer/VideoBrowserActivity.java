@@ -16,6 +16,7 @@
 
 package com.google.sample.cast.refplayer;
 
+import com.google.android.gms.cast.framework.CastContext;
 import com.google.sample.cast.refplayer.settings.CastPreference;
 
 import android.content.Intent;
@@ -32,6 +33,7 @@ public class VideoBrowserActivity extends AppCompatActivity {
     private static final String TAG = "VideoBrowserActivity";
     private boolean mIsHoneyCombOrAbove = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
     private Toolbar mToolbar;
+    private CastContext mCastContext;
 
     /*
      * (non-Javadoc)
@@ -42,6 +44,8 @@ public class VideoBrowserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_browser);
         setupActionBar();
+
+        mCastContext = CastContext.getSharedInstance(this);
     }
 
     private void setupActionBar() {

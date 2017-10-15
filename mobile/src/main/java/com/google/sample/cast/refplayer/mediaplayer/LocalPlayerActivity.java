@@ -16,6 +16,7 @@
 
 package com.google.sample.cast.refplayer.mediaplayer;
 
+import com.google.android.gms.cast.framework.CastContext;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.settings.CastPreference;
 import com.google.sample.cast.refplayer.utils.MediaItem;
@@ -89,6 +90,8 @@ public class LocalPlayerActivity extends AppCompatActivity {
     private TextView mAuthorView;
     private ImageButton mPlayCircle;
     private PlaybackLocation mLocation;
+    
+    private CastContext mCastContext;
 
     /**
      * indicates whether we are doing a local or a remote playback
@@ -143,6 +146,8 @@ public class LocalPlayerActivity extends AppCompatActivity {
         if (mTitleView != null) {
             updateMetadata(true);
         }
+
+        mCastContext = CastContext.getSharedInstance(this);
     }
 
     private void updatePlaybackLocation(PlaybackLocation location) {
