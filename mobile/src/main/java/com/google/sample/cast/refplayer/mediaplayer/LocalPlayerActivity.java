@@ -16,6 +16,7 @@
 
 package com.google.sample.cast.refplayer.mediaplayer;
 
+import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.sample.cast.refplayer.R;
 import com.google.sample.cast.refplayer.settings.CastPreference;
@@ -90,8 +91,9 @@ public class LocalPlayerActivity extends AppCompatActivity {
     private TextView mAuthorView;
     private ImageButton mPlayCircle;
     private PlaybackLocation mLocation;
-    
+
     private CastContext mCastContext;
+    private MenuItem mediaRouteMenuItem;
 
     /**
      * indicates whether we are doing a local or a remote playback
@@ -567,6 +569,7 @@ public class LocalPlayerActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.browse, menu);
+        mediaRouteMenuItem = CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item);
         return true;
     }
 
