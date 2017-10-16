@@ -119,7 +119,7 @@ public class MediaItem {
         wrapper.putString(KEY_URL, mUrl);
         wrapper.putString(KEY_STUDIO, mStudio);
         wrapper.putStringArrayList(KEY_IMAGES, mImageList);
-        wrapper.putString(KEY_CONTENT_TYPE, "video/mp4");
+        wrapper.putString(KEY_CONTENT_TYPE, mContentType);
         return wrapper;
     }
 
