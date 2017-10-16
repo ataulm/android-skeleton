@@ -18,6 +18,7 @@ android {
 }
 
 dependencies {
+    compile libraries.noPlayer
     compile libraries.supportAppCompatV7
     compile libraries.supportMediaRouter
     compile libraries.supportRecyclerView
