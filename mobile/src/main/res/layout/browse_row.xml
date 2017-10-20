@@ -46,7 +46,7 @@
                 android:orientation="vertical" >
 
             <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/player_text_title"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -55,7 +55,7 @@
                     android:textSize="18sp" />
 
             <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/player_text_description"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"

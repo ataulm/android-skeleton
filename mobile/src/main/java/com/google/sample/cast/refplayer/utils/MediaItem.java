@@ -38,6 +38,7 @@ public class MediaItem {
     public static final String KEY_STUDIO= "studio";
     public static final String KEY_URL= "movie-urls";
     public static final String KEY_IMAGES = "images";
+    public static final String KEY_DURATION = "duration";
     public static final String KEY_CONTENT_TYPE = "content-type";
 
     public String getUrl() {
@@ -118,6 +119,7 @@ public class MediaItem {
         wrapper.putString(KEY_SUBTITLE, mSubTitle);
         wrapper.putString(KEY_URL, mUrl);
         wrapper.putString(KEY_STUDIO, mStudio);
+        wrapper.putInt(KEY_DURATION, mDuration);
         wrapper.putStringArrayList(KEY_IMAGES, mImageList);
         wrapper.putString(KEY_CONTENT_TYPE, mContentType);
         return wrapper;
@@ -132,6 +134,7 @@ public class MediaItem {
         media.setTitle(wrapper.getString(KEY_TITLE));
         media.setSubTitle(wrapper.getString(KEY_SUBTITLE));
         media.setStudio(wrapper.getString(KEY_STUDIO));
+        media.setDuration(wrapper.getInt(KEY_DURATION));
         media.mImageList.addAll(wrapper.getStringArrayList(KEY_IMAGES));
         media.setContentType(wrapper.getString(KEY_CONTENT_TYPE));
         return media;

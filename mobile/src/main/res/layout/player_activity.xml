@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2015 Google Inc. All rights reserved.
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +15,12 @@
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+    android:id="@+id/player_root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.novoda.noplayer.NoPlayerView
-        android:id="@+id/videoView1"
+        android:id="@+id/player_view"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_alignParentLeft="true"
@@ -30,27 +29,27 @@
         android:layout_centerInParent="true" />
 
     <RelativeLayout
-        android:layout_alignBottom="@+id/videoView1"
-        android:layout_alignLeft="@+id/videoView1"
-        android:layout_alignRight="@+id/videoView1"
-        android:layout_alignTop="@+id/videoView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/player_view"
+        android:layout_alignLeft="@+id/player_view"
+        android:layout_alignRight="@+id/player_view"
+        android:layout_alignTop="@+id/player_view">
 
         <ImageView
-            android:id="@+id/coverArtView"
+            android:id="@+id/player_cover_art_view"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:scaleType="fitXY"
             android:visibility="gone" />
 
         <ImageButton
-            android:id="@+id/play_circle"
-            android:src="@drawable/ic_play_circle_white_80dp"
+            android:id="@+id/player_button_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:src="@drawable/ic_play_circle_white_80dp" />
 
     </RelativeLayout>
 
@@ -58,49 +57,50 @@
         android:id="@+id/controllers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/videoView1"
-        android:layout_alignLeft="@+id/videoView1"
-        android:layout_alignRight="@+id/videoView1"
-        android:layout_alignTop="@+id/videoView1"
-        android:visibility="visible"
-        android:background="@drawable/player_bg_gradient_dark" >
+        android:layout_alignBottom="@+id/player_view"
+        android:layout_alignLeft="@+id/player_view"
+        android:layout_alignRight="@+id/player_view"
+        android:layout_alignTop="@+id/player_view"
+        android:background="@drawable/player_bg_gradient_dark"
+        android:visibility="visible">
 
         <ProgressBar
-                android:id="@+id/progressBar1"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:visibility="gone"
-                android:progressTint="@color/primary"
-                android:thumbTint="@color/primary"/>
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:progressTint="@color/primary"
+            android:thumbTint="@color/primary"
+            android:visibility="gone" />
 
         <RelativeLayout
-            android:id="@+id/control_bar"
+            android:id="@+id/player_controls_bottom_bar"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
-            android:layout_alignParentBottom="true" >
+            android:layout_alignParentBottom="true"
+            android:visibility="gone">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/player_button_pause"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/ic_av_pause_dark" />
 
             <TextView
-                android:id="@+id/startText"
+                android:id="@+id/player_text_elapsed_time"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/imageView2"
+                android:layout_toRightOf="@+id/player_button_pause"
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:text="0:00"
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/endText"
+                android:id="@+id/player_text_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_alignParentRight="true"
@@ -111,24 +111,24 @@
                 android:textColor="@color/white" />
 
             <SeekBar
-                android:id="@+id/seekBar1"
+                android:id="@+id/player_seek_bar"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/endText"
-                android:layout_toRightOf="@+id/startText" />
+                android:layout_toLeftOf="@+id/player_text_duration"
+                android:layout_toRightOf="@+id/player_text_elapsed_time" />
         </RelativeLayout>
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/player_text_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/videoView1"
+        android:layout_below="@+id/player_view"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="10dp"
@@ -136,24 +136,24 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/player_text_author"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/player_text_title"
+        android:layout_alignRight="@+id/player_text_title"
+        android:layout_below="@+id/player_text_title"
         android:layout_marginTop="2dp"
         android:lines="1"
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/player_text_description"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/player_text_title"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/player_text_title"
+        android:layout_below="@+id/player_text_author"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-light"
@@ -163,11 +163,11 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </RelativeLayout>

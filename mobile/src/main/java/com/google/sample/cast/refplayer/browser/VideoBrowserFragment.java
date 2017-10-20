@@ -37,6 +37,9 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import static com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity.MEDIA;
+import static com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity.SHOULD_START_PLAYBACK;
+
 /**
  * A fragment to host a list view of the video catalog.
  */
@@ -85,8 +88,8 @@ public class VideoBrowserFragment extends Fragment implements VideoListAdapter.I
                 .makeSceneTransitionAnimation(getActivity(), imagePair);
 
         Intent intent = new Intent(getActivity(), LocalPlayerActivity.class);
-        intent.putExtra("media", item.toBundle());
-        intent.putExtra("shouldStart", false);
+        intent.putExtra(MEDIA, item.toBundle());
+        intent.putExtra(SHOULD_START_PLAYBACK, false);
         ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
     }
 

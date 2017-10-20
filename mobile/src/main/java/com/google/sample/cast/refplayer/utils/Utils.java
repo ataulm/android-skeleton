@@ -118,6 +118,13 @@ public class Utils {
     }
 
     /**
+     * Formats time from seconds to hh:mm:ss string format.
+     */
+    public static String formatSeconds(int seconds) {
+        return formatMillis(seconds * 1000);
+    }
+
+    /**
      * Formats time from milliseconds to hh:mm:ss string format.
      */
     public static String formatMillis(int millisec) {

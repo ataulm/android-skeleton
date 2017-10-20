@@ -37,6 +37,7 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -59,86 +60,176 @@ import static android.view.View.GONE;
  */
 public class LocalPlayerActivity extends AppCompatActivity {
 
+    public static final String MEDIA = "media";
+    public static final String SHOULD_START_PLAYBACK = "shouldStart";
+    private static final String START_POSITION = "startPosition";
     private static final String TAG = "LocalPlayerActivity";
-    private NoPlayerView mNoPlayerView;
-    private TextView mTitleView;
-    private TextView mDescriptionView;
-    private View mContainer;
-    private ImageView mCoverArt;
-    private final float mAspectRatio = 72f / 128;
-    private AQuery mAquery;
-    private MediaItem mSelectedMedia;
-    private TextView mAuthorView;
-    private ImageButton mPlayCircle;
-    private NoPlayer mNoPlayer;
+    private static final float mAspectRatio = 72f / 128;
+
+    private TextView titleView;
+    private TextView descriptionView;
+    private View rootView;
+    private MediaItem selectedMedia;
+    private TextView authorView;
+    private NoPlayerView noPlayerView;
+    private NoPlayer noPlayer;
+    private ImageButton playButton;
+    private ImageView coverArtImageView;
+    private TextView elapsedTimeTextView;
+    private TextView durationTextView;
+    private SeekBar seekBar;
+    private View playerControlsBottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_activity);
-        mNoPlayer = new PlayerBuilder().withPriority(PlayerType.EXO_PLAYER).build(this);
 
-        mAquery = new AQuery(this);
-        loadViews();
-        mNoPlayer.attach(mNoPlayerView);
-        // see what we need to play and where
+        noPlayerView = findViewById(R.id.player_view);
+        noPlayer = new PlayerBuilder().withPriority(PlayerType.EXO_PLAYER).build(this);
+        noPlayer.attach(noPlayerView);
+
+        titleView = findViewById(R.id.player_text_title);
+        descriptionView = findViewById(R.id.player_text_description);
+        descriptionView.setMovementMethod(new ScrollingMovementMethod());
+        authorView = findViewById(R.id.player_text_author);
+
+        durationTextView = findViewById(R.id.player_text_duration);
+        elapsedTimeTextView = findViewById(R.id.player_text_elapsed_time);
+        elapsedTimeTextView.setText(Utils.formatMillis(0));
+
+        rootView = findViewById(R.id.player_root_view);
+        coverArtImageView = findViewById(R.id.player_cover_art_view);
+        ViewCompat.setTransitionName(coverArtImageView, getString(R.string.transition_image));
+        seekBar = findViewById(R.id.player_seek_bar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                VideoPosition videoPosition = VideoPosition.fromSeconds(seekBar.getProgress());
+                noPlayer.seekTo(videoPosition);
+            }
+        });
+        playerControlsBottomBar = findViewById(R.id.player_controls_bottom_bar);
+        View pauseButton = findViewById(R.id.player_button_pause);
+        pauseButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                noPlayer.pause();
+            }
+        });
+        playButton = findViewById(R.id.player_button_play);
+        playButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playVideo();
+            }
+        });
+
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            mSelectedMedia = MediaItem.fromBundle(getIntent().getBundleExtra("media"));
-            setupActionBar();
-            boolean shouldStartPlayback = bundle.getBoolean("shouldStart");
-            int startPosition = bundle.getInt("startPosition", 0);
-
-            mNoPlayer.getListeners().addPreparedListener(new NoPlayer.PreparedListener() {
-                @Override
-                public void onPrepared(PlayerState playerState) {
-                    prepared = true;
-                    mNoPlayer.play();
-                }
-            });
-
-            Log.d(TAG, "Setting url of the VideoView to: " + mSelectedMedia.getUrl());
-            if (shouldStartPlayback) {
-                // this will be the case only if we are coming from the
-                // CastControllerActivity by disconnecting from a device
-                if (startPosition > 0) {
-                    mNoPlayer.seekTo(VideoPosition.fromMillis(startPosition));
-                }
-                prepareNoPlayerWithVideo();
-            }
-            if (mTitleView != null) {
-                updateMetadata(true);
-            }
+        if (bundle == null) {
+            throw new IllegalStateException("LocalPlayerActivity should not be able to exist without passing bundle");
         }
+        selectedMedia = MediaItem.fromBundle(getIntent().getBundleExtra(MEDIA));
+        seekBar.setMax(selectedMedia.getDuration());
+        durationTextView.setText(Utils.formatSeconds(selectedMedia.getDuration()));
+        int startPosition = bundle.getInt(START_POSITION, 0);
+        boolean shouldStartPlayback = bundle.getBoolean(SHOULD_START_PLAYBACK);
+        prepareMediaPlayback(selectedMedia, startPosition, shouldStartPlayback);
     }
 
-    private void prepareNoPlayerWithVideo() {
-        if (ContentType.DASH.name().equalsIgnoreCase(mSelectedMedia.getContentType())) {
-            mNoPlayer.loadVideo(Uri.parse(mSelectedMedia.getUrl()), ContentType.DASH);
-        } else {
-            mNoPlayer.loadVideo(Uri.parse(mSelectedMedia.getUrl()), ContentType.H264);
+    private void prepareMediaPlayback(MediaItem media, int startPosition, boolean shouldStartPlayback) {
+        setupActionBar();
+
+        noPlayer.getListeners().addHeartbeatCallback(new NoPlayer.HeartbeatCallback() {
+            @Override
+            public void onBeat(NoPlayer player) {
+                VideoPosition playheadPosition = noPlayer.getPlayheadPosition();
+                int progress = playheadPosition.inImpreciseSeconds();
+                seekBar.setProgress(progress);
+                elapsedTimeTextView.setText(Utils.formatMillis(playheadPosition.inImpreciseMillis()));
+            }
+        });
+
+        noPlayer.getListeners().addStateChangedListener(new NoPlayer.StateChangedListener() {
+            @Override
+            public void onVideoPlaying() {
+                playButton.setVisibility(GONE);
+                playerControlsBottomBar.setVisibility(View.VISIBLE);
+                coverArtImageView.setVisibility(GONE);
+            }
+
+            @Override
+            public void onVideoPaused() {
+                playButton.setVisibility(View.VISIBLE);
+                playerControlsBottomBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onVideoStopped() {
+                prepared = false;
+                playButton.setVisibility(View.VISIBLE);
+                playerControlsBottomBar.setVisibility(View.GONE);
+                coverArtImageView.setVisibility(View.VISIBLE);
+                new AQuery(LocalPlayerActivity.this).id(coverArtImageView).image(selectedMedia.getImage(0),
+                        true, true, 0, R.drawable.default_video, null, 0, mAspectRatio);
+
+            }
+        });
+
+        noPlayer.getListeners().addPreparedListener(new NoPlayer.PreparedListener() {
+            @Override
+            public void onPrepared(PlayerState playerState) {
+                prepared = true;
+                noPlayer.play();
+            }
+        });
+
+        Log.d(TAG, "Setting url of the VideoView to: " + media.getUrl());
+        if (shouldStartPlayback) {
+            // this will be the case only if we are coming from the
+            // CastControllerActivity by disconnecting from a device
+            if (startPosition > 0) {
+                noPlayer.seekTo(VideoPosition.fromMillis(startPosition));
+            }
+            prepareNoPlayerWithVideo();
+        }
+        if (titleView != null) {
+            updateMetadata(true);
         }
     }
 
     private boolean prepared;
 
-    private void togglePlayback() {
+    private void playVideo() {
         if (!prepared) {
             prepareNoPlayerWithVideo();
             return;
         }
+        noPlayer.play();
+    }
 
-        if (mNoPlayer.isPlaying()) {
-            mNoPlayer.pause();
+    private void prepareNoPlayerWithVideo() {
+        if (ContentType.DASH.name().equalsIgnoreCase(selectedMedia.getContentType())) {
+            noPlayer.loadVideo(Uri.parse(selectedMedia.getUrl()), ContentType.DASH);
         } else {
-            mNoPlayer.play();
+            noPlayer.loadVideo(Uri.parse(selectedMedia.getUrl()), ContentType.H264);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mNoPlayer.pause();
+        if (noPlayer.isPlaying()) {
+            noPlayer.pause();
+        }
     }
 
     @SuppressLint("NewApi")
@@ -156,7 +247,7 @@ public class LocalPlayerActivity extends AppCompatActivity {
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
             }
             updateMetadata(false);
-            mContainer.setBackgroundColor(getResources().getColor(R.color.black));
+            rootView.setBackgroundColor(getResources().getColor(R.color.black));
 
         } else {
             getWindow().setFlags(
@@ -169,41 +260,40 @@ public class LocalPlayerActivity extends AppCompatActivity {
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
             }
             updateMetadata(true);
-            mContainer.setBackgroundColor(getResources().getColor(R.color.white));
+            rootView.setBackgroundColor(getResources().getColor(R.color.white));
         }
     }
 
     private void updateMetadata(boolean visible) {
-        Point displaySize;
         if (!visible) {
-            mDescriptionView.setVisibility(GONE);
-            mTitleView.setVisibility(GONE);
-            mAuthorView.setVisibility(GONE);
-            displaySize = Utils.getDisplaySize(this);
+            descriptionView.setVisibility(GONE);
+            titleView.setVisibility(GONE);
+            authorView.setVisibility(GONE);
+            Point displaySize = Utils.getDisplaySize(this);
             RelativeLayout.LayoutParams lp = new
                     RelativeLayout.LayoutParams(
                     displaySize.x,
                     displaySize.y + getSupportActionBar().getHeight()
             );
             lp.addRule(RelativeLayout.CENTER_IN_PARENT);
-            mNoPlayerView.setLayoutParams(lp);
-            mNoPlayerView.invalidate();
+            noPlayerView.setLayoutParams(lp);
+            noPlayerView.invalidate();
         } else {
-            mDescriptionView.setText(mSelectedMedia.getSubTitle());
-            mTitleView.setText(mSelectedMedia.getTitle());
-            mAuthorView.setText(mSelectedMedia.getStudio());
-            mDescriptionView.setVisibility(View.VISIBLE);
-            mTitleView.setVisibility(View.VISIBLE);
-            mAuthorView.setVisibility(View.VISIBLE);
-            displaySize = Utils.getDisplaySize(this);
+            descriptionView.setText(selectedMedia.getSubTitle());
+            titleView.setText(selectedMedia.getTitle());
+            authorView.setText(selectedMedia.getStudio());
+            descriptionView.setVisibility(View.VISIBLE);
+            titleView.setVisibility(View.VISIBLE);
+            authorView.setVisibility(View.VISIBLE);
+            Point displaySize = Utils.getDisplaySize(this);
             RelativeLayout.LayoutParams lp = new
                     RelativeLayout.LayoutParams(
                     displaySize.x,
                     (int) (displaySize.x * mAspectRatio)
             );
             lp.addRule(RelativeLayout.BELOW, R.id.toolbar);
-            mNoPlayerView.setLayoutParams(lp);
-            mNoPlayerView.invalidate();
+            noPlayerView.setLayoutParams(lp);
+            noPlayerView.invalidate();
         }
     }
 
@@ -216,40 +306,24 @@ public class LocalPlayerActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent;
-        if (item.getItemId() == R.id.action_settings) {
-            intent = new Intent(LocalPlayerActivity.this, CastPreference.class);
-            startActivity(intent);
-        } else if (item.getItemId() == android.R.id.home) {
-            ActivityCompat.finishAfterTransition(this);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                ActivityCompat.finishAfterTransition(this);
+                return true;
+            case R.id.action_settings:
+                Intent intent = new Intent(LocalPlayerActivity.this, CastPreference.class);
+                startActivity(intent);
+                return true;
+            default:
+                throw new IllegalArgumentException("unknown menu item: " + item.getTitle());
         }
-        return true;
     }
 
     private void setupActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(mSelectedMedia.getTitle());
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(selectedMedia.getTitle());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void loadViews() {
-        mNoPlayerView = (NoPlayerView) findViewById(R.id.videoView1);
-        mTitleView = (TextView) findViewById(R.id.textView1);
-        mDescriptionView = (TextView) findViewById(R.id.textView2);
-        mDescriptionView.setMovementMethod(new ScrollingMovementMethod());
-        mAuthorView = (TextView) findViewById(R.id.textView3);
-        TextView mStartText = (TextView) findViewById(R.id.startText);
-        mStartText.setText(Utils.formatMillis(0));
-        mContainer = findViewById(R.id.container);
-        mCoverArt = (ImageView) findViewById(R.id.coverArtView);
-        ViewCompat.setTransitionName(mCoverArt, getString(R.string.transition_image));
-        mPlayCircle = (ImageButton) findViewById(R.id.play_circle);
-        mPlayCircle.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                togglePlayback();
-            }
-        });
-    }
 }
