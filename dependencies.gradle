@@ -1,7 +1,7 @@
 ext {
     versions = [
             androidSdk: [
-                    buildTools: '25.0.2',
+                    buildTools: '26.0.2',
                     compile   : 26,
                     min       : 19,
                     target    : 26
