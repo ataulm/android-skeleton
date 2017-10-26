@@ -19,8 +19,9 @@ android {
 
 dependencies {
     compile libraries.noPlayer
+    compile libraries.androidQuery
+    compile libraries.playServicesCast
     compile libraries.supportAppCompatV7
     compile libraries.supportMediaRouter
     compile libraries.supportRecyclerView
-    compile libraries.androidQuery
 }
