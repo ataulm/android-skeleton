@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion versions.androidSdk.compile
@@ -23,31 +22,31 @@ android {
 }
 
 dependencies {
-    compile project(":core")
+    implementation project(":core")
 
-    compile libraries.supportAppCompatV7
-    compile libraries.supportDesign
-    compile libraries.supportRecyclerView
-    compile libraries.supportV13
+    implementation libraries.supportAppCompatV7
+    implementation libraries.supportDesign
+    implementation libraries.supportRecyclerView
+    implementation libraries.supportV13
 
-    compile libraries.butterknife
-    apt libraries.butterknifeCompiler
+    implementation libraries.butterknife
+    annotationProcessor libraries.butterknifeCompiler
 
     // Android runner and rules support
-    androidTestCompile(libraries.androidTestRunner) {
+    androidTestImplementation(libraries.androidTestRunner) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
-    androidTestCompile(libraries.androidTestRules) {
+    androidTestImplementation(libraries.androidTestRules) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
     // Espresso support
-    androidTestCompile(libraries.espressoCore) {
+    androidTestImplementation(libraries.espressoCore) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
-    testCompile libraries.jUnit
-    testCompile libraries.mockitoCore
-    testCompile libraries.festAssertCore
+    testImplementation libraries.jUnit
+    testImplementation libraries.mockitoCore
+    testImplementation libraries.festAssertCore
 }

@@ -1,8 +1,8 @@
 ext {
     versions = [
             androidSdk: [
-                    buildTools: '26.0.2',
-                    compile   : 26,
+                    buildTools: '27.0.0',
+                    compile   : 27,
                     min       : 19,
                     target    : 26
             ],
@@ -12,7 +12,7 @@ ext {
     libraries = [
             build              : [
                     androidApt   : 'com.neenbedankt.gradle.plugins:android-apt:1.8',
-                    androidGradle: 'com.android.tools.build:gradle:2.3.0'
+                    androidGradle: 'com.android.tools.build:gradle:3.0.0'
             ],
             androidTestRules   : 'com.android.support.test:rules:0.5',
             androidTestRunner  : 'com.android.support.test:runner:0.5',
