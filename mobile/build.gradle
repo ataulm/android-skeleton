@@ -24,6 +24,8 @@ android {
 dependencies {
     implementation project(":core")
 
+    implementation libraries.landingStrip
+    implementation libraries.viewPagerAdapter
     implementation libraries.supportAppCompatV7
     implementation libraries.supportDesign
     implementation libraries.supportRecyclerView
