@@ -29,6 +29,7 @@ dependencies {
     implementation libraries.supportRecyclerView
     implementation libraries.supportV13
 
+    implementation libraries.glide
     implementation libraries.butterknife
     annotationProcessor libraries.butterknifeCompiler
 

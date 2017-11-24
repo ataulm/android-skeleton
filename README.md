@@ -1,11 +1,9 @@
-android-skeleton
+spiking android big picture notification
 ================
-Can be used as a skeleton for new spikes. Don't modify this project except to update dependencies, copy it.
-
-It would be good to fill this out before starting the spike and with updates before each push if necessary:
 
 #### Aim
-_e.g. wanted to try to create a completely virtual view hierarchy, so there's nothing really there on screen but an accessibility service like TalkBack could navigate it and a user proficient with TalkBack could use the app_
+Determine how to transition the small image when the large image is shown and whether they can be distinct images or whether the system handles it all with a single bitmap.
 
 #### Current state (inc. next steps if applicable)
-_e.g. completed - see blahblah.java for main bits._
+- completed
+- https://medium.com/@ataulm/do-you-know-if-the-android-screenshot-notification-on-o-is-custom-4bd89666fd14
