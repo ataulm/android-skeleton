@@ -6,13 +6,15 @@ ext {
                     min       : 19,
                     target    : 26
             ],
+            kotlin    : '1.2.20',
             support   : '26.1.0'
     ]
 
     libraries = [
             build              : [
                     androidApt   : 'com.neenbedankt.gradle.plugins:android-apt:1.8',
-                    androidGradle: 'com.android.tools.build:gradle:3.0.0'
+                    androidGradle: 'com.android.tools.build:gradle:3.0.0',
+                    kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
             ],
             androidTestRules   : 'com.android.support.test:rules:0.5',
             androidTestRunner  : 'com.android.support.test:runner:0.5',
@@ -22,6 +24,7 @@ ext {
             festAssertCore     : 'org.easytesting:fest-assert-core:2.0M10',
             jUnit              : 'junit:junit:4.12',
             jsr305             : 'com.google.code.findbugs:jsr305:2.0.1',
+            kotlinStdLib       : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
             mockitoCore        : 'org.mockito:mockito-core:1.10.19',
             supportAppCompatV7 : "com.android.support:appcompat-v7:${versions.support}",
             supportDesign      : "com.android.support:design:${versions.support}",

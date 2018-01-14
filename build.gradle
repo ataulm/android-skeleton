@@ -9,6 +9,7 @@ buildscript {
     dependencies {
         classpath libraries.build.androidApt
         classpath libraries.build.androidGradle
+        classpath libraries.build.kotlinGradle
     }
 }
 

@@ -1,7 +1,8 @@
-apply plugin: 'java'
+apply plugin: 'kotlin'
 
 dependencies {
     implementation libraries.jsr305
+    implementation libraries.kotlinStdLib
 
     testImplementation libraries.jUnit
     testImplementation libraries.festAssertCore
