@@ -1,11 +1,12 @@
-android-skeleton
-================
-Can be used as a skeleton for new spikes. Don't modify this project except to update dependencies, copy it.
-
-It would be good to fill this out before starting the spike and with updates before each push if necessary:
+log key events in a11y service
+==============================
 
 #### Aim
-_e.g. wanted to try to create a completely virtual view hierarchy, so there's nothing really there on screen but an accessibility service like TalkBack could navigate it and a user proficient with TalkBack could use the app_
+- Log key events in accessibility service
+- Determine whether it's possible to inject keyevents into the message queue of the main looper to trigger keyevents on the a11y service (or to the foreground window)
 
 #### Current state (inc. next steps if applicable)
-_e.g. completed - see blahblah.java for main bits._
+
+- logged fine :ok_hand:
+- couldn't trigger a11y service by dispatching a keyevent via the main/mylooper :(
+

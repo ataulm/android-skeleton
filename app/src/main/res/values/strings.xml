@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">Android Skeleton</string>
+    <string name="accessibility_service_description">don\'t matter</string>
 </resources>
