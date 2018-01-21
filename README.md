@@ -1,11 +1,17 @@
-android-skeleton
-================
-Can be used as a skeleton for new spikes. Don't modify this project except to update dependencies, copy it.
+how do spans affect accessibility
+=================================
 
-It would be good to fill this out before starting the spike and with updates before each push if necessary:
+companion to: https://medium.com/p/814456bc3e74/edit
 
 #### Aim
-_e.g. wanted to try to create a completely virtual view hierarchy, so there's nothing really there on screen but an accessibility service like TalkBack could navigate it and a user proficient with TalkBack could use the app_
+Learn how accessibility services behave if you use a single TextView with multiple spans, instead of multiple TextViews.
 
 #### Current state (inc. next steps if applicable)
-_e.g. completed - see blahblah.java for main bits._
+- depends on the spans
+- using urlspan, it'll break up the text into separate fragments
+- I guess also with layout changing spans, but need to check
+- with "<br>" it breaks up too
+- `FeedbackProcessingUtils#addFormattingCharacteristics(FeedbackItem item)`
+- overriding the text/content description on the AccessibilityNodeInfo will replace the fragment with that text. Does it goof up the UrlSpans? or are these still available in the local context menu and is the action still exposed (double tap to activate)?
+
+
