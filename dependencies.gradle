@@ -6,13 +6,12 @@ ext {
                     min       : 19,
                     target    : 26
             ],
-            kotlin    : '1.2.20',
+            kotlin    : '1.2.21',
             support   : '26.1.0'
     ]
 
     libraries = [
             build              : [
-                    androidApt   : 'com.neenbedankt.gradle.plugins:android-apt:1.8',
                     androidGradle: 'com.android.tools.build:gradle:3.0.0',
                     kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
             ],

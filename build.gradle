@@ -2,12 +2,9 @@ buildscript {
     apply from: 'dependencies.gradle'
     repositories {
         jcenter()
-        maven {
-            url 'https://maven.google.com/'
-        }
+        google()
     }
     dependencies {
-        classpath libraries.build.androidApt
         classpath libraries.build.androidGradle
         classpath libraries.build.kotlinGradle
     }
@@ -16,8 +13,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url 'https://maven.google.com'
-        }
+        google()
     }
 }
