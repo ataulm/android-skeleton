@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -30,9 +31,6 @@ dependencies {
     implementation libraries.supportDesign
     implementation libraries.supportRecyclerView
     implementation libraries.supportV13
-
-    implementation libraries.butterknife
-    kapt libraries.butterknifeCompiler
 
     // Android runner and rules support
     androidTestImplementation(libraries.androidTestRunner) {

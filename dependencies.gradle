@@ -12,13 +12,11 @@ ext {
 
     libraries = [
             build              : [
-                    androidGradle: 'com.android.tools.build:gradle:3.0.0',
+                    androidGradle: 'com.android.tools.build:gradle:3.0.1',
                     kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
             ],
             androidTestRules   : 'com.android.support.test:rules:0.5',
             androidTestRunner  : 'com.android.support.test:runner:0.5',
-            butterknife        : 'com.jakewharton:butterknife:8.0.1',
-            butterknifeCompiler: 'com.jakewharton:butterknife-compiler:8.0.1',
             espressoCore       : 'com.android.support.test.espresso:espresso-core:2.2.2',
             festAssertCore     : 'org.easytesting:fest-assert-core:2.0M10',
             jUnit              : 'junit:junit:4.12',
