@@ -18,7 +18,7 @@ ext {
             androidTestRules   : 'com.android.support.test:rules:0.5',
             androidTestRunner  : 'com.android.support.test:runner:0.5',
             espressoCore       : 'com.android.support.test.espresso:espresso-core:2.2.2',
-            festAssertCore     : 'org.easytesting:fest-assert-core:2.0M10',
+            googleTruth        : 'com.google.truth:truth:0.39',
             jUnit              : 'junit:junit:4.12',
             jsr305             : 'com.google.code.findbugs:jsr305:2.0.1',
             kotlinStdLib       : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
