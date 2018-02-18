@@ -25,7 +25,6 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
     implementation libraries.kotlinStdLib
     implementation libraries.supportAppCompatV7
     implementation libraries.supportDesign
