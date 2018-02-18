@@ -8,7 +8,7 @@ android {
     buildToolsVersion versions.androidSdk.buildTools
 
     defaultConfig {
-        applicationId 'com.example.androidskeleton'
+        applicationId 'com.example'
         minSdkVersion versions.androidSdk.min
         targetSdkVersion versions.androidSdk.target
         versionCode 1
