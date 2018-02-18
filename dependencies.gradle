@@ -6,7 +6,7 @@ ext {
                     min       : 19,
                     target    : 26
             ],
-            kotlin    : '1.2.21',
+            kotlin    : '1.2.20',
             support   : '26.1.0'
     ]
 

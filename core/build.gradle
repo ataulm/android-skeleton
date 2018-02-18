@@ -8,6 +8,3 @@ dependencies {
     testImplementation libraries.festAssertCore
     testImplementation libraries.mockitoCore
 }
-
-sourceCompatibility = '1.7'
-targetCompatibility = '1.7'
