@@ -2,10 +2,8 @@ buildscript {
     apply from: 'dependencies.gradle'
     repositories {
         jcenter()
-        google()
     }
     dependencies {
-        classpath libraries.build.androidGradle
         classpath libraries.build.kotlinGradle
     }
 }
@@ -13,6 +11,5 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        google()
     }
 }
