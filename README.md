@@ -1,11 +1,16 @@
-android-example
-===============
-Can be used as a skeleton for new spikes. Don't modify this project except to update dependencies; checkout from the latest master.
+this isn't an android project
+=============================
 
-It would be good to fill this out before starting the spike and with updates before each push if necessary:
+Using this to do the challenges that are available on [HackerRank](https://www.hackerrank.com/challenges/)
 
-#### Aim
-_e.g. wanted to try to create a completely virtual view hierarchy, so there's nothing really there on screen but an accessibility service like TalkBack could navigate it and a user proficient with TalkBack could use the app_
+## [ArrayLeftRotation](https://www.hackerrank.com/challenges/ctci-array-left-rotation/problem)
 
-#### Current state (inc. next steps if applicable)
-_e.g. completed - see blahblah.kt for main bits._
+- Given a 1-dimensional array of size N, rotate the array K times.
+- A single rotation shifts each element one index to the left, with the first element becoming the last element.
+
+Did this simply:
+
+- created a function that does one rotation
+- used that function K times
+
+There will be a function to map oldIndex -> newIndex, such that for-loops aren't needed, and only one more array needs to be initialized.
