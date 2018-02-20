@@ -1,6 +1,6 @@
 ext {
     versions = [
-            kotlin: '1.2.20'
+            kotlin: '1.2.21'
     ]
 
     libraries = [

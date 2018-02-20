@@ -7,9 +7,9 @@ class ArrayLeftRotationTest {
 
     @Test
     fun rotateOnce() {
-        val input = listOf(1, 2,  3, 4, 5)
+        val input = listOf(1, 2, 3, 4, 5)
 
-        val rotated = ArrayLeftRotation.Companion.leftRotate(input, 1)
+        val rotated = leftRotate(input, 1)
 
         assertThat(rotated).isEqualTo(listOf(2, 3, 4, 5, 1))
     }
@@ -18,7 +18,7 @@ class ArrayLeftRotationTest {
     fun rotateTwice() {
         val input = listOf(1, 2, 3, 4, 5)
 
-        val rotated = ArrayLeftRotation.Companion.leftRotate(input, 2)
+        val rotated = leftRotate(input, 2)
 
         assertThat(rotated).isEqualTo(listOf(3, 4, 5, 1, 2))
     }
@@ -27,7 +27,7 @@ class ArrayLeftRotationTest {
     fun rotateEntireLengthOfList() {
         val input = listOf(1, 2, 3, 4, 5)
 
-        val rotated = ArrayLeftRotation.Companion.leftRotate(input, input.size)
+        val rotated = leftRotate(input, input.size)
 
         assertThat(rotated).isEqualTo(input)
     }

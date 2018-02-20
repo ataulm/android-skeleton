@@ -7,14 +7,14 @@ class AnagramsTest {
 
     @Test
     fun cde_abc() {
-        val result = Anagrams.Companion.minimumCharacterDeletionsToMakeAnagram("cde", "abc")
+        val result = minimumCharacterDeletionsToMakeAnagram("cde", "abc")
 
         assertThat(result).isEqualTo(4)
     }
 
     @Test
     fun abc_abc() {
-        val result = Anagrams.Companion.minimumCharacterDeletionsToMakeAnagram("abc", "abc")
+        val result = minimumCharacterDeletionsToMakeAnagram("abc", "abc")
 
         assertThat(result).isEqualTo(0)
     }
