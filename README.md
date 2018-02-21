@@ -1,7 +1,7 @@
 this isn't an android project
 =============================
 
-Using this to do the challenges that are available on [HackerRank](https://www.hackerrank.com/challenges/)
+Using this to do the challenges that are available on [HackerRank](https://www.hackerrank.com/challenges/) to learn me some Kotlin.
 
 ## [ArrayLeftRotation](https://www.hackerrank.com/challenges/ctci-array-left-rotation/problem)
 
@@ -22,7 +22,7 @@ Improvement: there will be a function to map oldIndex -> newIndex, such that for
 
 Used an extension function to count the number of matches of the characters in a given string. Then for each letter of the alphabet, counting the difference in matches between the two strings.
 
-## [Ranson Note](https://www.hackerrank.com/challenges/ctci-ransom-note/problem)
+## [Ransom Note](https://www.hackerrank.com/challenges/ctci-ransom-note/problem)
 
 - Given a ransom note and a set of words in a magazine, determine whether words from the magazine could be used to create the ransom note
 - Return yes if it's possible, else no
