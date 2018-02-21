@@ -19,3 +19,11 @@ Improvement: there will be a function to map oldIndex -> newIndex, such that for
 
 - Given two strings, `a` and `b`, that may or may not be of the same length, determine the minimum number of character deletions required to make `a` and `b` anagrams.
 - Any characters can be deleted from either of the strings.
+
+Used an extension function to count the number of matches of the characters in a given string. Then for each letter of the alphabet, counting the difference in matches between the two strings.
+
+## [Ranson Note](https://www.hackerrank.com/challenges/ctci-ransom-note/problem)
+
+- Given a ransom note and a set of words in a magazine, determine whether words from the magazine could be used to create the ransom note
+- Return yes if it's possible, else no
+- Constraints: case sensitive, no cutting of words into parts
