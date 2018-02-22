@@ -27,3 +27,7 @@ Used an extension function to count the number of matches of the characters in a
 - Given a ransom note and a set of words in a magazine, determine whether words from the magazine could be used to create the ransom note
 - Return yes if it's possible, else no
 - Constraints: case sensitive, no cutting of words into parts
+
+## [Linked List Cycles](https://www.hackerrank.com/challenges/ctci-linked-list-cycle/problem)
+
+- return true if there is a cycle in the list
