@@ -25,6 +25,7 @@ android {
 }
 
 dependencies {
+    implementation libraries.androidKtx
     implementation libraries.kotlinStdLib
     implementation libraries.supportAppCompatV7
     implementation libraries.supportDesign
