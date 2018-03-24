@@ -6,8 +6,10 @@
 
     <TextView
         android:id="@+id/text_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="75dp"
+        android:layout_height="100dp"
+        android:background="@android:color/holo_orange_dark"
+        android:ellipsize="end"
         android:gravity="center" />
 
 </LinearLayout>
