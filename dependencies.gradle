@@ -1,13 +1,13 @@
 ext {
     versions = [
             androidSdk: [
-                    buildTools: '27.0.0',
+                    buildTools: '27.0.3',
                     compile   : 27,
                     min       : 19,
                     target    : 26
             ],
-            kotlin    : '1.2.20',
-            support   : '26.1.0'
+            kotlin    : '1.2.31',
+            support   : '27.1.0'
     ]
 
     libraries = [
