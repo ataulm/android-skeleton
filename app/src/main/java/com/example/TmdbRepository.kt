@@ -6,7 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 class TmdbRepository() {
 
     // TODO: pass the API in from above. until we get the thread switching inside the repo, we can't accept any old api - need to ensure it's safe on main thread, i.e. stub api only
-    val tmdbApi = StubTmdbApi()
+    private val tmdbApi = StubTmdbApi()
 
     fun topRatedMovies(): LiveData<List<Movie>> {
         val mutableLiveData = MutableLiveData<List<Movie>>()

@@ -17,3 +17,5 @@ Process:
 - created a stub api that returns a list of 3 forrest gumps. who's responsible for switching to a background thread? need to step back and think about the bigger pieces.
 - the term "repository" is used as an abstraction over the data layer from the [archguide](https://developer.android.com/topic/libraries/architecture/guide.html#fetching_data)
 - it exposes LiveData wrappers so we can operate along that line, using our stub data, and then fill in the blanks later. LiveData doesn't switch to a bg thread, but it does provide an async opportunity.
+
+- let's do the UI, then we can return to the data layer.

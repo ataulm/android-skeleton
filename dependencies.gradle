@@ -24,6 +24,7 @@ ext {
             kotlinStdLib       : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
             mockitoCore        : 'org.mockito:mockito-core:1.10.19',
             retrofit           : 'com.squareup.retrofit2:retrofit:2.4.0',
+            rvTools            : 'com.ataulm:rv-tools:1.1.0',
             supportAppCompatV7 : "com.android.support:appcompat-v7:${versions.support}",
             supportDesign      : "com.android.support:design:${versions.support}",
             supportRecyclerView: "com.android.support:recyclerview-v7:${versions.support}",
