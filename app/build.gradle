@@ -25,6 +25,7 @@ android {
 }
 
 dependencies {
+    implementation libraries.glide
     implementation libraries.kotlinStdLib
     implementation libraries.retrofit
     implementation libraries.rvTools

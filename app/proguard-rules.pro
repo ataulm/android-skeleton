@@ -33,3 +33,11 @@
 -keepattributes Exceptions
 # Retrofit uses Okio under the hood - https://github.com/square/okio#proguard
 -dontwarn okio.**
+
+# Glide - https://github.com/bumptech/glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}

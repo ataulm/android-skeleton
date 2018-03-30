@@ -18,6 +18,7 @@ ext {
             androidTestRules   : 'com.android.support.test:rules:0.5',
             androidTestRunner  : 'com.android.support.test:runner:0.5',
             espressoCore       : 'com.android.support.test.espresso:espresso-core:2.2.2',
+            glide              : 'com.github.bumptech.glide:glide:4.6.1',
             googleTruth        : 'com.google.truth:truth:0.39',
             jUnit              : 'junit:junit:4.12',
             jsr305             : 'com.google.code.findbugs:jsr305:2.0.1',

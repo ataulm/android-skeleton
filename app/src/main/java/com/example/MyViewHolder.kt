@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.view_movie.view.*
 
 class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,6 +21,6 @@ class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(movie: Movie) {
         itemView.movieTitleView.text = movie.title
         itemView.movieOverviewView.text = movie.overview
-//        TODO bind image
+        Glide.with(itemView).load(movie.posterUrl).into(itemView.moviePosterView)
     }
 }
