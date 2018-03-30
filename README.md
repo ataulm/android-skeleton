@@ -13,3 +13,7 @@ Process:
 - need more from [configuration](https://developers.themoviedb.org/3/configuration/get-api-configuration) to get full image url.
 - saved example response as `get_configuration.json`
 - will immediately jump to [retrofit](http://square.github.io/retrofit/) to make API calls: well known, comfortable with integrating.
+
+- created a stub api that returns a list of 3 forrest gumps. who's responsible for switching to a background thread? need to step back and think about the bigger pieces.
+- the term "repository" is used as an abstraction over the data layer from the [archguide](https://developer.android.com/topic/libraries/architecture/guide.html#fetching_data)
+- it exposes LiveData wrappers so we can operate along that line, using our stub data, and then fill in the blanks later. LiveData doesn't switch to a bg thread, but it does provide an async opportunity.
