@@ -23,3 +23,6 @@ Process:
 
 - next should return to the data layer, and hit the real API and mapping the response to a class. Since Retrofit already has bindings for GSON and has an RX api, which I'm most familiar with for off-main-thread work, I'll continue with that.
 - **(I'm at the 2/3 hour mark now c75a07d)** but will continue.
+
+- added Retrofit implementation of the TMDb API. This meant adding the rxjava adapter and gson converter (to convert the JSON to the api models). Decided to adjust the field names of the kotlin data classes to match the json field names, instead of annotating for brevity, though now wondering if it's possible to annotate the constructor parameters?
+- next I want to pull the API key out into a properties file. I'll use novoda's gradle build properties plugin for that.
