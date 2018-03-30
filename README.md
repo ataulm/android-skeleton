@@ -26,3 +26,14 @@ Process:
 
 - added Retrofit implementation of the TMDb API. This meant adding the rxjava adapter and gson converter (to convert the JSON to the api models). Decided to adjust the field names of the kotlin data classes to match the json field names, instead of annotating for brevity, though now wondering if it's possible to annotate the constructor parameters?
 - next I want to pull the API key out into a properties file. I'll use novoda's gradle build properties plugin for that.
+
+- pulled out the properties file and added it to the gitignore.
+- updated proguard to allow release builds 🙈
+- calling it here (~4/5 hours 5252b4f), anything further is just me exploring archcomp library
+
+---
+
+Building the app:
+
+- create `<project_root>/tmdb.properties` with `apiKey=YOUR_TMDB_API_KEY_HERE`
+- `./gradlew clean build`
