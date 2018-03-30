@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_my.*
 
 class MyActivity : AppCompatActivity() {
 
-    private val tmdbRepository = TmdbRepository()
+    private val tmdbRepository = TmdbRepository(createApi())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,5 +23,9 @@ class MyActivity : AppCompatActivity() {
                 (movieListView.adapter as MyAdapter).update(movieList)
             }
         })
+    }
+
+    private fun createApi(): TmdbApi {
+        return StubTmdbApi()
     }
 }

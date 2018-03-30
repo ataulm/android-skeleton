@@ -1,9 +1,12 @@
 package com.example
 
+import io.reactivex.Observable
+
 class StubTmdbApi : TmdbApi {
 
-    override fun configuration(): TmdbApi.Configuration {
-        return TmdbApi.Configuration("https://image.tmdb.org/t/p/", posterSizes())
+    override fun configuration(): Observable<TmdbApi.Configuration> {
+        val configuration = TmdbApi.Configuration("https://image.tmdb.org/t/p/", posterSizes())
+        return Observable.just(configuration)
     }
 
     private fun posterSizes(): List<String> {
@@ -18,8 +21,9 @@ class StubTmdbApi : TmdbApi {
         )
     }
 
-    override fun topRatedMovies(): TmdbApi.TopRatedMovies {
-        return TmdbApi.TopRatedMovies(listOf(movie(), movie(), movie()))
+    override fun topRatedMovies(): Observable<TmdbApi.TopRatedMovies> {
+        val topRatedMovies = TmdbApi.TopRatedMovies(listOf(movie(), movie(), movie()))
+        return Observable.just(topRatedMovies)
     }
 
     private fun movie(): TmdbApi.Movie {
