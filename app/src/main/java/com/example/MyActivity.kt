@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import com.ataulm.rv.SpacesItemDecoration
 import kotlinx.android.synthetic.main.activity_my.*
 import okhttp3.Interceptor
@@ -45,7 +46,7 @@ class MyActivity : AppCompatActivity() {
     private fun apiKeyInterceptor(): Interceptor {
         return Interceptor { chain ->
             val requestBuilder = chain.request().newBuilder()
-            val httpUrl = chain.request().url().newBuilder().addQueryParameter("api_key", "get your own api key").build()
+            val httpUrl = chain.request().url().newBuilder().addQueryParameter("api_key", BuildConfig.TMDB_API_KEY).build()
             chain.proceed(requestBuilder.url(httpUrl).build())
         }
     }

@@ -18,6 +18,8 @@
 bin/
 gen/
 
+tmdb.properties
+
 # Gradle files
 .gradle/
 build/
