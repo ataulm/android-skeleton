@@ -27,10 +27,10 @@ class TmdbRepository(private val tmdbApi: TmdbApi) {
 
         private fun toMovieList(): BiFunction<TmdbApi.Configuration, TmdbApi.TopRatedMovies, List<Movie>> {
             return BiFunction { configuration, topRatedMovies ->
-                topRatedMovies.movies.map {
+                topRatedMovies.results.map {
                     // dumb selection of poster size, API seems to order by size, so this'll be the biggest
                     // probably this could return a map<size:urls>, then choose which closer to the view
-                    val posterUrl = configuration.baseUrl + configuration.posterSizes.last() + it.posterPath
+                    val posterUrl = configuration.images.secure_base_url + configuration.images.poster_sizes.last() + it.poster_path
                     Movie(it.id, it.title, it.overview, posterUrl)
                 }
             }

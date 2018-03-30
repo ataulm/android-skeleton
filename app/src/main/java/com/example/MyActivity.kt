@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.ataulm.rv.SpacesItemDecoration
 import kotlinx.android.synthetic.main.activity_my.*
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MyActivity : AppCompatActivity() {
 
@@ -26,6 +31,22 @@ class MyActivity : AppCompatActivity() {
     }
 
     private fun createApi(): TmdbApi {
-        return StubTmdbApi()
+        val httpClient = OkHttpClient.Builder()
+                .addNetworkInterceptor(apiKeyInterceptor())
+                .build()
+        return Retrofit.Builder()
+                .client(httpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("https://api.themoviedb.org/3/")
+                .build().create(TmdbApi::class.java)
+    }
+
+    private fun apiKeyInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            val requestBuilder = chain.request().newBuilder()
+            val httpUrl = chain.request().url().newBuilder().addQueryParameter("api_key", "get your own api key").build()
+            chain.proceed(requestBuilder.url(httpUrl).build())
+        }
     }
 }

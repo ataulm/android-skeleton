@@ -5,13 +5,14 @@ import retrofit2.http.GET
 
 interface TmdbApi {
 
-    @GET("configuration/")
+    @GET("configuration")
     fun configuration(): Observable<Configuration>
 
-    @GET("movie/top_rated/")
+    @GET("movie/top_rated")
     fun topRatedMovies(): Observable<TopRatedMovies>
 
-    data class Configuration(val baseUrl: String, val posterSizes: List<String>)
-    data class TopRatedMovies(val movies: List<Movie>)
-    data class Movie(val id: Int, val title: String, val overview: String, val posterPath: String)
+    data class Configuration(val images: Images)
+    data class TopRatedMovies(val results: List<Movie>)
+    data class Images(val secure_base_url: String, val poster_sizes: List<String>)
+    data class Movie(val id: Int, val title: String, val overview: String, val poster_path: String)
 }

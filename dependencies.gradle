@@ -7,7 +7,8 @@ ext {
                     target    : 27
             ],
             kotlin    : '1.2.31',
-            support   : '27.1.0'
+            support   : '27.1.0',
+            retrofit  : '2.4.0'
     ]
 
     libraries = [
@@ -20,11 +21,15 @@ ext {
             espressoCore       : 'com.android.support.test.espresso:espresso-core:2.2.2',
             glide              : 'com.github.bumptech.glide:glide:4.6.1',
             googleTruth        : 'com.google.truth:truth:0.39',
+            gson               : 'com.google.code.gson:gson:2.8.2',
+
             jUnit              : 'junit:junit:4.12',
             jsr305             : 'com.google.code.findbugs:jsr305:2.0.1',
             kotlinStdLib       : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
             mockitoCore        : 'org.mockito:mockito-core:1.10.19',
-            retrofit           : 'com.squareup.retrofit2:retrofit:2.4.0',
+            retrofit           : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+            retrofitGson       : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+            retrofitRxJava     : "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
             rvTools            : 'com.ataulm:rv-tools:1.1.0',
             rxAndroid          : 'io.reactivex.rxjava2:rxandroid:2.0.2',
             rxJava             : 'io.reactivex.rxjava2:rxjava:2.1.12',

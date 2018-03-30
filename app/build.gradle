@@ -26,8 +26,11 @@ android {
 
 dependencies {
     implementation libraries.glide
+    implementation libraries.gson
     implementation libraries.kotlinStdLib
     implementation libraries.retrofit
+    implementation libraries.retrofitGson
+    implementation libraries.retrofitRxJava
     implementation libraries.rvTools
     implementation libraries.rxAndroid
     implementation libraries.rxJava
