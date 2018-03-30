@@ -19,3 +19,7 @@ Process:
 - it exposes LiveData wrappers so we can operate along that line, using our stub data, and then fill in the blanks later. LiveData doesn't switch to a bg thread, but it does provide an async opportunity.
 
 - let's do the UI, then we can return to the data layer.
+- instantiated the repository in the activity. would usually keep this/instantiate it at a higher level like the application (either on app launch, or as-needed with something like Dagger), since it'll likely contain something that accesses the DB, which for sqlite we should keep a singleton to prevent concurrent modifications/loading DB multiple times in memory.
+
+- next should return to the data layer, and hit the real API and mapping the response to a class. Since Retrofit already has bindings for GSON and has an RX api, which I'm most familiar with for off-main-thread work, I'll continue with that.
+- **(I'm at the 2/3 hour mark now c75a07d)** but will continue.
