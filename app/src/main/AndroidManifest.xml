@@ -21,7 +21,7 @@
         </activity-alias>
 
         <service
-            android:name=".StopJudgingMeService"
+            android:name=".ContinueWatchingService"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
 
@@ -31,7 +31,7 @@
 
             <meta-data
                 android:name="android.accessibilityservice"
-                android:resource="@xml/stop_judging_me" />
+                android:resource="@xml/continue_watching_config" />
         </service>
     </application>
 

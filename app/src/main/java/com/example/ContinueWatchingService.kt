@@ -7,7 +7,7 @@ import android.view.accessibility.AccessibilityNodeInfo
 /**
  * Watches for window changes to scan for a "Continue watching" button to click it for you.
  */
-class StopJudgingMeService : AccessibilityService() {
+class ContinueWatchingService : AccessibilityService() {
 
     override fun onInterrupt() {
         // no op - this has no feedback so there'll be nothing to interrupt
