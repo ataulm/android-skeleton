@@ -6,6 +6,7 @@ ext {
                     min       : 19,
                     target    : 27
             ],
+            androidArchLifecycle: '1.1.1',
             kotlin    : '1.2.31',
             support   : '27.1.0'
     ]
@@ -15,6 +16,8 @@ ext {
                     androidGradle: 'com.android.tools.build:gradle:3.0.1',
                     kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
             ],
+            androidArchLifecycleExtensions: "android.arch.lifecycle:extensions:${versions.androidArchLifecycle}",
+            androidArchLifecycleCompiler  : "android.arch.lifecycle:compiler:${versions.androidArchLifecycle}",
             androidTestRules   : 'com.android.support.test:rules:0.5',
             androidTestRunner  : 'com.android.support.test:runner:0.5',
             espressoCore       : 'com.android.support.test.espresso:espresso-core:2.2.2',

@@ -21,6 +21,6 @@ class FakeFlixActivity : AppCompatActivity() {
     }
 
     private fun promptIfStillWatching() {
-        outerLayout.postDelayed({ outerLayout.visibility = View.VISIBLE }, 5000)
+        outerLayout.postDelayed({ outerLayout.visibility = View.VISIBLE }, 2500)
     }
 }

@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/clickableWordsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TODO!" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-</merge>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/addClickableWordEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/addClickableWordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add" />
+
+    </LinearLayout>
+
+</LinearLayout>

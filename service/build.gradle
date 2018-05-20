@@ -25,6 +25,8 @@ android {
 }
 
 dependencies {
+    implementation libraries.androidArchLifecycleExtensions
+    kapt libraries.androidArchLifecycleCompiler
     implementation libraries.kotlinStdLib
     implementation libraries.supportAppCompatV7
     implementation libraries.supportDesign
