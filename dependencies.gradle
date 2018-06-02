@@ -3,7 +3,7 @@ ext {
             androidSdk: [
                     buildTools: '27.0.3',
                     compile   : 27,
-                    min       : 19,
+                    min       : 21,
                     target    : 27
             ],
             androidArchLifecycle: '1.1.1',
