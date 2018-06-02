@@ -41,9 +41,25 @@ class ContinueWatchingService : AccessibilityService() {
 
     private fun clickWordIfPresent(event: AccessibilityEvent?, clickableWord: String) {
         val list = event?.source?.findAccessibilityNodeInfosByText(clickableWord).orEmpty()
-        if (list.isEmpty()) {
-            return
+        if (list.isNotEmpty()) {
+            clickClosestAncestor(list.first())
         }
-        list.first()?.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+    }
+
+    private fun clickClosestAncestor(info: AccessibilityNodeInfo?) {
+        if (info.hasClickAction()) {
+            info?.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+        } else {
+            clickClosestAncestor(info?.parent)
+        }
+    }
+
+    private fun AccessibilityNodeInfo?.hasClickAction(): Boolean {
+        this?.actionList?.forEach({
+            if (it.id == AccessibilityNodeInfo.ACTION_CLICK) {
+                return true
+            }
+        })
+        return false
     }
 }
