@@ -9,4 +9,4 @@ If you're displaying an article or something, it can mess up the UX for selectin
 Create UI demonstrating text sharing from multiple item views.
 
 #### Current state (inc. next steps if applicable)
-just started yo
+RecyclerView displays 5 paragraphs with selectable text in _each_ paragraph.
