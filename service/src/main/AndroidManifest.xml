@@ -11,6 +11,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".ConfigureEntriesActivity" />
 
         <activity-alias
             android:name="activity.primary_launcher"
