@@ -160,8 +160,20 @@ private class SwivelInterpolator private constructor(private val values: FloatAr
                 0.9991f, 0.9993f, 0.9995f, 0.9997f, 0.9998f, 0.9999f, 0.9999f, 1.0f, 1.0f
         )
 
-        // TODO: these each need to go from 0-1, but at different rates
-        val FAST_OUT = SwivelInterpolator(FAST_OUT_SLOW_IN_VALUES)
-        val SLOW_IN = SwivelInterpolator(FAST_OUT_SLOW_IN_VALUES)
+        val FAST_OUT = SwivelInterpolator(fastOutValues())
+        val SLOW_IN = SwivelInterpolator(slowInValues())
+
+        private fun fastOutValues(): FloatArray {
+            val fastOut = FAST_OUT_SLOW_IN_VALUES.copyOfRange(0, 100)
+            val max = fastOut.last()
+            return fastOut.map { it / max }.toFloatArray()
+        }
+
+        private fun slowInValues():FloatArray {
+            val slowIn = FAST_OUT_SLOW_IN_VALUES.copyOfRange(101, 200)
+            val min = slowIn.first()
+            val max = slowIn.last()
+            return slowIn.map { (it - min) / (max - min) }.toFloatArray()
+        }
     }
 }

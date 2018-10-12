@@ -7,4 +7,4 @@ _e.g. wanted to try to create a completely virtual view hierarchy, so there's no
 #### Current state (inc. next steps if applicable)
 
 - got a swivel
-- need fast out, slow in interpolator, but split in two because there's two animations that make up the swivel.
+- got an interpolator
