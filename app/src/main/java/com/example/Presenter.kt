@@ -6,7 +6,7 @@ internal class Presenter {
 
     fun startPresenting(view: View) {
         val emailUiModels = fakeEmails.map {
-            val contactImageUrl = "https://robohash.org/${it.contact}"
+            val contactImageUrl = "https://robohash.org/${it.contact}?bgset=bg1"
             val isSelected: () -> Boolean = { selectedEmailIds.contains(it.id) }
             val setSelected: (Boolean) -> Unit = { setSelected ->
                 if (setSelected) {

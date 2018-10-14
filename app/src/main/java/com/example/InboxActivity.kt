@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_inbox.*
 import kotlinx.android.synthetic.main.view_email.view.*
 
@@ -44,7 +46,10 @@ private class EmailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
         itemView.setOnClickListener { email.onClick() }
 
         itemView.avatarView.apply {
-            imageView().setImageResource(R.drawable.ic_launcher) // TODO: load contactUrl image
+            Glide.with(context)
+                    .load(email.contactImageUrl)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(imageView())
             setChecked(email.isSelected(), shouldAnimate = false)
             setOnClickListener {
                 val targetState = !isChecked
