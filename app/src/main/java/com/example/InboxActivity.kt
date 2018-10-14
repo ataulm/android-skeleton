@@ -14,6 +14,8 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_inbox.*
 import kotlinx.android.synthetic.main.view_email.view.*
 
+private const val KEY_STATE = "presenter-state"
+
 internal class InboxActivity : AppCompatActivity(), Presenter.View {
 
     private val presenter = Presenter()
@@ -23,7 +25,12 @@ internal class InboxActivity : AppCompatActivity(), Presenter.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inbox)
         inboxRecyclerView.adapter = inboxAdapter
-        presenter.startPresenting(this)
+        presenter.startPresenting(this, savedInstanceState?.getParcelable(KEY_STATE))
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putParcelable(KEY_STATE, presenter.state())
+        super.onSaveInstanceState(outState)
     }
 
     override fun display(emails: List<EmailUiModel>) = inboxAdapter.submitList(emails)

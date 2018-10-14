@@ -1,18 +1,28 @@
 package com.example
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class SelectedEmails(val ids: MutableSet<String> = mutableSetOf()) : Parcelable
+
 internal class Presenter {
 
-    private val selectedEmailIds: MutableSet<String> = mutableSetOf()
+    private val selectedEmails = SelectedEmails()
 
-    fun startPresenting(view: View) {
+    fun state(): Parcelable = selectedEmails
+
+    fun startPresenting(view: View, restoredState: SelectedEmails?) {
+        restoredState?.run { selectedEmails.ids.addAll(ids) }
+
         val emailUiModels = fakeEmails.map {
             val contactImageUrl = "https://robohash.org/${it.contact}?bgset=bg1"
-            val isSelected: () -> Boolean = { selectedEmailIds.contains(it.id) }
+            val isSelected: () -> Boolean = { selectedEmails.ids.contains(it.id) }
             val setSelected: (Boolean) -> Unit = { setSelected ->
                 if (setSelected) {
-                    selectedEmailIds += it.id
+                    selectedEmails.ids += it.id
                 } else {
-                    selectedEmailIds -= it.id
+                    selectedEmails.ids -= it.id
                 }
             }
             val onClick: () -> Unit = { view.openEmail(it.id) }

@@ -13,8 +13,8 @@ gmail-like checkable view animation
 - trying with ViewFlipper and a backwards checkmark so we can just use one animation for the whole thing
 - use matrix scale to avoid the reversed image
 - animate in both directions
+- verify it works with pre-selected emails (config change on rotate)
 
 TODO:
 
 - spammy clicks
-- verify it works with pre-selected emails
