@@ -11,11 +11,10 @@ gmail-like checkable view animation
 - ~~got an interpolator~~
 - added a fake demo for email
 - trying with ViewFlipper and a backwards checkmark so we can just use one animation for the whole thing
+- use matrix scale to avoid the reversed image
+- animate in both directions
 
 TODO:
 
-- add a backwards checkmark drawable
-- post-animation the image should be the correct way around
-- animate from checked -> not-checked
 - spammy clicks
-- check with pre-selected emails
+- verify it works with pre-selected emails

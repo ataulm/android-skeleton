@@ -6,8 +6,9 @@
     android:minHeight="72dp"
     android:orientation="horizontal">
 
-    <com.example.swivel.ImageFlippingCheckableView
+    <com.example.SwivelCheckView
         android:id="@+id/avatarView"
+        android:padding="8dp"
         android:layout_width="56dp"
         android:layout_height="56dp" />
 
