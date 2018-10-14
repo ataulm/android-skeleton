@@ -10,19 +10,17 @@ import android.view.animation.Transformation
 import android.widget.Checkable
 import android.widget.ImageView
 import android.widget.ViewFlipper
-import com.example.SwivelAnimation.Companion.createAnimation
+import com.example.SwivelAnimation.Companion.toChecked
+import com.example.SwivelAnimation.Companion.toNotChecked
 import kotlinx.android.synthetic.main.merge_swivel_check.view.*
-
-private val ROTATION_TO_CHECKED = 0f..180f
-private val ROTATION_TO_NOT_CHECKED = 180f..0f
 
 class SwivelCheckView constructor(context: Context, attrs: AttributeSet)
     : ViewFlipper(context, attrs), Checkable {
 
     private val calculateCenterX = { width * 0.5f }
     private val updateDisplayedSide: (DisplaySide) -> Unit = { setDisplaySide(it) }
-    private val toCheckedAnimation = createAnimation(ROTATION_TO_CHECKED, calculateCenterX, updateDisplayedSide)
-    private val toNotCheckedAnimation = createAnimation(ROTATION_TO_NOT_CHECKED, calculateCenterX, updateDisplayedSide)
+    private val toCheckedAnimation = toChecked(calculateCenterX, updateDisplayedSide)
+    private val toNotCheckedAnimation = toNotChecked(calculateCenterX, updateDisplayedSide)
 
     private var isChecked: Boolean = false
 
@@ -103,9 +101,17 @@ private class SwivelAnimation(
 
     companion object {
 
+        private val ROTATION_TO_CHECKED = 0f..180f
+        private val ROTATION_TO_NOT_CHECKED = 180f..0f
         private const val DURATION_MS = 320L
 
-        fun createAnimation(rotation: ClosedFloatingPointRange<Float>, calculateCenterX: () -> Float, updateDisplayedSide: (DisplaySide) -> Unit): Animation {
+        fun toChecked(calculateCenterX: () -> Float, updateDisplayedSide: (DisplaySide) -> Unit) =
+                createAnimation(ROTATION_TO_CHECKED, calculateCenterX, updateDisplayedSide)
+
+        fun toNotChecked(calculateCenterX: () -> Float, updateDisplayedSide: (DisplaySide) -> Unit) =
+                createAnimation(ROTATION_TO_NOT_CHECKED, calculateCenterX, updateDisplayedSide)
+
+        private fun createAnimation(rotation: ClosedFloatingPointRange<Float>, calculateCenterX: () -> Float, updateDisplayedSide: (DisplaySide) -> Unit): Animation {
             return SwivelAnimation(rotation, calculateCenterX, updateDisplayedSide).apply {
                 duration = DURATION_MS
                 interpolator = FastOutSlowInInterpolator()
