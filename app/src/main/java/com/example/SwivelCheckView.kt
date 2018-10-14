@@ -28,9 +28,6 @@ class SwivelCheckView constructor(context: Context, attrs: AttributeSet)
         View.inflate(context, R.layout.merge_swivel_check, this)
     }
 
-    /**
-     * Will not cancel running animations.
-     */
     fun setChecked(targetState: Boolean, shouldAnimate: Boolean = true) {
         if (shouldAnimate) {
             setChecked(targetState)
@@ -46,12 +43,6 @@ class SwivelCheckView constructor(context: Context, attrs: AttributeSet)
         }
     }
 
-    /**
-     * Will animate to the targetState.
-     *
-     * If already mid-way through an animation, it will stop the animation at its position
-     * and reverse it from that point.
-     */
     override fun setChecked(targetState: Boolean) {
         if (targetState == isChecked) {
             return
