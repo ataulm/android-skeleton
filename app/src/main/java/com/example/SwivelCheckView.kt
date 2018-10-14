@@ -74,8 +74,7 @@ class SwivelCheckView constructor(context: Context, attrs: AttributeSet)
 }
 
 private class SwivelAnimation(
-        private val degreesStart: Float,
-        private val degreesEnd: Float,
+        private val rotation: ClosedFloatingPointRange<Float>,
         private val calculateCenterX: () -> Float,
         private val updateDisplayedSide: (DisplaySide) -> Unit
 ) : Animation() {
@@ -83,7 +82,7 @@ private class SwivelAnimation(
     private val camera = Camera()
 
     override fun applyTransformation(interpolatedTime: Float, transformation: Transformation) {
-        val degrees = degreesStart + (degreesEnd - degreesStart) * interpolatedTime
+        val degrees = rotation.start + (rotation.endInclusive - rotation.start) * interpolatedTime
 
         val matrix = transformation.matrix
         val centerX = calculateCenterX()
@@ -108,7 +107,7 @@ private class SwivelAnimation(
         private const val DURATION_MS = 320L
 
         fun createAnimation(rotation: ClosedFloatingPointRange<Float>, calculateCenterX: () -> Float, updateDisplayedSide: (DisplaySide) -> Unit): Animation {
-            return SwivelAnimation(rotation.start, rotation.endInclusive, calculateCenterX, updateDisplayedSide).apply {
+            return SwivelAnimation(rotation, calculateCenterX, updateDisplayedSide).apply {
                 duration = DURATION_MS
                 interpolator = FastOutSlowInInterpolator()
             }
