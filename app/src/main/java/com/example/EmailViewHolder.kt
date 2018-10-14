@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.android.synthetic.main.view_email.view.*
 
 internal class EmailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
