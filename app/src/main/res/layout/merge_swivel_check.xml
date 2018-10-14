@@ -18,6 +18,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:importantForAccessibility="no"
-        android:src="@drawable/ic_circle_check" />
+        android:src="@drawable/ic_checked" />
 
 </merge>
