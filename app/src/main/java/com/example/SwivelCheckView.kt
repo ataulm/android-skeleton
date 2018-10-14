@@ -87,7 +87,6 @@ private class SwivelAnimation(
         val matrix = transformation.matrix
         val centerX = calculateCenterX()
         camera.save()
-        matrix.setScale(-1f, 0f)
         camera.rotateY(degrees)
         camera.getMatrix(matrix)
         camera.restore()
