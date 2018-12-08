@@ -13,7 +13,7 @@ android {
         versionCode 1
         versionName '1.0'
 
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
@@ -25,24 +25,14 @@ android {
 
 dependencies {
     implementation libraries.kotlinStdLib
-    implementation libraries.supportAppCompatV7
-    implementation libraries.supportDesign
-    implementation libraries.supportRecyclerView
-    implementation libraries.supportV13
+    implementation libraries.androidxAppCompat
+    implementation libraries.materialDesignComponents
+    implementation libraries.androidxRecyclerView
+    implementation libraries.androidxLegacySupportV13
 
-    // Android runner and rules support
-    androidTestImplementation(libraries.androidTestRunner) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-
-    androidTestImplementation(libraries.androidTestRules) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-
-    // Espresso support
-    androidTestImplementation(libraries.espressoCore) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
+    androidTestImplementation libraries.androidxTestRules
+    androidTestImplementation libraries.androidxTestRunner
+    androidTestImplementation libraries.androidxEspressoCore
 
     testImplementation libraries.googleTruth
     testImplementation libraries.jUnit
