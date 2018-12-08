@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.view_number.view.*
 
 class MyActivity : AppCompatActivity() {
 
-    private val itemsAdapter = ItemsAdapter()
+    private val itemsAdapter = ItemsAdapter { toast(it) }
     private val numberList = IntArray(100) { it }.toList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,14 +24,22 @@ class MyActivity : AppCompatActivity() {
 
         itemsAdapter.submitList(numberList)
     }
+
+    private var toast: Toast? = null
+    private fun toast(value: Int) {
+        toast?.cancel()
+        toast = Toast.makeText(this, "click $value", Toast.LENGTH_SHORT).apply { show() }
+    }
 }
 
-private class ItemsAdapter : ListAdapter<Int, NumberViewHolder>(Differ) {
+private class ItemsAdapter(val onClick: (Int) -> Unit) : ListAdapter<Int, NumberViewHolder>(Differ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NumberViewHolder.inflate(parent)
 
     override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
-        holder.itemView.numberTextView.text = "${getItem(position)} number!"
+        val item = getItem(position)
+        holder.itemView.numberTextView.text = "$item number!"
+        holder.itemView.setOnClickListener { onClick(item) }
     }
 
     object Differ : DiffUtil.ItemCallback<Int>() {
