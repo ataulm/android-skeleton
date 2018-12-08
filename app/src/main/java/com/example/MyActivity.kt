@@ -8,7 +8,12 @@ import kotlinx.android.synthetic.main.activity_my.*
 
 class MyActivity : AppCompatActivity() {
 
-    private val itemsAdapter = ItemsAdapter { toast(it) }
+    private val onClick: (String) -> Unit = { toast(it) }
+    private val onClickDelete: (String) -> Unit = {
+        list.remove(it)
+        itemsAdapter.submitList(list.toList())
+    }
+    private val itemsAdapter = ItemsAdapter(onClick, onClickDelete)
     private val list = IntArray(100) { it }.map { "item: $it" }.toMutableList()
 
     override fun onCreate(savedInstanceState: Bundle?) {

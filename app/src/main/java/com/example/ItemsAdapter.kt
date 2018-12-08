@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_number.view.*
 
-class ItemsAdapter(val onClick: (String) -> Unit) : ListAdapter<String, NumberViewHolder>(Differ) {
+class ItemsAdapter(val onClick: (String) -> Unit, val onClickDelete: (String) -> Unit) : ListAdapter<String, NumberViewHolder>(Differ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NumberViewHolder.inflate(parent)
 
     override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
         val item = getItem(position)
         holder.itemView.numberTextView.text = item
+        holder.itemView.deleteButton.setOnClickListener { onClickDelete(item) }
         holder.itemView.setOnClickListener { onClick(item) }
     }
 
