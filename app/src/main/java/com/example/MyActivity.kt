@@ -24,7 +24,7 @@ class MyActivity : AppCompatActivity() {
         itemsAdapter.submitList(list.toList())
 
         ItemTouchHelper(
-                SwipeToDeleteCallback { position ->
+                SwipeToDeleteCallback(this) { position ->
                     list.removeAt(position)
                     itemsAdapter.submitList(list.toList())
                 }

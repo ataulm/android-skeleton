@@ -1,8 +1,14 @@
 package com.example
 
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
@@ -26,7 +32,7 @@ class ItemsAdapter(val onClick: (String) -> Unit, val onClickDelete: (String) ->
     }
 }
 
-class SwipeToDeleteCallback(private val onSwipeToDeleteAtAdapterPosition: (Int) -> Unit) : ItemTouchHelper.Callback() {
+class SwipeToDeleteCallback(context: Context, private val onSwipeToDeleteAtAdapterPosition: (Int) -> Unit) : ItemTouchHelper.Callback() {
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
         return ItemTouchHelper.Callback.makeMovementFlags(NO_DIRECTIONS, ItemTouchHelper.END)
@@ -34,6 +40,39 @@ class SwipeToDeleteCallback(private val onSwipeToDeleteAtAdapterPosition: (Int) 
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         onSwipeToDeleteAtAdapterPosition(viewHolder.adapterPosition)
+    }
+
+    private val background = ColorDrawable(Color.RED)
+    private val deleteIndicator = ContextCompat.getDrawable(context, android.R.drawable.ic_delete)!!.apply {
+        setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+    }
+    private val deleteIndicatorMargin = context.resources.getDimensionPixelSize(R.dimen.delete_indicator_margin)
+
+    override fun onChildDraw(
+            canvas: Canvas,
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            dX: Float,
+            dY: Float,
+            actionState: Int,
+            isCurrentlyActive: Boolean
+    ) {
+        val view = viewHolder.itemView
+        background.apply {
+            setBounds(dX.toInt(), view.top, view.left, view.bottom)
+            draw(canvas)
+        }
+        deleteIndicator.apply {
+            val drawableTop = view.top + (view.bottom - view.top - deleteIndicator.intrinsicHeight) / 2
+            setBounds(
+                    deleteIndicatorMargin,
+                    drawableTop,
+                    deleteIndicatorMargin + deleteIndicator.intrinsicWidth,
+                    drawableTop + deleteIndicator.intrinsicHeight
+            )
+            draw(canvas)
+        }
+        super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
 
     override fun onMove(rv: RecyclerView, vh: RecyclerView.ViewHolder, t: RecyclerView.ViewHolder) = false
