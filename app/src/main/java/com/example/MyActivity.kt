@@ -13,19 +13,29 @@ import kotlinx.android.synthetic.main.item_view.view.*
 
 class MyActivity : AppCompatActivity() {
 
+    private val items = IntArray(10) { it }.map {
+        ItemUiModel("ItemUiModel ${it + 1}", it == 0)
+    }.toMutableList()
+
+    private val onSelect: (ItemUiModel) -> Unit = { selectedItem: ItemUiModel ->
+        val previouslySelectedItem = items.first { it.activated }
+        items[items.indexOf(previouslySelectedItem)] = previouslySelectedItem.copy(activated = false)
+        items[items.indexOf(selectedItem)] = selectedItem.copy(activated = true)
+        adapter.submitList(items.toList())
+    }
+
+    private val adapter = SelectableViewAdapter(onSelect)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my)
 
-        val adapter = SelectableViewAdapter()
+        adapter.submitList(items.toList())
         recyclerView.adapter = adapter
-
-        val items = IntArray(10) { it }.map { Item("Item ${it + 1}", it == 0) }
-        adapter.submitList(items)
     }
 }
 
-class SelectableViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffer) {
+class SelectableViewAdapter(private val onSelect: (ItemUiModel) -> Unit) : ListAdapter<ItemUiModel, RecyclerView.ViewHolder>(ItemDiffer) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
@@ -36,13 +46,14 @@ class SelectableViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDif
         val item = getItem(position)
         holder.itemView.titleTextView.text = item.title
         holder.itemView.selectionStatusView.visibility = if (item.activated) View.VISIBLE else View.INVISIBLE
+        holder.itemView.setOnClickListener { onSelect(item) }
     }
 }
 
-object ItemDiffer : DiffUtil.ItemCallback<Item>() {
-    override fun areItemsTheSame(oldItem: Item, newItem: Item) = oldItem.title == newItem.title
-    override fun areContentsTheSame(oldItem: Item, newItem: Item) = oldItem == newItem
+object ItemDiffer : DiffUtil.ItemCallback<ItemUiModel>() {
+    override fun areItemsTheSame(oldItem: ItemUiModel, newItem: ItemUiModel) = oldItem.title == newItem.title
+    override fun areContentsTheSame(oldItem: ItemUiModel, newItem: ItemUiModel) = oldItem == newItem
 }
 
 class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-data class Item(val title: String, val activated: Boolean)
+data class ItemUiModel(val title: String, val activated: Boolean)
