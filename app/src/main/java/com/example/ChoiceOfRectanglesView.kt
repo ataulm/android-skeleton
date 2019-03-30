@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewPropertyAnimator
 import android.view.animation.OvershootInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import kotlinx.android.synthetic.main.merge_choice_of_rectangles.view.*
 
 internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs) {
+
+    private var isSpread = false
 
     init {
         View.inflate(context, R.layout.merge_choice_of_rectangles, this)
@@ -18,7 +21,29 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
 
     fun show(rectangle: Rectangle) {
         if (isSpread) {
-            unspread()
+            unspreadAndThen {
+                red.pivotX = red.width.toFloat()
+                red.pivotY = red.height.toFloat()
+                red.animate()
+                        .rotation(45f)
+                        .translationXBy(45.dp.toFloat())
+                        .translationYBy(-120.dp.toFloat())
+                        .setDuration(200)
+                        .setInterpolator(FastOutSlowInInterpolator())
+                        .withEndAction {
+                            red.z = -100f
+                            red.animate()
+                                    .rotation(0f)
+                                    .translationX(0f)
+                                    .translationY(0f)
+                                    .setDuration(300)
+                                    .setInterpolator(FastOutSlowInInterpolator())
+                                    .setStartDelay(0)
+                                    .start()
+                        }
+                        .setStartDelay(0)
+                        .start()
+            }
             isSpread = false
         }
 
@@ -33,52 +58,51 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
 //        }
     }
 
-    var isSpread = false
-
     fun spread() {
         isSpread = true
         blue.animate()
                 .rotation(-17f)
                 .translationXBy(-12.dp.toFloat())
                 .translationYBy(-60.dp.toFloat())
-                .startSpreadAnimation()
+                .startSpread()
 
         yellow.animate()
                 .translationXBy(4.dp.toFloat())
-                .startSpreadAnimation()
+                .startSpread()
 
         red.animate()
                 .rotation(17f)
                 .translationYBy(60.dp.toFloat())
-                .startSpreadAnimation()
+                .startSpread()
     }
 
-    fun unspread() {
-        blue.animate()
-                .rotation(7f)
-                .translationX(0f)
-                .translationY(0f)
-                .startUnspreadAnimation()
-
-        yellow.animate()
-                .rotation(-7f)
-                .translationXBy(0f)
-                .startUnspreadAnimation()
-
-        red.animate()
-                .rotation(0f)
-                .translationY(0f)
-                .startUnspreadAnimation()
-    }
-
-    private fun ViewPropertyAnimator.startSpreadAnimation() {
+    private fun ViewPropertyAnimator.startSpread() {
         setDuration(600)
                 .setInterpolator(OvershootInterpolator(3f))
                 .setStartDelay(1000)
                 .start()
     }
 
-    private fun ViewPropertyAnimator.startUnspreadAnimation() {
+    private fun unspreadAndThen(doOnEndIsh: () -> Unit) {
+        blue.animate()
+                .rotation(7f)
+                .translationX(0f)
+                .translationY(0f)
+                .withEndAction { doOnEndIsh() }
+                .startUnspread()
+
+        yellow.animate()
+                .rotation(-7f)
+                .translationXBy(0f)
+                .startUnspread()
+
+        red.animate()
+                .rotation(0f)
+                .translationY(0f)
+                .startUnspread()
+    }
+
+    private fun ViewPropertyAnimator.startUnspread() {
         setDuration(600)
                 .setInterpolator(FastOutSlowInInterpolator())
                 .setStartDelay(0)
