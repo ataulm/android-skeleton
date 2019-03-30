@@ -14,14 +14,14 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     }
 
     fun show(rectangle: Rectangle) {
-        red.visibility = GONE
-        yellow.visibility = GONE
         blue.visibility = GONE
+        yellow.visibility = GONE
+        red.visibility = GONE
 
         when (rectangle) {
-            Rectangle.RED -> red.visibility = View.VISIBLE
-            Rectangle.YELLOW -> yellow.visibility = View.VISIBLE
             Rectangle.BLUE -> blue.visibility = View.VISIBLE
+            Rectangle.YELLOW -> yellow.visibility = View.VISIBLE
+            Rectangle.RED -> red.visibility = View.VISIBLE
         }
     }
 
@@ -30,8 +30,8 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     }
 
     enum class Rectangle {
-        RED,
+        BLUE,
         YELLOW,
-        BLUE
+        RED
     }
 }
