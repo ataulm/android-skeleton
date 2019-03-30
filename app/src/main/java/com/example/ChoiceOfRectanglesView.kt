@@ -1,9 +1,11 @@
 package com.example
 
 import android.content.Context
+import android.content.res.Resources
 import android.util.AttributeSet
 import android.view.View
-import android.widget.FrameLayout
+import android.view.ViewPropertyAnimator
+import android.view.animation.OvershootInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.merge_choice_of_rectangles.view.*
 
@@ -26,7 +28,27 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     }
 
     fun spread() {
-        // TODO: spread ’em!
+        blue.animate()
+                .rotation(-17f)
+                .translationXBy(-12.dp.toFloat())
+                .translationYBy(-60.dp.toFloat())
+                .startSpreadAnimation()
+
+        yellow.animate()
+                .translationXBy(4.dp.toFloat())
+                .startSpreadAnimation()
+
+        red.animate()
+                .rotation(17f)
+                .translationYBy(60.dp.toFloat())
+                .startSpreadAnimation()
+    }
+
+    private fun ViewPropertyAnimator.startSpreadAnimation() {
+        setDuration(600)
+                .setInterpolator(OvershootInterpolator(3f))
+                .setStartDelay(1000)
+                .start()
     }
 
     enum class Rectangle {
@@ -35,3 +57,9 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
         RED
     }
 }
+
+val Int.dp: Int
+    get() {
+        val density = Resources.getSystem().displayMetrics.density
+        return Math.round(this * density)
+    }
