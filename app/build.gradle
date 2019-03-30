@@ -26,6 +26,8 @@ android {
 dependencies {
     implementation libraries.kotlinStdLib
     implementation libraries.androidxAppCompat
+    implementation libraries.androidxConstraintLayout
+    implementation libraries.androidxDynamicAnimation
     implementation libraries.materialDesignComponents
     implementation libraries.androidxRecyclerView
     implementation libraries.androidxLegacySupportV13
