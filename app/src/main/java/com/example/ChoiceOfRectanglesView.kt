@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewPropertyAnimator
 import android.view.animation.OvershootInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import kotlinx.android.synthetic.main.merge_choice_of_rectangles.view.*
 
 internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs) {
@@ -16,18 +17,26 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     }
 
     fun show(rectangle: Rectangle) {
-        blue.visibility = GONE
-        yellow.visibility = GONE
-        red.visibility = GONE
-
-        when (rectangle) {
-            Rectangle.BLUE -> blue.visibility = View.VISIBLE
-            Rectangle.YELLOW -> yellow.visibility = View.VISIBLE
-            Rectangle.RED -> red.visibility = View.VISIBLE
+        if (isSpread) {
+            unspread()
+            isSpread = false
         }
+
+//        blue.visibility = GONE
+//        yellow.visibility = GONE
+//        red.visibility = GONE
+//
+//        when (rectangle) {
+//            Rectangle.BLUE -> blue.visibility = View.VISIBLE
+//            Rectangle.YELLOW -> yellow.visibility = View.VISIBLE
+//            Rectangle.RED -> red.visibility = View.VISIBLE
+//        }
     }
 
+    var isSpread = false
+
     fun spread() {
+        isSpread = true
         blue.animate()
                 .rotation(-17f)
                 .translationXBy(-12.dp.toFloat())
@@ -44,10 +53,35 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
                 .startSpreadAnimation()
     }
 
+    fun unspread() {
+        blue.animate()
+                .rotation(7f)
+                .translationX(0f)
+                .translationY(0f)
+                .startUnspreadAnimation()
+
+        yellow.animate()
+                .rotation(-7f)
+                .translationXBy(0f)
+                .startUnspreadAnimation()
+
+        red.animate()
+                .rotation(0f)
+                .translationY(0f)
+                .startUnspreadAnimation()
+    }
+
     private fun ViewPropertyAnimator.startSpreadAnimation() {
         setDuration(600)
                 .setInterpolator(OvershootInterpolator(3f))
                 .setStartDelay(1000)
+                .start()
+    }
+
+    private fun ViewPropertyAnimator.startUnspreadAnimation() {
+        setDuration(600)
+                .setInterpolator(FastOutSlowInInterpolator())
+                .setStartDelay(0)
                 .start()
     }
 
