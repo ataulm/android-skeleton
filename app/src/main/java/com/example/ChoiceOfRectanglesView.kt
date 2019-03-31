@@ -1,6 +1,5 @@
 package com.example
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.res.Resources
 import android.util.AttributeSet
@@ -37,6 +36,7 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     private var front = Rectangle.RED
 
     init {
+        clipChildren = false
         View.inflate(context, R.layout.merge_choice_of_rectangles, this)
     }
 
@@ -134,7 +134,6 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     }
 
     private fun View.shuffleFromBackToFront() {
-        matrix.isAffine
         setPivotAtBottomRight()
         animate()
                 .rotation(ROTATION_CARD_BEING_SHUFFLED)
@@ -185,44 +184,44 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
                     Rectangle.BLUE -> {
                     }
                     Rectangle.YELLOW -> {
-                        red.shuffleFromBackToMiddle()
-                        blue.shuffleFromMiddleToFront()
-                        yellow.shuffleFromFrontToBack()
+                        redWrapper.shuffleFromBackToMiddle()
+                        blueWrapper.shuffleFromMiddleToFront()
+                        yellowWrapper.shuffleFromFrontToBack()
                     }
                     Rectangle.RED -> {
-                        blue.shuffleFromBackToFront()
-                        yellow.shuffleFromMiddleToBack()
-                        red.shuffleFromFrontToMiddle()
+                        blueWrapper.shuffleFromBackToFront()
+                        yellowWrapper.shuffleFromMiddleToBack()
+                        redWrapper.shuffleFromFrontToMiddle()
                     }
                 }
             }
             Rectangle.YELLOW -> {
                 when (front) {
                     Rectangle.BLUE -> {
-                        yellow.shuffleFromBackToFront()
-                        red.shuffleFromMiddleToBack()
-                        blue.shuffleFromFrontToMiddle()
+                        yellowWrapper.shuffleFromBackToFront()
+                        redWrapper.shuffleFromMiddleToBack()
+                        blueWrapper.shuffleFromFrontToMiddle()
                     }
                     Rectangle.YELLOW -> {
                     }
                     Rectangle.RED -> {
-                        blue.shuffleFromBackToMiddle()
-                        yellow.shuffleFromMiddleToFront()
-                        red.shuffleFromFrontToBack()
+                        blueWrapper.shuffleFromBackToMiddle()
+                        yellowWrapper.shuffleFromMiddleToFront()
+                        redWrapper.shuffleFromFrontToBack()
                     }
                 }
             }
             Rectangle.RED -> {
                 when (front) {
                     Rectangle.BLUE -> {
-                        yellow.shuffleFromBackToMiddle()
-                        red.shuffleFromMiddleToFront()
-                        blue.shuffleFromFrontToBack()
+                        yellowWrapper.shuffleFromBackToMiddle()
+                        redWrapper.shuffleFromMiddleToFront()
+                        blueWrapper.shuffleFromFrontToBack()
                     }
                     Rectangle.YELLOW -> {
-                        red.shuffleFromBackToFront()
-                        blue.shuffleFromMiddleToBack()
-                        yellow.shuffleFromFrontToMiddle()
+                        redWrapper.shuffleFromBackToFront()
+                        blueWrapper.shuffleFromMiddleToBack()
+                        yellowWrapper.shuffleFromFrontToMiddle()
                     }
                     Rectangle.RED -> {
                     }
@@ -235,17 +234,17 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
 
     fun spread() {
         isSpread = true
-        blue.animate()
+        blueWrapper.animate()
                 .rotation(-17f)
                 .translationXBy(-12.dp.toFloat())
                 .translationYBy(-60.dp.toFloat())
                 .startSpread()
 
-        yellow.animate()
+        yellowWrapper.animate()
                 .translationXBy(4.dp.toFloat())
                 .startSpread()
 
-        red.animate()
+        redWrapper.animate()
                 .rotation(17f)
                 .translationYBy(60.dp.toFloat())
                 .startSpread()
@@ -260,18 +259,18 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
 
 
     private fun unspreadAndThen(doOnEndIsh: () -> Unit) {
-        blue.animate()
+        blueWrapper.animate()
                 .rotation(ROTATION_CARD_BACK)
                 .resetTranslation()
                 .withEndAction { doOnEndIsh() }
                 .startUnspread()
 
-        yellow.animate()
+        yellowWrapper.animate()
                 .rotation(ROTATION_CARD_MIDDLE)
                 .resetTranslation()
                 .startUnspread()
 
-        red.animate()
+        redWrapper.animate()
                 .rotation(ROTATION_CARD_FRONT)
                 .resetTranslation()
                 .startUnspread()
