@@ -14,18 +14,16 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 
-private const val ROTATION_CARD_BEING_SHUFFLED = 45f
-private const val ROTATION_CARD_BACK = 7f
-private const val ROTATION_CARD_MIDDLE = -7f
-private const val ROTATION_CARD_FRONT = 0f
+private const val ROTATION_RECT_SHUFFLE_INITIAL = 0f
+private const val ROTATION_RECT_SHUFFLE_PEAK = 45f
+private val TX_RECT_BEING_SHUFFLED = 45.dp.toFloat()
+private val TY_RECT_BEING_SHUFFLED = -120.dp.toFloat()
+
 private const val Z_BACKEST = -3f
 private const val Z_BACK = -2f
 private const val Z_MIDDLE = -1f
 private const val Z_FRONT = 0f
 private const val Z_FRONTEST = 1f
-
-private val TX_CARD_BEING_SHUFFLED = 45.dp.toFloat()
-private val TY_CARD_BEING_SHUFFLED = -120.dp.toFloat()
 
 internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs) {
 
@@ -39,23 +37,23 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     init {
         clipChildren = false
         val inflater = LayoutInflater.from(context)
+        blue = inflater.addColoredRectangleView(Color.parseColor("#005ab3"))
+        yellow = inflater.addColoredRectangleView(Color.parseColor("#ffd500"))
+        red = inflater.addColoredRectangleView(ContextCompat.getColor(inflater.context, android.R.color.holo_red_light))
+    }
 
-        blue = inflater.inflate(R.layout.view_item_choice_of_rectangles, this, false) as ColoredRectangleView
-        blue.setColor(Color.parseColor("#005ab3"))
-        addView(blue)
-
-        yellow = inflater.inflate(R.layout.view_item_choice_of_rectangles, this, false) as ColoredRectangleView
-        yellow.setColor(Color.parseColor("#ffd500"))
-        addView(yellow)
-
-        red = inflater.inflate(R.layout.view_item_choice_of_rectangles, this, false) as ColoredRectangleView
-        red.setColor(ContextCompat.getColor(context, android.R.color.holo_red_light))
-        addView(red)
+    private fun LayoutInflater.addColoredRectangleView(@ColorInt color: Int): ColoredRectangleView {
+        val view = inflate(R.layout.view_item_choice_of_rectangles, this@ChoiceOfRectanglesView, false) as ColoredRectangleView
+        view.setColor(color)
+        addView(view)
+        return view
     }
 
     fun show(rectangle: Rectangle) {
         if (isSpread) {
-            unspreadAndThen { animateToFront(rectangle) }
+            unspreadAndThen {
+                animateToFront(rectangle)
+            }
             isSpread = false
         } else {
             animateToFront(rectangle)
@@ -136,19 +134,23 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     }
 
     private fun unspreadAndThen(doOnEndIsh: () -> Unit) {
+        blue.animateRotationToBack { z = Z_BACK }
+        yellow.animateRotationToMiddle { z = Z_MIDDLE }
+        red.animateRotationToFront { z = Z_FRONT }
+
         blue.animate()
-                .rotation(ROTATION_CARD_BACK)
+                .rotation(0f)
                 .resetTranslation()
                 .withEndAction { doOnEndIsh() }
                 .startUnspread()
 
         yellow.animate()
-                .rotation(ROTATION_CARD_MIDDLE)
+                .rotation(0f)
                 .resetTranslation()
                 .startUnspread()
 
         red.animate()
-                .rotation(ROTATION_CARD_FRONT)
+                .rotation(0f)
                 .resetTranslation()
                 .startUnspread()
     }
@@ -169,93 +171,45 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
                 .start()
     }
 
-    private fun ColoredRectangleView.setPivotAtCenter() {
-        pivotX = width * 0.5f
-        pivotY = height * 0.5f
-    }
-
     private fun ColoredRectangleView.setPivotAtBottomRight() {
         pivotX = width.toFloat()
         pivotY = height.toFloat()
     }
 
     private fun ColoredRectangleView.shuffleFromBackToMiddle() {
-        animate()
-                .rotation(ROTATION_CARD_MIDDLE)
-                .setDuration(300)
-                .setInterpolator(FastOutSlowInInterpolator())
-                .setStartDelay(0)
-                .withEndAction {
-                    z = Z_MIDDLE
-                }
-                .start()
+        animateRotationToMiddle { z = Z_MIDDLE }
     }
 
     private fun ColoredRectangleView.shuffleFromMiddleToBack() {
-        animate()
-                .rotation(ROTATION_CARD_BACK)
-                .setDuration(300)
-                .setInterpolator(FastOutSlowInInterpolator())
-                .setStartDelay(0)
-                .withEndAction {
-                    z = Z_BACK
-                }
-                .start()
+        animateRotationToBack { z = Z_BACK }
     }
 
     private fun ColoredRectangleView.shuffleFromMiddleToFront() {
-        animate()
-                .rotation(ROTATION_CARD_FRONT)
-                .setDuration(300)
-                .setInterpolator(FastOutSlowInInterpolator())
-                .setStartDelay(0)
-                .withEndAction {
-                    z = Z_FRONT
-                }
-                .start()
+        animateRotationToFront { z = Z_FRONT }
     }
 
     private fun ColoredRectangleView.shuffleFromFrontToMiddle() {
-        animate()
-                .rotation(ROTATION_CARD_MIDDLE)
-                .setDuration(300)
-                .setInterpolator(FastOutSlowInInterpolator())
-                .setStartDelay(0)
-                .withEndAction {
-                    z = Z_MIDDLE
-                }
-                .start()
+        animateRotationToMiddle { z = Z_MIDDLE }
     }
 
     private fun ColoredRectangleView.shuffleFromFrontToBack() {
+        animateRotationToBack {}
         setPivotAtBottomRight()
         animate()
-                .rotation(ROTATION_CARD_BEING_SHUFFLED)
-                .translationXBy(TX_CARD_BEING_SHUFFLED)
-                .translationYBy(TY_CARD_BEING_SHUFFLED)
+                .rotation(ROTATION_RECT_SHUFFLE_PEAK)
+                .translationXBy(TX_RECT_BEING_SHUFFLED)
+                .translationYBy(TY_RECT_BEING_SHUFFLED)
                 .setDuration(200)
                 .setInterpolator(FastOutSlowInInterpolator())
                 .withEndAction {
                     z = Z_BACKEST
                     animate()
-                            .rotation(ROTATION_CARD_FRONT)
+                            .rotation(ROTATION_RECT_SHUFFLE_INITIAL)
                             .resetTranslation()
                             .setDuration(300)
                             .setInterpolator(FastOutSlowInInterpolator())
                             .setStartDelay(0)
-                            .withEndAction {
-                                setPivotAtCenter()
-                                animate()
-                                        .rotation(ROTATION_CARD_BACK)
-                                        .resetTranslation()
-                                        .setDuration(300)
-                                        .setInterpolator(FastOutSlowInInterpolator())
-                                        .setStartDelay(0)
-                                        .withEndAction {
-                                            z = Z_BACK
-                                        }
-                                        .start()
-                            }
+                            .withEndAction { z = Z_BACK }
                             .start()
                 }
                 .setStartDelay(0)
@@ -263,34 +217,23 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     }
 
     private fun ColoredRectangleView.shuffleFromBackToFront() {
+        animateRotationToFront {}
         setPivotAtBottomRight()
         animate()
-                .rotation(ROTATION_CARD_BEING_SHUFFLED)
-                .translationXBy(TX_CARD_BEING_SHUFFLED)
-                .translationYBy(TY_CARD_BEING_SHUFFLED)
+                .rotation(ROTATION_RECT_SHUFFLE_PEAK)
+                .translationXBy(TX_RECT_BEING_SHUFFLED)
+                .translationYBy(TY_RECT_BEING_SHUFFLED)
                 .setDuration(200)
                 .setInterpolator(FastOutSlowInInterpolator())
                 .withEndAction {
                     z = Z_FRONTEST
                     animate()
-                            .rotation(ROTATION_CARD_BACK)
+                            .rotation(ROTATION_RECT_SHUFFLE_INITIAL)
                             .resetTranslation()
                             .setDuration(300)
                             .setInterpolator(FastOutSlowInInterpolator())
                             .setStartDelay(0)
-                            .withEndAction {
-                                setPivotAtCenter()
-                                animate()
-                                        .rotation(ROTATION_CARD_FRONT)
-                                        .resetTranslation()
-                                        .setDuration(300)
-                                        .setInterpolator(FastOutSlowInInterpolator())
-                                        .setStartDelay(0)
-                                        .withEndAction {
-                                            z = Z_FRONT
-                                        }
-                                        .start()
-                            }
+                            .withEndAction { z = Z_FRONT }
                             .start()
                 }
                 .setStartDelay(0)
@@ -312,15 +255,30 @@ val Int.dp: Int
 
 internal class ColoredRectangleView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
-    private val coloredView: View
-
-    init {
-        coloredView = View(context).apply {
-            layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-        }
-        addView(coloredView)
+    internal val coloredView: View = View(context).apply {
+        layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+        )
+        addView(this)
     }
 
     fun setColor(@ColorInt color: Int) = coloredView.setBackgroundColor(color)
+
+    fun animateRotationToBack(doOnEndIsh: () -> Unit) = animateChildRotation(7f, doOnEndIsh)
+
+    fun animateRotationToMiddle(doOnEndIsh: () -> Unit) = animateChildRotation(-7f, doOnEndIsh)
+
+    fun animateRotationToFront(doOnEndIsh: () -> Unit) = animateChildRotation(0f, doOnEndIsh)
+
+    private fun animateChildRotation(rotation: Float, doOnEndIsh: () -> Unit) {
+        coloredView.animate()
+                .rotation(rotation)
+                .setDuration(300)
+                .setInterpolator(FastOutSlowInInterpolator())
+                .setStartDelay(0)
+                .withEndAction { doOnEndIsh() }
+                .start()
+    }
 }
         
