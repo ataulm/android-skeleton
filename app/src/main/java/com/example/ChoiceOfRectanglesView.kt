@@ -27,15 +27,6 @@ private const val Z_FRONTEST = 1f
 private val TX_CARD_BEING_SHUFFLED = 45.dp.toFloat()
 private val TY_CARD_BEING_SHUFFLED = -120.dp.toFloat()
 
-/**
- * there's kind of a coupling between this class and the ordering the XML
- * - BLUE
- * - YELLOW
- * - RED
- * where RED is on top of the others.
- *
- * Except now this class is responsible for setting the colors, so we could internalise it all here.
- */
 internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs) {
 
     private var isSpread = false
@@ -60,6 +51,122 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
         red = inflater.inflate(R.layout.view_item_choice_of_rectangles, this, false) as ColoredRectangleView
         red.setColor(ContextCompat.getColor(context, android.R.color.holo_red_light))
         addView(red)
+    }
+
+    fun show(rectangle: Rectangle) {
+        if (isSpread) {
+            unspreadAndThen { animateToFront(rectangle) }
+            isSpread = false
+        } else {
+            animateToFront(rectangle)
+        }
+    }
+
+    private fun animateToFront(rectangle: Rectangle) {
+        when (rectangle) {
+            Rectangle.BLUE -> {
+                when (front) {
+                    Rectangle.BLUE -> {
+                    }
+                    Rectangle.YELLOW -> {
+                        red.shuffleFromBackToMiddle()
+                        blue.shuffleFromMiddleToFront()
+                        yellow.shuffleFromFrontToBack()
+                    }
+                    Rectangle.RED -> {
+                        blue.shuffleFromBackToFront()
+                        yellow.shuffleFromMiddleToBack()
+                        red.shuffleFromFrontToMiddle()
+                    }
+                }
+            }
+            Rectangle.YELLOW -> {
+                when (front) {
+                    Rectangle.BLUE -> {
+                        yellow.shuffleFromBackToFront()
+                        red.shuffleFromMiddleToBack()
+                        blue.shuffleFromFrontToMiddle()
+                    }
+                    Rectangle.YELLOW -> {
+                    }
+                    Rectangle.RED -> {
+                        blue.shuffleFromBackToMiddle()
+                        yellow.shuffleFromMiddleToFront()
+                        red.shuffleFromFrontToBack()
+                    }
+                }
+            }
+            Rectangle.RED -> {
+                when (front) {
+                    Rectangle.BLUE -> {
+                        yellow.shuffleFromBackToMiddle()
+                        red.shuffleFromMiddleToFront()
+                        blue.shuffleFromFrontToBack()
+                    }
+                    Rectangle.YELLOW -> {
+                        red.shuffleFromBackToFront()
+                        blue.shuffleFromMiddleToBack()
+                        yellow.shuffleFromFrontToMiddle()
+                    }
+                    Rectangle.RED -> {
+                    }
+                }
+
+            }
+        }
+        front = rectangle
+    }
+
+    fun spread() {
+        isSpread = true
+        blue.animate()
+                .rotation(-17f)
+                .translationXBy(-12.dp.toFloat())
+                .translationYBy(-60.dp.toFloat())
+                .startSpread()
+
+        yellow.animate()
+                .translationXBy(4.dp.toFloat())
+                .startSpread()
+
+        red.animate()
+                .rotation(17f)
+                .translationYBy(60.dp.toFloat())
+                .startSpread()
+    }
+
+    private fun unspreadAndThen(doOnEndIsh: () -> Unit) {
+        blue.animate()
+                .rotation(ROTATION_CARD_BACK)
+                .resetTranslation()
+                .withEndAction { doOnEndIsh() }
+                .startUnspread()
+
+        yellow.animate()
+                .rotation(ROTATION_CARD_MIDDLE)
+                .resetTranslation()
+                .startUnspread()
+
+        red.animate()
+                .rotation(ROTATION_CARD_FRONT)
+                .resetTranslation()
+                .startUnspread()
+    }
+
+    private fun ViewPropertyAnimator.resetTranslation() = translationX(0f).translationY(0f)
+
+    private fun ViewPropertyAnimator.startSpread() {
+        setDuration(600)
+                .setInterpolator(OvershootInterpolator(3f))
+                .setStartDelay(1000)
+                .start()
+    }
+
+    private fun ViewPropertyAnimator.startUnspread() {
+        setDuration(600)
+                .setInterpolator(FastOutSlowInInterpolator())
+                .setStartDelay(0)
+                .start()
     }
 
     private fun ColoredRectangleView.setPivotAtCenter() {
@@ -186,123 +293,6 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
                             }
                             .start()
                 }
-                .setStartDelay(0)
-                .start()
-    }
-
-    fun show(rectangle: Rectangle) {
-        if (isSpread) {
-            unspreadAndThen { animateToFront(rectangle) }
-            isSpread = false
-        } else {
-            animateToFront(rectangle)
-        }
-    }
-
-    private fun animateToFront(rectangle: Rectangle) {
-        when (rectangle) {
-            Rectangle.BLUE -> {
-                when (front) {
-                    Rectangle.BLUE -> {
-                    }
-                    Rectangle.YELLOW -> {
-                        red.shuffleFromBackToMiddle()
-                        blue.shuffleFromMiddleToFront()
-                        yellow.shuffleFromFrontToBack()
-                    }
-                    Rectangle.RED -> {
-                        blue.shuffleFromBackToFront()
-                        yellow.shuffleFromMiddleToBack()
-                        red.shuffleFromFrontToMiddle()
-                    }
-                }
-            }
-            Rectangle.YELLOW -> {
-                when (front) {
-                    Rectangle.BLUE -> {
-                        yellow.shuffleFromBackToFront()
-                        red.shuffleFromMiddleToBack()
-                        blue.shuffleFromFrontToMiddle()
-                    }
-                    Rectangle.YELLOW -> {
-                    }
-                    Rectangle.RED -> {
-                        blue.shuffleFromBackToMiddle()
-                        yellow.shuffleFromMiddleToFront()
-                        red.shuffleFromFrontToBack()
-                    }
-                }
-            }
-            Rectangle.RED -> {
-                when (front) {
-                    Rectangle.BLUE -> {
-                        yellow.shuffleFromBackToMiddle()
-                        red.shuffleFromMiddleToFront()
-                        blue.shuffleFromFrontToBack()
-                    }
-                    Rectangle.YELLOW -> {
-                        red.shuffleFromBackToFront()
-                        blue.shuffleFromMiddleToBack()
-                        yellow.shuffleFromFrontToMiddle()
-                    }
-                    Rectangle.RED -> {
-                    }
-                }
-
-            }
-        }
-        front = rectangle
-    }
-
-    fun spread() {
-        isSpread = true
-        blue.animate()
-                .rotation(-17f)
-                .translationXBy(-12.dp.toFloat())
-                .translationYBy(-60.dp.toFloat())
-                .startSpread()
-
-        yellow.animate()
-                .translationXBy(4.dp.toFloat())
-                .startSpread()
-
-        red.animate()
-                .rotation(17f)
-                .translationYBy(60.dp.toFloat())
-                .startSpread()
-    }
-
-    private fun ViewPropertyAnimator.startSpread() {
-        setDuration(600)
-                .setInterpolator(OvershootInterpolator(3f))
-                .setStartDelay(1000)
-                .start()
-    }
-
-
-    private fun unspreadAndThen(doOnEndIsh: () -> Unit) {
-        blue.animate()
-                .rotation(ROTATION_CARD_BACK)
-                .resetTranslation()
-                .withEndAction { doOnEndIsh() }
-                .startUnspread()
-
-        yellow.animate()
-                .rotation(ROTATION_CARD_MIDDLE)
-                .resetTranslation()
-                .startUnspread()
-
-        red.animate()
-                .rotation(ROTATION_CARD_FRONT)
-                .resetTranslation()
-                .startUnspread()
-    }
-
-    private fun ViewPropertyAnimator.resetTranslation() = translationX(0f).translationY(0f)
-
-    private fun ViewPropertyAnimator.startUnspread() {
-        setDuration(600)
-                .setInterpolator(FastOutSlowInInterpolator())
                 .setStartDelay(0)
                 .start()
     }
