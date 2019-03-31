@@ -25,8 +25,6 @@ class MyActivity : AppCompatActivity() {
             rectanglesView.show(ChoiceOfRectanglesView.Rectangle.BLUE)
             select(blue)
         }
-
-        rectanglesView.spread()
     }
 
     private fun select(button: Button) {

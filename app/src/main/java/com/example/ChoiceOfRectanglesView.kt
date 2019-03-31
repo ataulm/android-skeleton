@@ -1,5 +1,9 @@
 package com.example
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
@@ -40,6 +44,7 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
         blue = inflater.addColoredRectangleView(Color.parseColor("#005ab3"))
         yellow = inflater.addColoredRectangleView(Color.parseColor("#ffd500"))
         red = inflater.addColoredRectangleView(ContextCompat.getColor(inflater.context, android.R.color.holo_red_light))
+        spread()
     }
 
     private fun LayoutInflater.addColoredRectangleView(@ColorInt color: Int): ColoredRectangleView {
@@ -49,19 +54,51 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
         return view
     }
 
+    private fun spread() {
+        isSpread = true
+        AnimatorSet().apply {
+            duration = 600
+            startDelay = 1000
+            interpolator = OvershootInterpolator(3f)
+            playTogether(
+                    blue.rotateChildAnimator(-17f),
+                    blue.translationAnimator(-12.dp.toFloat(), -60.dp.toFloat()),
+                    yellow.rotateChildAnimator(0f),
+                    yellow.translationAnimator(4.dp.toFloat(), 0f),
+                    red.rotateChildAnimator(17f),
+                    red.translationAnimator(0f, 60.dp.toFloat())
+            )
+        }.start()
+    }
+
     fun show(rectangle: Rectangle) {
         if (isSpread) {
-            unspreadAndThen {
-                animateToFront(rectangle)
-            }
+            AnimatorSet().apply {
+                playSequentially(collateRectanglesAnimator(), rectangle.showAtFrontAnimator())
+                duration = 600
+                interpolator = FastOutSlowInInterpolator()
+            }.start()
             isSpread = false
         } else {
-            animateToFront(rectangle)
+            rectangle.showAtFrontAnimator().start()
         }
     }
 
-    private fun animateToFront(rectangle: Rectangle) {
-        when (rectangle) {
+    private fun collateRectanglesAnimator(): AnimatorSet {
+        return AnimatorSet().apply {
+            playTogether(
+                    blue.rotateChildAnimator(BACK_CHILD_ROTATION),
+                    blue.resetTranslationAnimator(),
+                    yellow.rotateChildAnimator(MIDDLE_CHILD_ROTATION),
+                    yellow.resetTranslationAnimator(),
+                    red.rotateChildAnimator(FRONT_CHILD_ROTATION),
+                    red.resetTranslationAnimator()
+            )
+        }
+    }
+
+    private fun Rectangle.showAtFrontAnimator(): Animator {
+        when (this) {
             Rectangle.BLUE -> {
                 when (front) {
                     Rectangle.BLUE -> {
@@ -112,63 +149,20 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
 
             }
         }
-        front = rectangle
-    }
-
-    fun spread() {
-        isSpread = true
-        blue.animate()
-                .rotation(-17f)
-                .translationXBy(-12.dp.toFloat())
-                .translationYBy(-60.dp.toFloat())
-                .startSpread()
-
-        yellow.animate()
-                .translationXBy(4.dp.toFloat())
-                .startSpread()
-
-        red.animate()
-                .rotation(17f)
-                .translationYBy(60.dp.toFloat())
-                .startSpread()
-    }
-
-    private fun unspreadAndThen(doOnEndIsh: () -> Unit) {
-        blue.animateRotationToBack { z = Z_BACK }
-        yellow.animateRotationToMiddle { z = Z_MIDDLE }
-        red.animateRotationToFront { z = Z_FRONT }
-
-        blue.animate()
-                .rotation(0f)
-                .resetTranslation()
-                .withEndAction { doOnEndIsh() }
-                .startUnspread()
-
-        yellow.animate()
-                .rotation(0f)
-                .resetTranslation()
-                .startUnspread()
-
-        red.animate()
-                .rotation(0f)
-                .resetTranslation()
-                .startUnspread()
+        front = this
+        return AnimatorSet() // TODO: fill it
     }
 
     private fun ViewPropertyAnimator.resetTranslation() = translationX(0f).translationY(0f)
 
-    private fun ViewPropertyAnimator.startSpread() {
-        setDuration(600)
-                .setInterpolator(OvershootInterpolator(3f))
-                .setStartDelay(1000)
-                .start()
-    }
+    private fun View.resetTranslationAnimator(): ObjectAnimator = translationAnimator(0f, 0f)
 
-    private fun ViewPropertyAnimator.startUnspread() {
-        setDuration(600)
-                .setInterpolator(FastOutSlowInInterpolator())
-                .setStartDelay(0)
-                .start()
+    private fun View.translationAnimator(x: Float, y: Float): ObjectAnimator {
+        return ObjectAnimator.ofPropertyValuesHolder(
+                this,
+                PropertyValuesHolder.ofFloat(View.TRANSLATION_X, x),
+                PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, y)
+        )
     }
 
     private fun ColoredRectangleView.setPivotAtBottomRight() {
@@ -177,23 +171,58 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     }
 
     private fun ColoredRectangleView.shuffleFromBackToMiddle() {
-        animateRotationToMiddle { z = Z_MIDDLE }
+        rotateChildAnimator(MIDDLE_CHILD_ROTATION).apply {
+            addListener(object : SimpleAnimationListener() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    z = Z_MIDDLE
+                }
+            })
+            start()
+        }
     }
 
     private fun ColoredRectangleView.shuffleFromMiddleToBack() {
-        animateRotationToBack { z = Z_BACK }
+        rotateChildAnimator(BACK_CHILD_ROTATION).apply {
+            addListener(object : SimpleAnimationListener() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    z = Z_BACK
+                }
+            })
+            start()
+        }
     }
 
     private fun ColoredRectangleView.shuffleFromMiddleToFront() {
-        animateRotationToFront { z = Z_FRONT }
+        rotateChildAnimator(FRONT_CHILD_ROTATION).apply {
+            addListener(object : SimpleAnimationListener() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    z = Z_FRONT
+                }
+            })
+            start()
+        }
     }
 
     private fun ColoredRectangleView.shuffleFromFrontToMiddle() {
-        animateRotationToMiddle { z = Z_MIDDLE }
+        rotateChildAnimator(MIDDLE_CHILD_ROTATION).apply {
+            addListener(object : SimpleAnimationListener() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    z = Z_MIDDLE
+                }
+            })
+            start()
+        }
     }
 
     private fun ColoredRectangleView.shuffleFromFrontToBack() {
-        animateRotationToBack {}
+        rotateChildAnimator(BACK_CHILD_ROTATION).apply {
+            addListener(object : SimpleAnimationListener() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    z = Z_BACK
+                }
+            })
+            start()
+        }
         setPivotAtBottomRight()
         animate()
                 .rotation(ROTATION_RECT_SHUFFLE_PEAK)
@@ -217,7 +246,14 @@ internal class ChoiceOfRectanglesView(context: Context, attrs: AttributeSet?) : 
     }
 
     private fun ColoredRectangleView.shuffleFromBackToFront() {
-        animateRotationToFront {}
+        rotateChildAnimator(FRONT_CHILD_ROTATION).apply {
+            addListener(object : SimpleAnimationListener() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    z = Z_FRONT
+                }
+            })
+            start()
+        }
         setPivotAtBottomRight()
         animate()
                 .rotation(ROTATION_RECT_SHUFFLE_PEAK)
@@ -253,9 +289,13 @@ val Int.dp: Int
         return Math.round(this * density)
     }
 
+private const val BACK_CHILD_ROTATION = 7f
+private const val MIDDLE_CHILD_ROTATION = -7f
+private const val FRONT_CHILD_ROTATION = 0f
+
 internal class ColoredRectangleView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
-    internal val coloredView: View = View(context).apply {
+    private val coloredView: View = View(context).apply {
         layoutParams = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT
@@ -265,20 +305,14 @@ internal class ColoredRectangleView(context: Context, attrs: AttributeSet) : Fra
 
     fun setColor(@ColorInt color: Int) = coloredView.setBackgroundColor(color)
 
-    fun animateRotationToBack(doOnEndIsh: () -> Unit) = animateChildRotation(7f, doOnEndIsh)
-
-    fun animateRotationToMiddle(doOnEndIsh: () -> Unit) = animateChildRotation(-7f, doOnEndIsh)
-
-    fun animateRotationToFront(doOnEndIsh: () -> Unit) = animateChildRotation(0f, doOnEndIsh)
-
-    private fun animateChildRotation(rotation: Float, doOnEndIsh: () -> Unit) {
-        coloredView.animate()
-                .rotation(rotation)
-                .setDuration(300)
-                .setInterpolator(FastOutSlowInInterpolator())
-                .setStartDelay(0)
-                .withEndAction { doOnEndIsh() }
-                .start()
+    fun rotateChildAnimator(rotation: Float): ObjectAnimator {
+        return ObjectAnimator.ofFloat(coloredView, View.ROTATION, rotation)
     }
 }
-        
+
+private abstract class SimpleAnimationListener : Animator.AnimatorListener {
+    override fun onAnimationRepeat(animation: Animator?) {}
+    override fun onAnimationEnd(animation: Animator?) {}
+    override fun onAnimationCancel(animation: Animator?) {}
+    override fun onAnimationStart(animation: Animator?) {}
+}
