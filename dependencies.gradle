@@ -19,6 +19,7 @@ ext {
             androidxRecyclerView    : 'androidx.recyclerview:recyclerview:1.0.0',
             androidxTestRules       : 'androidx.test:rules:1.1.0',
             androidxTestRunner      : 'androidx.test:runner:1.1.0',
+            picasso      : 'com.squareup.picasso:picasso:2.71828',
             googleTruth             : 'com.google.truth:truth:0.42',
             jUnit                   : 'junit:junit:4.12',
             kotlinStdLib            : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
