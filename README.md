@@ -1,11 +1,10 @@
-android-example
-===============
-Can be used as a skeleton for new spikes. Don't modify this project except to update dependencies; checkout from the latest master.
+remove custom accessibility action
+==================================
 
-It would be good to fill this out before starting the spike and with updates before each push if necessary:
+in app-compat-1.1.0, ViewCompat has new accessibility action APIs.
 
-#### Aim
-_e.g. wanted to try to create a completely virtual view hierarchy, so there's nothing really there on screen but an accessibility service like TalkBack could navigate it and a user proficient with TalkBack could use the app_
+While it's easy to add accessibility actions, it's less straight-forward to remove them.
 
-#### Current state (inc. next steps if applicable)
-_e.g. completed - see blahblah.kt for main bits._
+This is especially important in a recycler view where you want to reset a recycled view.
+
+This demo shows how you can remove accessibility actions from a view.
