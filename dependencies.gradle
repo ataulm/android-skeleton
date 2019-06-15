@@ -13,7 +13,7 @@ ext {
                     androidGradle: 'com.android.tools.build:gradle:3.4.1',
                     kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
             ],
-            androidxAppCompat       : 'androidx.appcompat:appcompat:1.0.2',
+            androidxAppCompat       : 'androidx.appcompat:appcompat:1.1.0-beta01',
             androidxEspressoCore    : 'androidx.test.espresso:espresso-core:3.1.0',
             androidxLegacySupportV13: 'androidx.legacy:legacy-support-v13:1.0.0',
             androidxRecyclerView    : 'androidx.recyclerview:recyclerview:1.0.0',

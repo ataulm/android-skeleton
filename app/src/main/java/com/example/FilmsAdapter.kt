@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ext.removeAccessibilityActions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_film.view.*
 
@@ -32,17 +34,29 @@ class FilmsAdapter : ListAdapter<FilmUiModel, FilmViewHolder>(Differ) {
 
 class FilmViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(filmUiModel: FilmUiModel) {
-        Picasso.get().load(filmUiModel.posterUrl).into(itemView.posterImageView)
-        itemView.titleTextView.text = filmUiModel.title
-        itemView.watchedIconView.setImageResource(filmUiModel.watchedDrawable())
-        itemView.setOnClickListener { filmUiModel.onClickWatch() }
+fun bind(filmUiModel: FilmUiModel) {
+    Picasso.get().load(filmUiModel.posterUrl).into(itemView.posterImageView)
+    itemView.titleTextView.text = filmUiModel.title
+    itemView.watchedIconView.setImageResource(filmUiModel.watchedDrawable())
+    itemView.setOnClickListener { filmUiModel.onClickWatch() }
+
+    itemView.removeAccessibilityActions()
+    ViewCompat.addAccessibilityAction(itemView, filmUiModel.actionLabel()) { _, _ ->
+        filmUiModel.onClickWatch()
+        true
     }
+}
 
     @DrawableRes
     private fun FilmUiModel.watchedDrawable() = if (watched) {
         R.drawable.ic_watched
     } else {
         R.drawable.ic_not_watched
+    }
+
+    private fun FilmUiModel.actionLabel() = if (watched) {
+        "Mark not watched"
+    } else {
+        "Mark watched"
     }
 }
