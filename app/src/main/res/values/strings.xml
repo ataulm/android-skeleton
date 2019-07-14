@@ -1,3 +1,8 @@
 <resources>
   <string name="app_name">example</string>
+    <string name="show_playlist">Show playlist</string>
+  <string name="skip_previous">Skip previous</string>
+  <string name="play">Play</string>
+  <string name="skip_next">Skip next</string>
+  <string name="more">More</string>
 </resources>
