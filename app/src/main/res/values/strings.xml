@@ -5,4 +5,6 @@
   <string name="play">Play</string>
   <string name="skip_next">Skip next</string>
   <string name="more">More</string>
+  <string name="demoSongTitle">Wake Me When It’s Over</string>
+  <string name="demoSongArtist">The Cranberries</string>
 </resources>
