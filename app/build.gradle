@@ -24,11 +24,12 @@ android {
 }
 
 dependencies {
-    implementation libraries.kotlinStdLib
     implementation libraries.androidxAppCompat
+    implementation libraries.androidxConstraintLayout
     implementation libraries.materialDesignComponents
     implementation libraries.androidxRecyclerView
     implementation libraries.androidxLegacySupportV13
+    implementation libraries.kotlinStdLib
 
     androidTestImplementation libraries.androidxTestRules
     androidTestImplementation libraries.androidxTestRunner
