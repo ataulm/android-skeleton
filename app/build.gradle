@@ -32,18 +32,18 @@ android {
 dependencies {
     implementation libraries.androidxAppCompat
     implementation libraries.androidxConstraintLayout
-    implementation libraries.materialDesignComponents
-    implementation libraries.androidxRecyclerView
     implementation libraries.androidxLegacySupportV13
+    implementation libraries.androidxRecyclerView
     implementation libraries.kotlinStdLib
+    implementation libraries.materialDesignComponents
     implementation libraries.moshi
     implementation libraries.roomRuntime
 
     kapt libraries.roomCompiler
 
+    androidTestImplementation libraries.androidxEspressoCore
     androidTestImplementation libraries.androidxTestRules
     androidTestImplementation libraries.androidxTestRunner
-    androidTestImplementation libraries.androidxEspressoCore
 
     testImplementation libraries.googleTruth
     testImplementation libraries.jUnit
