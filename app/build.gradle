@@ -34,6 +34,7 @@ dependencies {
     implementation libraries.androidxConstraintLayout
     implementation libraries.androidxLegacySupportV13
     implementation libraries.androidxRecyclerView
+    implementation libraries.glide
     implementation libraries.kotlinStdLib
     implementation libraries.materialDesignComponents
     implementation libraries.moshi
