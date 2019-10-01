@@ -30,6 +30,8 @@ android {
 }
 
 dependencies {
+    implementation project(':library')
+
     implementation libraries.androidxAppCompat
     implementation libraries.androidxConstraintLayout
     implementation libraries.androidxLegacySupportV13

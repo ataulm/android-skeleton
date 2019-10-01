@@ -1,0 +1,13 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion versions.androidSdk.compile
+
+    defaultConfig {
+        minSdkVersion versions.androidSdk.min
+    }
+}
+
+dependencies {
+    implementation libraries.materialDesignComponents
+}
