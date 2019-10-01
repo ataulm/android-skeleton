@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion versions.androidSdk.compile
@@ -9,5 +10,6 @@ android {
 }
 
 dependencies {
+    implementation libraries.kotlinStdLib
     implementation libraries.materialDesignComponents
 }

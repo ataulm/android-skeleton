@@ -1,8 +1,8 @@
 package com.example
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ataulm.materialdesignshowcase.MaterialDesignShowcaseActivity
 import kotlinx.android.synthetic.main.activity_my.*
 
 class MyActivity : AppCompatActivity() {
@@ -12,13 +12,10 @@ class MyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my)
 
         darkButton.setOnClickListener {
-           startActivity(Intent(this, DarkThemeActivity::class.java))
+            MaterialDesignShowcaseActivity.startActivity(this, R.style.Theme_Demo_Red)
         }
         lightButton.setOnClickListener {
-           startActivity(Intent(this, LightThemeActivity::class.java))
+            MaterialDesignShowcaseActivity.startActivity(this, R.style.Theme_Demo_Light)
         }
     }
 }
-
-class DarkThemeActivity : AppCompatActivity(R.layout.activity_material_design_showcase)
-class LightThemeActivity : AppCompatActivity(R.layout.activity_material_design_showcase)
