@@ -25,7 +25,7 @@ ext {
             googleTruth             : 'com.google.truth:truth:1.0',
             jUnit                   : 'junit:junit:4.12',
             kotlinStdLib            : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
-            materialDesignComponents: 'com.google.android.material:material:1.1.0-alpha10',
+            materialDesignComponents: 'com.google.android.material:material:1.1.0-beta01',
             mockitoCore             : 'org.mockito:mockito-core:2.19.1',
             moshi                   : 'com.squareup.moshi:moshi:1.8.0',
             roomCompiler            : "androidx.room:room-compiler:${versions.room}",
