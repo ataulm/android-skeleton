@@ -4,12 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
+        android:id="@+id/seekbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="#F0F0F0"
         app:extraThemeOverlay="@style/ThemeOverlay.Demo.RedText"
-        app:extraThemeOverlay2="@style/ThemeOverlay.Demo.Text"/>
+        app:extraThemeOverlay2="@style/ThemeOverlay.Demo.Text" />
 
 </FrameLayout>
