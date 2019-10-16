@@ -16,6 +16,15 @@
         <item name="android:textColor">@color/material_blue_500</item>
     </style>
 
+    <style name="ThemeOverlay.Demo.RedText" parent="">
+        <item name="android:textColor">@color/material_red_900</item>
+    </style>
+
+    <style name="ThemeOverlay.Demo.MinTouchTarget" parent="">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:minWidth">48dp</item>
+    </style>
+
     <style name="Base.Theme.Demo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">?isLightTheme</item>
