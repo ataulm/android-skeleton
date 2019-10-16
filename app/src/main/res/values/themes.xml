@@ -1,16 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-  <style name="Theme.Demo" parent="Base.Theme.Demo">
-    <item name="isLightTheme">true</item>
-    <item name="colorPrimary">@color/material_red_500</item>
-    <item name="colorPrimaryVariant">@color/material_red_900</item>
-    <item name="android:colorBackground">@android:color/white</item>
-    <item name="colorOnBackground">?colorPrimaryVariant</item>
-  </style>
+    <style name="Theme.Demo" parent="Base.Theme.Demo">
+        <item name="isLightTheme">true</item>
+        <item name="colorPrimary">@color/material_red_500</item>
+        <item name="colorPrimaryVariant">@color/material_red_900</item>
+        <item name="android:colorBackground">@android:color/white</item>
+        <item name="colorOnBackground">?colorPrimaryVariant</item>
+    </style>
 
-  <style name="Base.Theme.Demo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-    <item name="android:statusBarColor">?android:colorBackground</item>
-    <item name="android:windowLightStatusBar" tools:targetApi="m">?isLightTheme</item>
-  </style>
+    <style name="ThemeOverlay.Demo.Text" parent="">
+        <item name="android:text">"Here’s some theme overlay text"</item>
+    </style>
+
+    <style name="ThemeOverlay.Demo.TextColor" parent="">
+        <item name="android:textColor">@color/material_blue_500</item>
+    </style>
+
+    <style name="Base.Theme.Demo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">?isLightTheme</item>
+        <item name="viewInflaterClass">com.example.LayeredThemeOverlaysViewInflater</item>
+    </style>
 
 </resources>
