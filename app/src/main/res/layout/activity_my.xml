@@ -4,11 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <TextView
+        random="hello"
+        style="@style/Theme.Demo"
         android:id="@+id/seekbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

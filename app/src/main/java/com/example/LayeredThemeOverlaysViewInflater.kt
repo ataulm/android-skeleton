@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.InflateException
 import android.view.View
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
@@ -72,12 +73,12 @@ class LayeredThemeOverlaysViewInflater : MaterialComponentsViewInflater() {
     }
 
     override fun createAutoCompleteTextView(context: Context,
-                                             attrs: AttributeSet): AppCompatAutoCompleteTextView {
+                                            attrs: AttributeSet): AppCompatAutoCompleteTextView {
         return super.createAutoCompleteTextView(moreThemifyContext(context, attrs), attrs)
     }
 
     override fun createMultiAutoCompleteTextView(context: Context,
-                                                  attrs: AttributeSet): AppCompatMultiAutoCompleteTextView {
+                                                 attrs: AttributeSet): AppCompatMultiAutoCompleteTextView {
         return super.createMultiAutoCompleteTextView(moreThemifyContext(context, attrs), attrs)
     }
 
@@ -132,17 +133,19 @@ class LayeredThemeOverlaysViewInflater : MaterialComponentsViewInflater() {
         val extraThemeOverlayId2 = a.getResourceId(R.styleable.View_extraThemeOverlay2, 0)
         a.recycle()
 
+        val styleResId = attrs.styleAttribute
+
         var moreThemedContext = context
         moreThemedContext = if (extraThemeOverlayId != 0 && (moreThemedContext !is androidx.appcompat.view.ContextThemeWrapper || moreThemedContext.themeResId != extraThemeOverlayId)) {
             // If the context isn't a ContextThemeWrapper, or it is but does not have
             // the same theme as we need, wrap it in a new wrapper
-            androidx.appcompat.view.ContextThemeWrapper(moreThemedContext, extraThemeOverlayId)
+            ContextThemeWrapper(moreThemedContext, extraThemeOverlayId)
         } else moreThemedContext
 
-        moreThemedContext = if (extraThemeOverlayId2 != 0 && (moreThemedContext !is androidx.appcompat.view.ContextThemeWrapper || moreThemedContext.themeResId != extraThemeOverlayId2)) {
+        moreThemedContext = if (extraThemeOverlayId2 != 0 && (moreThemedContext !is ContextThemeWrapper || moreThemedContext.themeResId != extraThemeOverlayId2)) {
             // If the context isn't a ContextThemeWrapper, or it is but does not have
             // the same theme as we need, wrap it in a new wrapper
-            androidx.appcompat.view.ContextThemeWrapper(moreThemedContext, extraThemeOverlayId2)
+            ContextThemeWrapper(moreThemedContext, extraThemeOverlayId2)
         } else moreThemedContext
 
         return moreThemedContext
