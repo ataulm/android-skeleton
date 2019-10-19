@@ -20,12 +20,107 @@ TODO:
 
 
 
+---
 
 `Resources.obtainStyledAttributes`
 
-When we write a custom View, it’s not uncommon for us to define some custom attributes. For example, let’s make a `SpottyFrameLayout` which draws spots on top of its children, and let’s define a couple of custom attributes to allow configuration of these spots.
+When we write a custom View, it’s not uncommon for us to define some custom attributes. Let’s make a `SpottyFrameLayout` which draws spots on top of its children. We’ll define a couple of custom attributes so we can customise the spots too.
 
+So here's our `SpottyFrameLayout`:
 
+```kotlin
+class SpottyFrameLayout(context: Context, attrs: AttributeSet)
+    : FrameLayout(context, attrs)
+```
+
+and here's our custom attributes, defined in `res/values/attrs.xml`:
+
+```xml
+<resources>
+
+    <declare-styleable name="SpottyFrameLayout">
+        <attr name="spotColor" format="color" />
+        <attr name="spotSize" format="dimension" />
+    </declare-styleable>
+
+</resources>
+```
+
+There's two reasons we define these attributes. The first reason is so that we can get contextual autocomplete in the IDE.
+
+TK attr_autocomplete.png
+
+Android Studio knows (from the styleable's name) that `SpottyFrameLayout` has two custom attributes so it can suggest them to us for autocomplete. Since we've also specified the _format_ for the attributes (color and dimension, respectively), it'll know to restrict the allowed values to that particular type.
+
+The second reason is that a styleable definition is required to get a `TypedArray`, which is a handy way of reading values from an `AttributeSet` that are typed correctly. Let's try to read the values in our custom View:
+
+```kotlin
+init {
+    val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SpottyFrameLayout)
+    // TODO: read values from typedArray
+}
+```
+
+We get an instance of a `TypedArray` back which should have two elements, one for each of the attributes that are in the `SpottyFrameLayout` styleable.
+
+We could have read the attributes without a `TypedArray`, using functions directly on `AttributeSet` instead, but using `obtainStyledAttributes(...)` gives us:
+
+- resolution of resource references e.g. resolving `@string/app_name` to "My app name"
+- application of themes and styles when retrieving attribute values (hence the name, "obtain _styled_ attributes")
+
+`TypedArray` is wrapper around an array, so we can access values with integer indices. In our case, we can use `0` or `1`  because we've only got two attributes. It would be horrible to use indices directly though—they correspond to the _alphabetized_ position of our custom attributes.
+
+Instead, we use the styleables that are generated with the underscore convention and descriptive names:
+
+```kotlin
+init {
+    val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SpottyFrameLayout)
+    val spotColor = typedArray.getColor(R.styleable.SpottyFrameLayout_spotColor, 0)
+    val spotSize = typedArray.getDimensionPixelSize(R.styleable.SpottyFrameLayout_spotSize, 0)
+    typedArray.recycle()
+}
+```
+
+It's important to remember to recycle the `TypedArray` because this is obtained from a pool of objects and when we're done with it, we should mark it as such.
+
+When we have our attributes, we can use them to customise our View:
+
+```kotlin
+class SpottyFrameLayout(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
+
+    @Px
+    private val spotSize: Float
+    private val spotPaint = Paint().apply { isAntiAlias = true }
+
+    init {
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SpottyFrameLayout)
+        spotSize = typedArray.getDimension(R.styleable.SpottyFrameLayout_spotSize, 0f)
+        spotPaint.color = typedArray.getColor(R.styleable.SpottyFrameLayout_spotColor, 0)
+        typedArray.recycle()
+
+        setWillNotDraw(false)
+    }
+
+    override fun draw(canvas: Canvas) {
+        super.draw(canvas)
+        val spotRadius = (spotSize / 2)
+        val maxSpotsHorizontal = (width / spotSize).toInt()
+        val maxSpotsVertical = (height / spotSize).toInt()
+        for (i in 0 until maxSpotsHorizontal) {
+            for (j in 0 until maxSpotsVertical) {
+                if (Math.random() > 0.95) {
+                    val adjustedRadiusElseItIsBoring = spotRadius - (Math.random() * spotRadius).toFloat()
+                    canvas.drawCircle(spotRadius + i * spotSize, spotRadius + j * spotSize, adjustedRadiusElseItIsBoring, spotPaint)
+                }
+            }
+        }
+    }
+}
+```
+
+TK spotty_framelayout.png
+
+---
 
 When we're reading attributes in custom Views, we use a function to obtain a `TypedArray` containing the specific attributes were after.
 

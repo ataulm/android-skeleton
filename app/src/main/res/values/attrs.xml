@@ -6,4 +6,9 @@
         <attr name="extraThemeOverlay2" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="SpottyFrameLayout">
+        <attr name="spotColor" format="color" />
+        <attr name="spotSize" format="dimension" />
+    </declare-styleable>
+
 </resources>

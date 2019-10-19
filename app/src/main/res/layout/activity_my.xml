@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.SpottyFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:spotColor="@color/material_red_900"
+    app:spotSize="16dp"
+    undefinedAttribute="value doesn't matter because no one will read it">
 
     <TextView
-        random="hello"
         style="@style/Theme.Demo"
         android:id="@+id/seekbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:text="Hello world"
         android:background="#F0F0F0"
         app:extraThemeOverlay="@style/ThemeOverlay.Demo.RedText"
         app:extraThemeOverlay2="@style/ThemeOverlay.Demo.Text" />
 
-</FrameLayout>
+</com.example.SpottyFrameLayout>
