@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.InflateException
 import android.view.View
+import androidx.annotation.StyleRes
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.appcompat.widget.AppCompatButton
@@ -128,28 +129,25 @@ class LayeredThemeOverlaysViewInflater : MaterialComponentsViewInflater() {
     }
 
     private fun moreThemifyContext(context: Context, attrs: AttributeSet): Context {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.View, 0, 0)
-        val extraThemeOverlayId = a.getResourceId(R.styleable.View_extraThemeOverlay, 0)
-        val extraThemeOverlayId2 = a.getResourceId(R.styleable.View_extraThemeOverlay2, 0)
-        a.recycle()
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.View, 0, 0)
+        val extraThemeOverlayId = typedArray.getResourceId(R.styleable.View_extraThemeOverlay, 0)
+        val extraThemeOverlayId2 = typedArray.getResourceId(R.styleable.View_extraThemeOverlay2, 0)
+        typedArray.recycle()
 
         val styleResId = attrs.styleAttribute
 
         var moreThemedContext = context
-        moreThemedContext = if (extraThemeOverlayId != 0 && (moreThemedContext !is androidx.appcompat.view.ContextThemeWrapper || moreThemedContext.themeResId != extraThemeOverlayId)) {
-            // If the context isn't a ContextThemeWrapper, or it is but does not have
-            // the same theme as we need, wrap it in a new wrapper
-            ContextThemeWrapper(moreThemedContext, extraThemeOverlayId)
-        } else moreThemedContext
-
-        moreThemedContext = if (extraThemeOverlayId2 != 0 && (moreThemedContext !is ContextThemeWrapper || moreThemedContext.themeResId != extraThemeOverlayId2)) {
-            // If the context isn't a ContextThemeWrapper, or it is but does not have
-            // the same theme as we need, wrap it in a new wrapper
-            ContextThemeWrapper(moreThemedContext, extraThemeOverlayId2)
-        } else moreThemedContext
-
+        moreThemedContext = moreThemedContext.wrapThemeIfNecessary(extraThemeOverlayId)
+        moreThemedContext = moreThemedContext.wrapThemeIfNecessary(extraThemeOverlayId2)
         return moreThemedContext
     }
+
+    private fun Context.wrapThemeIfNecessary(@StyleRes themeRes: Int) =
+            if (themeRes != 0 && (this !is ContextThemeWrapper || this.themeResId != themeRes)) {
+                // If the context isn't a ContextThemeWrapper, or it is but does not have
+                // the same theme as we need, wrap it in a new wrapper
+                ContextThemeWrapper(this, themeRes)
+            } else this
 
     @Throws(ClassNotFoundException::class, InflateException::class)
     private fun createViewByPrefix(context: Context, name: String, prefix: String?): View? {
