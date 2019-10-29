@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="View">
-        <attr name="extraThemeOverlay" format="reference" />
-        <attr name="extraThemeOverlay2" format="reference" />
-    </declare-styleable>
-
-    <declare-styleable name="SpottyFrameLayout">
-        <attr name="spotColor" format="color" />
-        <attr name="spotSize" format="dimension" />
-    </declare-styleable>
+<declare-styleable name="View">
+    <attr name="include" format="reference" />
+    <attr name="include2" format="reference" />
+    <attr name="include3" format="reference" />
+    <attr name="include4" format="reference" />
+</declare-styleable>
 
 </resources>

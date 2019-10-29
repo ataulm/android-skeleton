@@ -30,7 +30,7 @@ import java.lang.reflect.Constructor
  *
  * This will let us read our custom theme overlay attr(s) and add as many ContextThemeWrappers as there are theme overlays.
  */
-class LayeredThemeOverlaysViewInflater : MaterialComponentsViewInflater() {
+class MixinsViewInflater : MaterialComponentsViewInflater() {
 
     private val sConstructorSignature = arrayOf(Context::class.java, AttributeSet::class.java)
     private val sClassPrefixList = arrayOf("android.widget.", "android.view.", "android.webkit.")
@@ -38,65 +38,65 @@ class LayeredThemeOverlaysViewInflater : MaterialComponentsViewInflater() {
     private val mConstructorArgs = arrayOfNulls<Any>(2)
 
     override fun createTextView(context: Context, attrs: AttributeSet): AppCompatTextView {
-        return super.createTextView(moreThemifyContext(context, attrs), attrs)
+        return super.createTextView(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createImageView(context: Context, attrs: AttributeSet): AppCompatImageView {
-        return super.createImageView(moreThemifyContext(context, attrs), attrs)
+        return super.createImageView(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createButton(context: Context, attrs: AttributeSet): AppCompatButton {
-        return super.createButton(moreThemifyContext(context, attrs), attrs)
+        return super.createButton(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createEditText(context: Context, attrs: AttributeSet): AppCompatEditText {
-        return super.createEditText(moreThemifyContext(context, attrs), attrs)
+        return super.createEditText(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createSpinner(context: Context, attrs: AttributeSet): AppCompatSpinner {
-        return super.createSpinner(moreThemifyContext(context, attrs), attrs)
+        return super.createSpinner(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createImageButton(context: Context, attrs: AttributeSet): AppCompatImageButton {
-        return super.createImageButton(moreThemifyContext(context, attrs), attrs)
+        return super.createImageButton(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createCheckBox(context: Context, attrs: AttributeSet): AppCompatCheckBox {
-        return super.createCheckBox(moreThemifyContext(context, attrs), attrs)
+        return super.createCheckBox(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createRadioButton(context: Context, attrs: AttributeSet): AppCompatRadioButton {
-        return super.createRadioButton(moreThemifyContext(context, attrs), attrs)
+        return super.createRadioButton(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createCheckedTextView(context: Context, attrs: AttributeSet): AppCompatCheckedTextView {
-        return super.createCheckedTextView(moreThemifyContext(context, attrs), attrs)
+        return super.createCheckedTextView(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createAutoCompleteTextView(context: Context,
                                             attrs: AttributeSet): AppCompatAutoCompleteTextView {
-        return super.createAutoCompleteTextView(moreThemifyContext(context, attrs), attrs)
+        return super.createAutoCompleteTextView(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createMultiAutoCompleteTextView(context: Context,
                                                  attrs: AttributeSet): AppCompatMultiAutoCompleteTextView {
-        return super.createMultiAutoCompleteTextView(moreThemifyContext(context, attrs), attrs)
+        return super.createMultiAutoCompleteTextView(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createRatingBar(context: Context, attrs: AttributeSet): AppCompatRatingBar {
-        return super.createRatingBar(moreThemifyContext(context, attrs), attrs)
+        return super.createRatingBar(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createSeekBar(context: Context, attrs: AttributeSet): AppCompatSeekBar {
-        return super.createSeekBar(moreThemifyContext(context, attrs), attrs)
+        return super.createSeekBar(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createToggleButton(context: Context, attrs: AttributeSet): AppCompatToggleButton {
-        return super.createToggleButton(moreThemifyContext(context, attrs), attrs)
+        return super.createToggleButton(wrapIncludes(context, attrs), attrs)
     }
 
     override fun createView(passedContext: Context, passedName: String, attrs: AttributeSet): View? {
-        val context = moreThemifyContext(passedContext, attrs)
+        val context = wrapIncludes(passedContext, attrs)
         var name = passedName
         if (name == "view") {
             name = attrs.getAttributeValue(null, "class")
@@ -128,18 +128,33 @@ class LayeredThemeOverlaysViewInflater : MaterialComponentsViewInflater() {
         }
     }
 
-    private fun moreThemifyContext(context: Context, attrs: AttributeSet): Context {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.View, 0, 0)
-        val extraThemeOverlayId = typedArray.getResourceId(R.styleable.View_extraThemeOverlay, 0)
-        val extraThemeOverlayId2 = typedArray.getResourceId(R.styleable.View_extraThemeOverlay2, 0)
+    fun Context.wrapWithIncludes(attrs: AttributeSet): Context {
+        val typedArray = obtainStyledAttributes(attrs, R.styleable.View, 0, 0)
+        val include = typedArray.getResourceId(R.styleable.View_include, 0)
+        val include2 = typedArray.getResourceId(R.styleable.View_include2, 0)
+        val include3 = typedArray.getResourceId(R.styleable.View_include3, 0)
+        val include4 = typedArray.getResourceId(R.styleable.View_include4, 0)
         typedArray.recycle()
 
-        val styleResId = attrs.styleAttribute
+        return wrapThemeIfNecessary(include)
+                .wrapThemeIfNecessary(include2)
+                .wrapThemeIfNecessary(include3)
+                .wrapThemeIfNecessary(include4)
+    }
 
-        var moreThemedContext = context
-        moreThemedContext = moreThemedContext.wrapThemeIfNecessary(extraThemeOverlayId)
-        moreThemedContext = moreThemedContext.wrapThemeIfNecessary(extraThemeOverlayId2)
-        return moreThemedContext
+    private fun wrapIncludes(context: Context, attrs: AttributeSet): Context {
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.View, 0, 0)
+        val include = typedArray.getResourceId(R.styleable.View_include, 0)
+        val include2 = typedArray.getResourceId(R.styleable.View_include2, 0)
+        val include3 = typedArray.getResourceId(R.styleable.View_include3, 0)
+        val include4 = typedArray.getResourceId(R.styleable.View_include4, 0)
+        typedArray.recycle()
+
+        return context
+                .wrapThemeIfNecessary(include)
+                .wrapThemeIfNecessary(include2)
+                .wrapThemeIfNecessary(include3)
+                .wrapThemeIfNecessary(include4)
     }
 
     private fun Context.wrapThemeIfNecessary(@StyleRes themeRes: Int) =
