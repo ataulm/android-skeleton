@@ -1,5 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+  <style name="NoParentTheme" parent="" />
+
   <style name="Theme.Demo" parent="Base.Theme.Demo">
     <item name="isLightTheme">true</item>
     <item name="colorPrimary">@color/material_red_500</item>
