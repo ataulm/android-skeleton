@@ -28,10 +28,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion versions.compose
-    }
 }
 
 dependencies {
@@ -39,10 +35,6 @@ dependencies {
     implementation libraries.androidxConstraintLayout
     implementation libraries.androidxLegacySupportV13
     implementation libraries.androidxRecyclerView
-    implementation libraries.androidxUiFramework
-    implementation libraries.androidxUiLayout
-    implementation libraries.androidxUiMaterial
-    implementation libraries.androidxUiTooling
     implementation libraries.glide
     implementation libraries.kotlinStdLib
     implementation libraries.materialDesignComponents

@@ -22,15 +22,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Add a new run configuration that points directly to this (or open from the launcher) -->
-        <activity android:name="com.example.MyComposeActivity"
-            android:label="AS Compose">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
     </application>
 
 </manifest>
