@@ -12,13 +12,14 @@ ext {
 
     libraries = [
             build                   : [
-                    androidGradle: 'com.android.tools.build:gradle:4.0.0-alpha09',
+                    androidGradle: 'com.android.tools.build:gradle:4.1.0-alpha01',
                     kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
             ],
             androidxAppCompat       : 'androidx.appcompat:appcompat:1.2.0-alpha02',
             androidxConstraintLayout: 'androidx.constraintlayout:constraintlayout:2.0.0-beta4',
             androidxEspressoCore    : 'androidx.test.espresso:espresso-core:3.1.0',
             androidxLegacySupportV13: 'androidx.legacy:legacy-support-v13:1.0.0',
+            androidxPreference      : 'androidx.preference:preference:1.1.0',
             androidxRecyclerView    : 'androidx.recyclerview:recyclerview:1.2.0-alpha01',
             androidxTestRules       : 'androidx.test:rules:1.1.0',
             androidxTestRunner      : 'androidx.test:runner:1.1.0',

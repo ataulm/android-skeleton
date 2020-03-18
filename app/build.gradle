@@ -38,6 +38,7 @@ dependencies {
     implementation libraries.androidxAppCompat
     implementation libraries.androidxConstraintLayout
     implementation libraries.androidxLegacySupportV13
+    implementation libraries.androidxPreference
     implementation libraries.androidxRecyclerView
     implementation libraries.androidxUiFramework
     implementation libraries.androidxUiLayout

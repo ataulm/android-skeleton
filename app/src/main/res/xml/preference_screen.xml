@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ListPreference
+        android:defaultValue="#00FFFF"
+        android:entries="@array/foreground_color_names_array"
+        android:entryValues="@array/foreground_color_values_array"
+        android:key="@string/sp_key_foreground_color"
+        android:summary="Select a foreground color"
+        android:title="Foreground Color" />
+</androidx.preference.PreferenceScreen>

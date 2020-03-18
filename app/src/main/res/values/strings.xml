@@ -1,3 +1,37 @@
 <resources>
   <string name="app_name">Android Skeleton</string>
+
+  <string name="sp_key_foreground_color">foregroundColor</string>
+
+  <string-array name="foreground_color_names_array">
+    <item>Aqua</item>
+    <!--item>#00FFFF</item-->
+    <item>Azure</item>
+    <!--item>#F0FFFF</item-->
+    <item>Beige</item>
+    <!--item>#F5F5DC</item-->
+    <item>Cornsilk</item>
+    <!--item>#FFF8DC</item-->
+    <item>Ivory</item>
+    <!--item>#FFFFF0</item-->
+  </string-array>
+
+  <!-- foreground color values array -->
+  <string-array name="foreground_color_values_array">
+    <!--item>Aqua</item-->
+    <item>#00FFFF</item>
+
+    <!--item>Azure</item-->
+    <item>#F0FFFF</item>
+
+    <!--item>Beige</item-->
+    <item>#F5F5DC</item>
+
+    <!--item>Cornsilk</item-->
+    <item>#FFF8DC</item>
+
+    <!--item>Ivory</item-->
+    <item>#FFFFF0</item>
+  </string-array>
+
 </resources>
