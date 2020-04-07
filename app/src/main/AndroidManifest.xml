@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example">
+    package="com.androidasync">
 
     <application
         android:allowBackup="true"
@@ -9,14 +9,14 @@
 
         <activity-alias
             android:name="activity.primary_launcher"
-            android:targetActivity="com.example.MyActivity">
+            android:targetActivity="com.androidasync.MyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
 
-        <activity android:name="com.example.MyActivity">
+        <activity android:name="com.androidasync.MyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

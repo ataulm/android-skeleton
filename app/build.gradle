@@ -7,7 +7,7 @@ android {
     compileSdkVersion versions.androidSdk.compile
 
     defaultConfig {
-        applicationId 'com.example'
+        applicationId 'com.demo'
         minSdkVersion versions.androidSdk.min
         targetSdkVersion versions.androidSdk.target
         versionCode 1

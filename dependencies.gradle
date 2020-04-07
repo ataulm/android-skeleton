@@ -11,7 +11,7 @@ ext {
 
     libraries = [
             build                   : [
-                    androidGradle: 'com.android.tools.build:gradle:3.6.1',
+                    androidGradle: 'com.android.tools.build:gradle:3.6.2',
                     kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
             ],
             androidxAppCompat       : 'androidx.appcompat:appcompat:1.2.0-alpha02',
@@ -25,7 +25,7 @@ ext {
             googleTruth             : 'com.google.truth:truth:1.0',
             jUnit                   : 'junit:junit:4.12',
             kotlinStdLib            : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
-            materialDesignComponents: 'com.google.android.material:material:1.2.0-alpha04',
+            materialDesignComponents: 'com.google.android.material:material:1.2.0-alpha05',
             mockitoCore             : 'org.mockito:mockito-core:2.19.1',
             moshi                   : 'com.squareup.moshi:moshi:1.8.0',
             roomCompiler            : "androidx.room:room-compiler:${versions.room}",

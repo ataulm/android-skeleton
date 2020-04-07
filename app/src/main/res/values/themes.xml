@@ -1,13 +1,5 @@
 <resources>
 
-    <style name="Platform.V21.Theme.Demo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@android:color/black</item>
-    </style>
-
-    <style name="Platform.Theme.Demo" parent="Platform.V21.Theme.Demo" />
-
-    <style name="Base.Theme.Demo" parent="Platform.Theme.Demo" />
-
     <style name="Theme.Demo" parent="Base.Theme.Demo">
         <item name="colorPrimary">@color/material_red_500</item>
         <item name="colorOnPrimary">@android:color/white</item>
