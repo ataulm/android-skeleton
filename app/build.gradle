@@ -39,9 +39,9 @@ dependencies {
     implementation libraries.kotlinStdLib
     implementation libraries.materialDesignComponents
     implementation libraries.moshi
-    implementation libraries.roomRuntime
+    implementation libraries.androidxRoomRuntime
 
-    kapt libraries.roomCompiler
+    kapt libraries.androidxRoomCompiler
 
     androidTestImplementation libraries.androidxEspressoCore
     androidTestImplementation libraries.androidxTestRules
