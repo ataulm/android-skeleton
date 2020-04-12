@@ -11,12 +11,12 @@ import kotlinx.android.synthetic.main.merge_burger.view.*
 
 class BurgerView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
-    private val addCheese: Boolean
+    private val includeLettuce: Boolean
     private val sauceColor: ColorStateList
 
     init {
         context.obtainStyledAttributes(attrs, R.styleable.BurgerView).apply {
-            addCheese = getBoolean(R.styleable.BurgerView_addCheese, false)
+            includeLettuce = getBoolean(R.styleable.BurgerView_includeLettuce, false)
 
             val sauceColorRes = getResourceId(R.styleable.BurgerView_sauce, -1)
             sauceColor = if (sauceColorRes != -1) {
@@ -32,7 +32,7 @@ class BurgerView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
     override fun onFinishInflate() {
         super.onFinishInflate()
         View.inflate(context, R.layout.merge_burger, this)
-        cheeseImageView.visibility = if (addCheese) View.VISIBLE else View.GONE
-        sauceImageView.imageTintList = sauceColor
+        burgerLettuce.visibility = if (includeLettuce) View.VISIBLE else View.GONE
+        burgerSauce.imageTintList = sauceColor
     }
 }

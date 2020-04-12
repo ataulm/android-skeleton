@@ -4,7 +4,7 @@
     <attr name="preferDarkStatusBarIcons" format="boolean" />
 
     <declare-styleable name="BurgerView">
-        <attr name="addCheese" format="boolean" />
+        <attr name="includeLettuce" format="boolean" />
         <attr name="sauce" format="color" />
     </declare-styleable>
 

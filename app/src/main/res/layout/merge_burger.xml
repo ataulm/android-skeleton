@@ -8,53 +8,35 @@
     tools:parentTag="com.androidasync.BurgerView">
 
     <ImageView
-        android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:tint="#EBC293"
-        android:tintMode="multiply"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/bun_bottom" />
+        app:srcCompat="@drawable/burger_base" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="40dp"
-        android:tint="#816340"
-        android:tintMode="multiply"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/patty" />
+        app:srcCompat="@drawable/burger_cheese" />
 
     <ImageView
-        android:id="@+id/cheeseImageView"
+        android:id="@+id/burgerSauce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:visibility="gone"
-        android:layout_marginBottom="60dp"
-        android:tint="#FFD862"
-        android:tintMode="multiply"
-        app:srcCompat="@drawable/cheese" />
-
-    <ImageView
-        android:id="@+id/sauceImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="120dp"
-        android:tint="@color/material_red_500"
-        android:tintMode="multiply"
-        app:srcCompat="@drawable/sauce" />
+        app:srcCompat="@drawable/burger_sauce_mask" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="150dp"
-        android:tint="#EBC293"
-        android:tintMode="multiply"
-        app:srcCompat="@drawable/bun_top" />
+        app:srcCompat="@drawable/burger_sauce_outline" />
+
+    <ImageView
+        android:id="@+id/burgerLettuce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/burger_lettuce" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/burger_top" />
 
 </merge>
