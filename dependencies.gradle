@@ -5,13 +5,13 @@ ext {
                     min    : 21,
                     target : 28
             ],
-            kotlin    : '1.3.71',
+            kotlin    : '1.3.70-dev-withExperimentalGoogleExtensions-20200424',
             room      : '2.2.0-rc01'
     ]
 
     libraries = [
             build                   : [
-                    androidGradle: 'com.android.tools.build:gradle:3.6.2',
+                    androidGradle: 'com.android.tools.build:gradle:4.2.0-alpha01',
                     kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
             ],
             androidxAppCompat       : 'androidx.appcompat:appcompat:1.2.0-beta01',
