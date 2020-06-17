@@ -2,7 +2,7 @@
 
     <style name="Platform.V23.Theme.Demo" parent="Platform.V21.Theme.Demo">
         <item name="android:statusBarColor">?attr/preferredStatusBarColor</item>
-        <item name="android:windowLightStatusBar">?attr/preferDarkStatusBarIcons</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="Platform.Theme.Demo" parent="Platform.V23.Theme.Demo" />

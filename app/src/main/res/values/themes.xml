@@ -9,14 +9,13 @@
     <style name="Base.Theme.Demo" parent="Platform.Theme.Demo" />
 
     <style name="Theme.Demo" parent="Base.Theme.Demo">
-        <item name="colorPrimary">@color/material_red_500</item>
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="android:textColorTertiary">?attr/colorOnBackground</item>
+        <item name="colorOnBackground">@android:color/white</item>
         <item name="colorOnPrimary">@android:color/white</item>
-        <item name="colorPrimaryVariant">@color/material_red_900</item>
-        <item name="android:colorBackground">@android:color/white</item>
-        <item name="colorOnBackground">?colorPrimaryVariant</item>
-
-        <item name="preferredStatusBarColor">?attr/colorPrimaryVariant</item>
-        <item name="preferDarkStatusBarIcons">false</item>
+        <item name="colorPrimary">@color/material_red_500</item>
+        <item name="preferredStatusBarColor">@color/material_red_900</item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
     </style>
 
 </resources>
