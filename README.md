@@ -1,11 +1,11 @@
-android-example
-===============
-Can be used as a skeleton for new spikes. Don't modify this project except to update dependencies; checkout from the latest master.
+pup
+===
 
-It would be good to fill this out before starting the spike and with updates before each push if necessary:
+Playing with the [dog.ceo API](https://dog.ceo/dog-api/documentation/). Let's make a simple app with
+two screens:
 
-#### Aim
-_e.g. wanted to try to create a completely virtual view hierarchy, so there's nothing really there on screen but an accessibility service like TalkBack could navigate it and a user proficient with TalkBack could use the app_
+- show a list of breed and sub-breeds
+- clicking on a breed/sub-breed should open a detail screen with images
 
-#### Current state (inc. next steps if applicable)
-_e.g. completed - see blahblah.kt for main bits._
+Let's remember to use 3rd party libraries where appropriate, no point reinventing the wheel, and of
+course, let's remember to write as many tests as are necessary.
