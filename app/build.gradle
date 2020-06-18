@@ -31,17 +31,22 @@ android {
 }
 
 dependencies {
+    kapt libraries.androidxRoomCompiler
+
     implementation libraries.androidxAppCompat
     implementation libraries.androidxConstraintLayout
     implementation libraries.androidxLegacySupportV13
     implementation libraries.androidxRecyclerView
+    implementation libraries.androidxRoomRuntime
     implementation libraries.glide
     implementation libraries.kotlinStdLib
     implementation libraries.materialDesignComponents
     implementation libraries.moshi
-    implementation libraries.androidxRoomRuntime
-
-    kapt libraries.androidxRoomCompiler
+    implementation libraries.retrofit
+    implementation libraries.retrofitMoshi
+    implementation libraries.retrofitRxJava
+    implementation libraries.rxandroid
+    implementation libraries.rxjava
 
     androidTestImplementation libraries.androidxEspressoCore
     androidTestImplementation libraries.androidxTestRules

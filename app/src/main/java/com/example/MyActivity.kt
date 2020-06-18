@@ -2,7 +2,6 @@ package com.example
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
 
 class MyActivity : AppCompatActivity() {
 
