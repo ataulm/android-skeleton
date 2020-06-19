@@ -58,6 +58,7 @@ dependencies {
     androidTestImplementation libraries.androidxTestRules
     androidTestImplementation libraries.androidxTestRunner
 
+    testImplementation libraries.androidxArchCoreTest
     testImplementation libraries.googleTruth
     testImplementation libraries.jUnit
     testImplementation libraries.mockitoCore

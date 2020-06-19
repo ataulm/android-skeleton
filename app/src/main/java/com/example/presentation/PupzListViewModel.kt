@@ -28,6 +28,7 @@ internal class PupzListViewModel(getBreeds: GetBreedsUsecase) : ViewModel() {
                 .subscribeWith(
                         onSuccess = Consumer { _breeds.value = it },
                         onError = Consumer<Throwable> {
+                            // TODO: show error, allow retry
                             Log.d("!!!", it.message)
                         }
                 )

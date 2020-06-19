@@ -16,6 +16,7 @@ ext {
                     kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
             ],
             androidxAppCompat       : 'androidx.appcompat:appcompat:1.2.0-beta01',
+            androidxArchCoreTest    : 'androidx.arch.core:core-testing:2.0.0',
             androidxConstraintLayout: 'androidx.constraintlayout:constraintlayout:2.0.0-beta4',
             androidxEspressoCore    : 'androidx.test.espresso:espresso-core:3.1.0',
             androidxLegacySupportV13: 'androidx.legacy:legacy-support-v13:1.0.0',
