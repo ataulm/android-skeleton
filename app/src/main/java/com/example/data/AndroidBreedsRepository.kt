@@ -5,7 +5,7 @@ import com.example.domain.BreedsRepository
 import com.example.domain.Subbreed
 import io.reactivex.Single
 
-class AndroidBreedsRepository(private val dogCeo: DogCeo) : BreedsRepository {
+internal class AndroidBreedsRepository(private val dogCeo: DogCeo) : BreedsRepository {
 
     override fun getBreeds(): Single<List<Breed>> {
         return dogCeo.breeds().flatMap {

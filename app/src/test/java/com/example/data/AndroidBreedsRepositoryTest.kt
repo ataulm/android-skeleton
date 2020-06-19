@@ -6,7 +6,7 @@ import io.reactivex.Single
 import org.junit.Test
 import java.io.IOException
 
-class AndroidBreedsRepositoryTest {
+internal class AndroidBreedsRepositoryTest {
 
     private val fakeDogCeo = FakeDogCeo()
     private val repository = AndroidBreedsRepository(fakeDogCeo)

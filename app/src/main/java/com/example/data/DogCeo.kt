@@ -6,7 +6,7 @@ import retrofit2.http.Path
 
 // https://dog.ceo/api/*
 // by breed: https://dog.ceo/api/breed/hound/images
-interface DogCeo {
+internal interface DogCeo {
 
     @GET("breeds/list/all")
     fun breeds(): Single<ApiResponse>
