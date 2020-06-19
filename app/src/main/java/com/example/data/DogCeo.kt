@@ -4,7 +4,6 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-// https://dog.ceo/api/*
 // by breed: https://dog.ceo/api/breed/hound/images
 internal interface DogCeo {
 
