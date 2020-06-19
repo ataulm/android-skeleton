@@ -28,6 +28,7 @@ ext {
             googleTruth             : 'com.google.truth:truth:1.0',
             jUnit                   : 'junit:junit:4.12',
             kotlinStdLib            : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
+            lottie                  : 'com.airbnb.android:lottie:3.4.0',
             materialDesignComponents: 'com.google.android.material:material:1.2.0-alpha05',
             mockitoCore             : 'org.mockito:mockito-core:2.19.1',
             moshi                   : 'com.squareup.moshi:moshi:1.8.0',
