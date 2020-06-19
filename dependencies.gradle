@@ -7,7 +7,7 @@ ext {
             ],
             kotlin    : '1.3.71',
             retrofit  : '2.8.1',
-            room      : '2.2.0-rc01'
+            room      : '2.2.5'
     ]
 
     libraries = [
