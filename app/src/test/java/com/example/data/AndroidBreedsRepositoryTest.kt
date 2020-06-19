@@ -6,10 +6,10 @@ import io.reactivex.Single
 import org.junit.Test
 import java.io.IOException
 
-class BreedsRepositoryTest {
+class AndroidBreedsRepositoryTest {
 
     private val fakeDogCeo = FakeDogCeo()
-    private val repository = BreedsRepository(fakeDogCeo)
+    private val repository = AndroidBreedsRepository(fakeDogCeo)
 
     @Test
     fun `given network exception, repo emits network exception`() {

@@ -1,14 +1,13 @@
 package com.example.data
 
 import com.example.domain.Breed
+import com.example.domain.BreedsRepository
 import com.example.domain.Subbreed
 import io.reactivex.Single
 
-class BreedsRepository(
-        private val dogCeo: DogCeo
-) {
+class AndroidBreedsRepository(private val dogCeo: DogCeo) : BreedsRepository {
 
-    fun getBreeds(): Single<List<Breed>> {
+    override fun getBreeds(): Single<List<Breed>> {
         return dogCeo.breeds().flatMap {
             if (it.status == "success") {
                 val breeds = it.message.entries.map { apiBreed -> apiBreed.toDomainBreed() }
