@@ -1,4 +1,4 @@
-package com.example.presentation
+package com.example.presentation.pupzlist
 
 import android.util.Log
 import androidx.lifecycle.LiveData

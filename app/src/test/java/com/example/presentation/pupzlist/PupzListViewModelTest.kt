@@ -1,4 +1,4 @@
-package com.example.presentation
+package com.example.presentation.pupzlist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.RxSchedulerRule

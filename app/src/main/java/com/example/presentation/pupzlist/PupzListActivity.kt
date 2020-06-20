@@ -1,10 +1,11 @@
-package com.example.presentation
+package com.example.presentation.pupzlist
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.R
 import com.example.domain.GetBreedsUsecase
+import com.example.presentation.PupzApplication
 import kotlinx.android.synthetic.main.activity_pupz_list.*
 
 internal class PupzListActivity : AppCompatActivity() {

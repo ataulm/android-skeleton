@@ -1,4 +1,4 @@
-package com.example.presentation
+package com.example.presentation.pupzlist
 
 import android.view.LayoutInflater
 import android.view.View

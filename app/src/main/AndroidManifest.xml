@@ -12,14 +12,14 @@
 
         <activity-alias
             android:name="activity.primary_launcher"
-            android:targetActivity="com.example.presentation.PupzListActivity">
+            android:targetActivity="com.example.presentation.pupzlist.PupzListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
 
-        <activity android:name="com.example.presentation.PupzListActivity">
+        <activity android:name="com.example.presentation.pupzlist.PupzListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
