@@ -30,6 +30,7 @@ internal class ImagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_images)
+        collapsingToolbarLayout.title = intent.getSubbreed()?.name ?: intent.getBreed().name
         recyclerView.adapter = imagesAdapter
         recyclerView.layoutManager = GridLayoutManager(this, 3)
         viewModel.images.observe(this, NonNullObserver { t ->
