@@ -25,8 +25,10 @@ internal class PupzListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pupz_list)
         recyclerView.adapter = pupzListAdapter
-        viewModel.breeds.observe(this, NonNullObserver { t ->
-            pupzListAdapter.submitList(t)
+        viewModel.state.observe(this, NonNullObserver { state ->
+            feelingLuckyButton.show()
+            feelingLuckyButton.setOnClickListener { state.onClickFeelingLucky.handler(Unit) }
+            pupzListAdapter.submitList(state.items)
         })
 
         viewModel.events.observe(this, EventObserver { t ->

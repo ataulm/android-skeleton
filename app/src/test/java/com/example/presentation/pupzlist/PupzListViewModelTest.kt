@@ -31,17 +31,20 @@ class PupzListViewModelTest {
             subbreeds = listOf(Subbreed(id = "golden", name = "Golden Retriever"), Subbreed(id = "labrador", name = "Labrador Retriever"))
     )
 
-    private val breed1AsUiModel = listOf(
-            PupzListItemUiModel.Breed("Retriever", EVENT_HANDLER),
-            PupzListItemUiModel.Subbreed("Golden Retriever", EVENT_HANDLER),
-            PupzListItemUiModel.Subbreed("Labrador Retriever", EVENT_HANDLER)
+    private val breed1AsUiModel = PupzListUiModel(
+            items = listOf(
+                    PupzListItemUiModel.Breed("Retriever", EVENT_HANDLER),
+                    PupzListItemUiModel.Subbreed("Golden Retriever", EVENT_HANDLER),
+                    PupzListItemUiModel.Subbreed("Labrador Retriever", EVENT_HANDLER)
+            ),
+            onClickFeelingLucky = EVENT_HANDLER
     )
 
     @Test
     fun `fetches list of breeds on initialization`() {
         fakeBreedsRepository.getBreeds = Single.just(listOf(breed1))
         val viewModel = initViewModel()
-        assertThat(viewModel.breeds.value).isEqualTo(breed1AsUiModel)
+        assertThat(viewModel.state.value).isEqualTo(breed1AsUiModel)
     }
 
     /**
