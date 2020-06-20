@@ -7,7 +7,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
 import com.example.R
 import com.example.domain.Breed
 import com.example.domain.GetImagesUsecase
@@ -45,8 +44,8 @@ internal class ImagesActivity : AppCompatActivity() {
     private fun showSpotlight(spotlightImageUiModel: SpotlightImageUiModel) {
         spotlightContainerView.visibility = View.VISIBLE
         Glide.with(spotlightImageView)
-                .download(GlideUrl(spotlightImageUiModel.url))
-                .into(SubsamplingScaleImageViewTarget(spotlightImageView))
+                .load(spotlightImageUiModel.url)
+                .into(spotlightImageView)
     }
 
     override fun onBackPressed() {

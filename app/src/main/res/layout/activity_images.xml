@@ -16,7 +16,7 @@
         android:background="@android:color/black"
         android:visibility="gone">
 
-        <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/spotlightImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

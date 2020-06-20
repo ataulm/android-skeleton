@@ -33,11 +33,11 @@ ext {
             materialDesignComponents : 'com.google.android.material:material:1.2.0-alpha05',
             mockitoCore              : 'org.mockito:mockito-core:2.19.1',
             moshi                    : 'com.squareup.moshi:moshi:1.8.0',
+            photoView                : 'com.github.chrisbanes:PhotoView:2.0.0',
             retrofit                 : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
             retrofitMoshi            : "com.squareup.retrofit2:converter-moshi:${versions.retrofit}",
             retrofitRxJava           : "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
             rxjava                   : 'io.reactivex.rxjava2:rxjava:2.1.0',
-            rxandroid                : 'io.reactivex.rxjava2:rxandroid:2.0.1',
-            subsamplingScaleImageView: 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
+            rxandroid                : 'io.reactivex.rxjava2:rxandroid:2.0.1'
     ]
 }

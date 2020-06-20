@@ -48,12 +48,12 @@ dependencies {
     implementation libraries.lottie
     implementation libraries.materialDesignComponents
     implementation libraries.moshi
+    implementation libraries.photoView
     implementation libraries.retrofit
     implementation libraries.retrofitMoshi
     implementation libraries.retrofitRxJava
     implementation libraries.rxandroid
     implementation libraries.rxjava
-    implementation libraries.subsamplingScaleImageView
 
     androidTestImplementation libraries.androidxEspressoCore
     androidTestImplementation libraries.androidxTestRules
