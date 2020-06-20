@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.R
 import com.example.domain.GetBreedsUsecase
+import kotlinx.android.synthetic.main.activity_pupz_list.*
 
 internal class PupzListActivity : AppCompatActivity() {
 
@@ -15,12 +16,15 @@ internal class PupzListActivity : AppCompatActivity() {
         PupzListViewModel(getBreedsUsecase)
     }
 
+    private val pupzListAdapter = PupzListAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pupz_list)
+        recyclerView.adapter = pupzListAdapter
         viewModel.breeds.observe(this, Observer { t ->
             if (t == null) return@Observer
-
+            pupzListAdapter.submitList(t)
         })
     }
 }
