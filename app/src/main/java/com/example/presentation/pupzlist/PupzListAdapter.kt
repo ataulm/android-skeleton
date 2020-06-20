@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.R
+import com.example.presentation.DoNothingViewHolder
 
 internal class PupzListAdapter : ListAdapter<PupzListItemUiModel, RecyclerView.ViewHolder>(Differ) {
 
@@ -47,8 +48,6 @@ internal class PupzListAdapter : ListAdapter<PupzListItemUiModel, RecyclerView.V
         }
     }
 }
-
-private class DoNothingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 private fun View.bind(breed: PupzListItemUiModel.Breed) {
     (this as TextView).text = breed.name

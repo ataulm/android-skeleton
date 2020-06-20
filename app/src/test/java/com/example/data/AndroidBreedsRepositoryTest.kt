@@ -43,11 +43,11 @@ internal class AndroidBreedsRepositoryTest {
 
         repository.getBreeds().test()
                 .assertResult(listOf(
-                        Breed(name = "Breed", subbreeds = listOf(
-                                Subbreed("Subbreed1 Breed"),
-                                Subbreed("Subbreed2 Breed")
+                        Breed(id = "breed", name = "Breed", subbreeds = listOf(
+                                Subbreed("subbreed1", "Subbreed1 Breed"),
+                                Subbreed("subbreed2", "Subbreed2 Breed")
                         )),
-                        Breed(name = "Breed2", subbreeds = emptyList())
+                        Breed(id = "breed2", name = "Breed2", subbreeds = emptyList())
                 ))
     }
 }

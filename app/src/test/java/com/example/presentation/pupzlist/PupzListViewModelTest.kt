@@ -26,8 +26,9 @@ class PupzListViewModelTest {
     private val getBreedsUsecase = GetBreedsUsecase(fakeBreedsRepository)
 
     private val breed1 = Breed(
+            id = "retriever",
             name = "Retriever",
-            subbreeds = listOf(Subbreed("Golden Retriever"), Subbreed("Labrador Retriever"))
+            subbreeds = listOf(Subbreed(id = "golden", name = "Golden Retriever"), Subbreed(id = "labrador", name = "Labrador Retriever"))
     )
 
     private val breed1AsUiModel = listOf(
