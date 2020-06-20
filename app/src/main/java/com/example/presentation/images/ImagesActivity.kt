@@ -3,12 +3,16 @@ package com.example.presentation.images
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
 import com.example.R
 import com.example.domain.Breed
 import com.example.domain.GetImagesUsecase
 import com.example.domain.Subbreed
+import com.example.presentation.EventObserver
 import com.example.presentation.NonNullObserver
 import com.example.presentation.PupzApplication
 import kotlinx.android.synthetic.main.activity_images.*
@@ -32,6 +36,25 @@ internal class ImagesActivity : AppCompatActivity() {
         viewModel.images.observe(this, NonNullObserver { t ->
             imagesAdapter.submitList(t)
         })
+
+        viewModel.events.observe(this, EventObserver {
+            showSpotlight(it.spotlightImageUiModel)
+        })
+    }
+
+    private fun showSpotlight(spotlightImageUiModel: SpotlightImageUiModel) {
+        spotlightContainerView.visibility = View.VISIBLE
+        Glide.with(spotlightImageView)
+                .download(GlideUrl(spotlightImageUiModel.url))
+                .into(SubsamplingScaleImageViewTarget(spotlightImageView))
+    }
+
+    override fun onBackPressed() {
+        if (spotlightContainerView.visibility == View.VISIBLE) {
+            spotlightContainerView.visibility = View.GONE
+        } else {
+            super.onBackPressed()
+        }
     }
 
     companion object {

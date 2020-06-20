@@ -36,5 +36,6 @@ internal class ImagesAdapter : ListAdapter<ImageUiModel, RecyclerView.ViewHolder
 }
 
 private fun View.bind(image: ImageUiModel) {
+    setOnClickListener { image.onClick.handler(Unit) }
     Glide.with(this).load(image.url).into(this as ImageView)
 }

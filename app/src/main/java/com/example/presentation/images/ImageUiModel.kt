@@ -1,3 +1,5 @@
 package com.example.presentation.images
 
-data class ImageUiModel(val url: String)
+import com.example.presentation.EventHandler
+
+data class ImageUiModel(val url: String, val onClick: EventHandler<Unit>)

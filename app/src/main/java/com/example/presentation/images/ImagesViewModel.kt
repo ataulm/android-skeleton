@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.example.domain.Breed
 import com.example.domain.GetImagesUsecase
 import com.example.domain.Subbreed
+import com.example.presentation.Event
+import com.example.presentation.EventHandler
 import com.example.presentation.subscribeWith
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -19,6 +21,10 @@ internal class ImagesViewModel(getImages: GetImagesUsecase, breed: Breed, subbre
     val images: LiveData<List<ImageUiModel>>
         get() = _images
 
+    private val _events = MutableLiveData<Event<ShowSpotlightCommand>>()
+    val events: LiveData<Event<ShowSpotlightCommand>>
+        get() = _events
+
     private val disposables = CompositeDisposable()
 
     init {
@@ -27,7 +33,12 @@ internal class ImagesViewModel(getImages: GetImagesUsecase, breed: Breed, subbre
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(
                         onSuccess = Consumer { images ->
-                            val uiModels = images.map { image -> ImageUiModel(url = image.url) }
+                            val uiModels = images.map { image ->
+                                ImageUiModel(url = image.url, onClick = EventHandler {
+                                    val showSpotlightCommand = ShowSpotlightCommand(SpotlightImageUiModel(image.url))
+                                    _events.value = Event(showSpotlightCommand)
+                                })
+                            }
                             _images.value = uiModels
                         },
                         onError = Consumer<Throwable> {
@@ -42,4 +53,6 @@ internal class ImagesViewModel(getImages: GetImagesUsecase, breed: Breed, subbre
         super.onCleared()
         disposables.clear()
     }
+
+    data class ShowSpotlightCommand(val spotlightImageUiModel: SpotlightImageUiModel)
 }
