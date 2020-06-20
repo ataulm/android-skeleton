@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.R
 import com.example.domain.Breed
 import com.example.domain.GetImagesUsecase
@@ -29,7 +28,7 @@ internal class ImagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_images)
         recyclerView.adapter = imagesAdapter
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        recyclerView.layoutManager = GridLayoutManager(this, 3)
         viewModel.images.observe(this, NonNullObserver { t ->
             imagesAdapter.submitList(t)
         })
