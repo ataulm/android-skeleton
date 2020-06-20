@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.R
@@ -21,8 +23,12 @@ internal class ImagesActivity : AppCompatActivity() {
     private val viewModel by lazy {
         val breedsRepository = (application as PupzApplication).provideRepository()
         val getImagesUsecase = GetImagesUsecase(breedsRepository)
-        // TODO: use ViewModelProviders (or whatever is not deprecated now)
-        ImagesViewModel(getImagesUsecase, intent.getBreed(), intent.getSubbreed())
+        @Suppress("UNCHECKED_CAST") val factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return ImagesViewModel(getImagesUsecase, intent.getBreed(), intent.getSubbreed()) as T
+            }
+        }
+        ViewModelProvider(this, factory).get(ImagesViewModel::class.java)
     }
 
     private val imagesAdapter = ImagesAdapter()

@@ -2,6 +2,8 @@ package com.example.presentation.pupzlist
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.R
 import com.example.domain.GetBreedsUsecase
 import com.example.presentation.EventObserver
@@ -15,8 +17,12 @@ internal class PupzListActivity : AppCompatActivity() {
     private val viewModel by lazy {
         val breedsRepository = (application as PupzApplication).provideRepository()
         val getBreedsUsecase = GetBreedsUsecase(breedsRepository)
-        // TODO: use ViewModelProviders (or whatever is not deprecated now)
-        PupzListViewModel(getBreedsUsecase)
+        @Suppress("UNCHECKED_CAST") val factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return PupzListViewModel(getBreedsUsecase) as T
+            }
+        }
+        ViewModelProvider(this, factory).get(PupzListViewModel::class.java)
     }
 
     private val pupzListAdapter = PupzListAdapter()

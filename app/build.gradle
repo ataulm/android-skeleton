@@ -38,6 +38,7 @@ android {
 dependencies {
     kapt libraries.androidxRoomCompiler
 
+    implementation libraries.androidxActivityKtx
     implementation libraries.androidxAppCompat
     implementation libraries.androidxConstraintLayout
     implementation libraries.androidxLegacySupportV13
