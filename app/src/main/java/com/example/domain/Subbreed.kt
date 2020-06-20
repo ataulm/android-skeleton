@@ -1,3 +1,5 @@
 package com.example.domain
 
-data class Subbreed(val name: String)
+import java.io.Serializable
+
+data class Subbreed(val name: String) : Serializable

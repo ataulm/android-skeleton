@@ -2,10 +2,12 @@ package com.example.presentation.pupzlist
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.example.R
 import com.example.domain.GetBreedsUsecase
+import com.example.presentation.EventObserver
+import com.example.presentation.NonNullObserver
 import com.example.presentation.PupzApplication
+import com.example.presentation.images.ImagesActivity
 import kotlinx.android.synthetic.main.activity_pupz_list.*
 
 internal class PupzListActivity : AppCompatActivity() {
@@ -23,9 +25,12 @@ internal class PupzListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pupz_list)
         recyclerView.adapter = pupzListAdapter
-        viewModel.breeds.observe(this, Observer { t ->
-            if (t == null) return@Observer
+        viewModel.breeds.observe(this, NonNullObserver { t ->
             pupzListAdapter.submitList(t)
+        })
+
+        viewModel.events.observe(this, EventObserver { t ->
+            startActivity(ImagesActivity.buildIntent(this, t.breed, t.subbreed))
         })
     }
 }

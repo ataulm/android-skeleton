@@ -4,11 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.domain.Breed
 import com.example.domain.GetBreedsUsecase
-import io.reactivex.Single
+import com.example.domain.Subbreed
+import com.example.presentation.Event
+import com.example.presentation.EventHandler
+import com.example.presentation.subscribeWith
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
@@ -17,6 +20,10 @@ internal class PupzListViewModel(getBreeds: GetBreedsUsecase) : ViewModel() {
     private val _breeds = MutableLiveData<List<PupzListItemUiModel>>()
     val breeds: LiveData<List<PupzListItemUiModel>>
         get() = _breeds
+
+    private val _events = MutableLiveData<Event<NavigateCommand>>()
+    val events: LiveData<Event<NavigateCommand>>
+        get() = _events
 
     private val disposables = CompositeDisposable()
 
@@ -27,10 +34,14 @@ internal class PupzListViewModel(getBreeds: GetBreedsUsecase) : ViewModel() {
                 .subscribeWith(
                         onSuccess = Consumer {
                             val uiModels: List<PupzListItemUiModel> = it.flatMap { breed ->
-                                val breedUiModel = PupzListItemUiModel.Breed(breed.name)
+                                val breedUiModel = PupzListItemUiModel.Breed(breed.name, EventHandler {
+                                    _events.value = Event(NavigateCommand(breed))
+                                })
                                 mutableListOf<PupzListItemUiModel>(breedUiModel).apply {
                                     val subbreedUiModels = breed.subbreeds.map { subbreed ->
-                                        PupzListItemUiModel.Subbreed(subbreed.name)
+                                        PupzListItemUiModel.Subbreed(subbreed.name, EventHandler {
+                                            _events.value = Event(NavigateCommand(breed, subbreed))
+                                        })
                                     }
                                     addAll(subbreedUiModels)
                                 }
@@ -49,9 +60,6 @@ internal class PupzListViewModel(getBreeds: GetBreedsUsecase) : ViewModel() {
         super.onCleared()
         disposables.clear()
     }
-}
 
-// allows named args
-private fun <T> Single<T>.subscribeWith(onSuccess: Consumer<T>, onError: Consumer<Throwable>): Disposable {
-    return subscribe(onSuccess, onError)
+    data class NavigateCommand(val breed: Breed, val subbreed: Subbreed? = null)
 }

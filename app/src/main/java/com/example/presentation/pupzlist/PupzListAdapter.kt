@@ -52,14 +52,10 @@ private class DoNothingViewHolder(itemView: View) : RecyclerView.ViewHolder(item
 
 private fun View.bind(breed: PupzListItemUiModel.Breed) {
     (this as TextView).text = breed.name
-    setOnClickListener {
-        // TODO: bind to clicks
-    }
+    setOnClickListener { breed.onClick.handler(Unit) }
 }
 
 private fun View.bind(subbreed: PupzListItemUiModel.Subbreed) {
     (this as TextView).text = subbreed.name
-    setOnClickListener {
-        // TODO: bind to clicks
-    }
+    setOnClickListener { subbreed.onClick.handler(Unit) }
 }

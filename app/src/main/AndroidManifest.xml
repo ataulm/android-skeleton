@@ -19,11 +19,8 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name="com.example.presentation.pupzlist.PupzListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.example.presentation.pupzlist.PupzListActivity" />
+        <activity android:name="com.example.presentation.images.ImagesActivity" />
 
     </application>
 

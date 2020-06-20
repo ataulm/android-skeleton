@@ -6,6 +6,7 @@ import com.example.data.FakeBreedsRepository
 import com.example.domain.Breed
 import com.example.domain.GetBreedsUsecase
 import com.example.domain.Subbreed
+import com.example.presentation.EVENT_HANDLER
 import com.google.common.truth.Truth.assertThat
 import io.reactivex.Single
 import org.junit.Rule
@@ -30,9 +31,9 @@ class PupzListViewModelTest {
     )
 
     private val breed1AsUiModel = listOf(
-            PupzListItemUiModel.Breed("Retriever"),
-            PupzListItemUiModel.Subbreed("Golden Retriever"),
-            PupzListItemUiModel.Subbreed("Labrador Retriever")
+            PupzListItemUiModel.Breed("Retriever", EVENT_HANDLER),
+            PupzListItemUiModel.Subbreed("Golden Retriever", EVENT_HANDLER),
+            PupzListItemUiModel.Subbreed("Labrador Retriever", EVENT_HANDLER)
     )
 
     @Test
