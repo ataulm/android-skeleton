@@ -1,5 +1,6 @@
 package com.example.data
 
+import android.annotation.SuppressLint
 import com.example.domain.Breed
 import com.example.domain.BreedsRepository
 import com.example.domain.Subbreed
@@ -18,8 +19,15 @@ internal class AndroidBreedsRepository(private val dogCeo: DogCeo) : BreedsRepos
         }
     }
 
+    /**
+     * There's some formatting here which is part of the domain, rather than the presentation.
+     * Since these are names (given in English by the API), they should be capitalized.
+     */
     private fun Map.Entry<String, List<String>>.toDomainBreed() = Breed(
-            name = key,
-            subbreeds = value.map { name -> Subbreed(name) }
+            name = key.capitalizeWords(),
+            subbreeds = value.map { name -> Subbreed("$name $key".capitalizeWords()) }
     )
 }
+
+@SuppressLint("DefaultLocale") // the locale passing version is experimental
+private fun String.capitalizeWords() = split(" ").joinToString(" ") { it.capitalize() }
