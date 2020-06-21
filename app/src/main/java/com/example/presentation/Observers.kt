@@ -28,7 +28,6 @@ internal class EventObserver<T>(private val observe: (T) -> Unit) : Observer<Eve
 
     override fun onChanged(event: Event<T>?) {
         event?.value()?.let { observe(it) }
-                ?: throw WhyWasThisApiNullableException
     }
 }
 
