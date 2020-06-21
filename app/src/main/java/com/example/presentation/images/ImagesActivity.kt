@@ -17,6 +17,10 @@ import com.example.presentation.EventObserver
 import com.example.presentation.NonNullObserver
 import com.example.presentation.PupzApplication
 import kotlinx.android.synthetic.main.activity_images.*
+import kotlinx.android.synthetic.main.activity_images.errorTextView
+import kotlinx.android.synthetic.main.activity_images.loadingErrorView
+import kotlinx.android.synthetic.main.activity_images.recyclerView
+import kotlinx.android.synthetic.main.activity_images.retryButton
 
 internal class ImagesActivity : AppCompatActivity() {
 
@@ -36,11 +40,35 @@ internal class ImagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_images)
-        collapsingToolbarLayout.title = intent.getSubbreed()?.name ?: intent.getBreed().name
         recyclerView.adapter = imagesAdapter
         recyclerView.layoutManager = GridLayoutManager(this, 3)
-        viewModel.images.observe(this, NonNullObserver { t ->
-            imagesAdapter.submitList(t)
+        viewModel.images.observe(this, NonNullObserver { imagesUiModel ->
+            when (imagesUiModel) {
+                is ImagesUiModel.Data -> {
+                    appBarLayout.visibility = View.VISIBLE
+                    collapsingToolbarLayout.title = imagesUiModel.title
+                    imagesAdapter.submitList(imagesUiModel.items)
+                    loadingErrorView.visibility = View.GONE
+                }
+                is ImagesUiModel.Error -> {
+                    appBarLayout.visibility = View.GONE
+                    loadingErrorView.visibility = View.VISIBLE
+                    errorTextView.visibility = View.VISIBLE
+                    errorTextView.text = imagesUiModel.message
+                    if (imagesUiModel.onClickRetry != null) {
+                        retryButton.visibility = View.VISIBLE
+                        retryButton.setOnClickListener { imagesUiModel.onClickRetry.handler(Unit) }
+                    } else {
+                        retryButton.visibility = View.INVISIBLE
+                    }
+                }
+                ImagesUiModel.Loading -> {
+                    appBarLayout.visibility = View.GONE
+                    errorTextView.visibility = View.INVISIBLE
+                    retryButton.visibility = View.INVISIBLE
+                    loadingErrorView.visibility = View.VISIBLE
+                }
+            }
         })
 
         viewModel.events.observe(this, EventObserver {
