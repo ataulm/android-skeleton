@@ -27,16 +27,27 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    signingConfigs {
+        release {
+            storeFile file('keystore')
+            storePassword 'password'
+            keyAlias 'alias'
+            keyPassword 'password'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
 
 dependencies {
     kapt libraries.androidxRoomCompiler
+    kapt libraries.moshiCodegen
 
     implementation libraries.androidxActivityKtx
     implementation libraries.androidxAppCompat
