@@ -1,6 +1,5 @@
 package com.example.presentation.pupzlist
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,11 +8,10 @@ import com.example.domain.GetBreedsUsecase
 import com.example.domain.Subbreed
 import com.example.presentation.Event
 import com.example.presentation.EventHandler
-import com.example.presentation.subscribeWith
+import com.example.presentation.RxResult
+import com.example.presentation.toRxResultWithInitialDelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Action
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import kotlin.random.Random
 
@@ -30,24 +28,37 @@ internal class PupzListViewModel(getBreeds: GetBreedsUsecase) : ViewModel() {
     private val disposables = CompositeDisposable()
 
     init {
-        val subscription = getBreeds()
+        val disposable = getBreeds().toRxResultWithInitialDelay()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(
-                        onNext = Consumer { breeds ->
-                            val items: List<PupzListItemUiModel> = breeds.toItemUiModels()
-                            _state.value = PupzListUiModel(
-                                    items = items,
-                                    onClickFeelingLucky = items.clickRandomItem()
-                            )
-                            // TODO: if breeds is empty, we could display the dog with a message!
-                        },
-                        onError = Consumer<Throwable> {
-                            // TODO: show error, allow retry
-                            Log.d("!!!", it.message)
+                .subscribe {
+                    _state.value = when (it) {
+                        is RxResult.Success -> {
+                            if (it.value.isEmpty()) {
+                                PupzListUiModel.Error(
+                                        message = "ugh, empty. Try again?",
+                                        onClickRetry = EventHandler { TODO("retry handler") }
+                                )
+                            } else {
+                                val items: List<PupzListItemUiModel> = it.value.toItemUiModels()
+                                PupzListUiModel.Data(
+                                        items = items,
+                                        onClickFeelingLucky = items.clickRandomItem()
+                                )
+                            }
                         }
-                )
-        disposables.add(subscription)
+                        is RxResult.Error -> {
+                            PupzListUiModel.Error(
+                                    message = "Something went wrong. Try again?",
+                                    onClickRetry = EventHandler { TODO("retry handler") }
+                            )
+                        }
+                        RxResult.InFlight -> {
+                            PupzListUiModel.Loading
+                        }
+                    }
+                }
+        disposables.add(disposable)
     }
 
     private fun List<Breed>.toItemUiModels() = flatMap { breed ->

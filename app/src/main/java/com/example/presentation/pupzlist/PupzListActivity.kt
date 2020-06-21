@@ -1,6 +1,7 @@
 package com.example.presentation.pupzlist
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -32,9 +33,25 @@ internal class PupzListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pupz_list)
         recyclerView.adapter = pupzListAdapter
         viewModel.state.observe(this, NonNullObserver { state ->
-            feelingLuckyButton.show()
-            feelingLuckyButton.setOnClickListener { state.onClickFeelingLucky.handler(Unit) }
-            pupzListAdapter.submitList(state.items)
+            when (state) {
+                is PupzListUiModel.Data -> {
+                    pupzListAdapter.submitList(state.items)
+                    loadingErrorView.visibility = View.GONE
+                    feelingLuckyButton.setOnClickListener { state.onClickFeelingLucky.handler(Unit) }
+                    feelingLuckyButton.show()
+                }
+                is PupzListUiModel.Error -> {
+                    loadingErrorView.visibility = View.VISIBLE
+                    errorTextView.visibility = View.VISIBLE
+                    errorTextView.text = state.message
+                    feelingLuckyButton.hide()
+                }
+                PupzListUiModel.Loading -> {
+                    loadingErrorView.visibility = View.VISIBLE
+                    errorTextView.visibility = View.INVISIBLE
+                    feelingLuckyButton.hide()
+                }
+            }
         })
 
         viewModel.events.observe(this, EventObserver { t ->

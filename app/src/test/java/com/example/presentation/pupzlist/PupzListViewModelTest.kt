@@ -31,7 +31,7 @@ class PupzListViewModelTest {
             subbreeds = listOf(Subbreed(id = "golden", name = "Golden Retriever"), Subbreed(id = "labrador", name = "Labrador Retriever"))
     )
 
-    private val breed1AsUiModel = PupzListUiModel(
+    private val breed1AsUiModel = PupzListUiModel.Data(
             items = listOf(
                     PupzListItemUiModel.Breed("Retriever", EVENT_HANDLER),
                     PupzListItemUiModel.Subbreed("Golden Retriever", EVENT_HANDLER),
