@@ -26,9 +26,9 @@ internal class AndroidBreedsRepository(
     private fun fetchBreedsFromNetwork(): Single<Map<String, List<String>>> {
         return dogCeo.breeds().flatMap {
             if (it.status == "success") {
-                Single.just(it.message)
+                Single.defer { Single.just(it.message) }
             } else {
-                Single.error(RuntimeException("Something went wrong fetching breeds from network."))
+                Single.defer { Single.error<Map<String, List<String>>?>(RuntimeException("Something went wrong fetching breeds from network.")) }
             }
         }
     }

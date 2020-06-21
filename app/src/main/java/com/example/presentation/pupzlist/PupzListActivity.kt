@@ -45,10 +45,13 @@ internal class PupzListActivity : AppCompatActivity() {
                     errorTextView.visibility = View.VISIBLE
                     errorTextView.text = state.message
                     feelingLuckyButton.hide()
+                    retryButton.visibility = View.VISIBLE
+                    retryButton.setOnClickListener { state.onClickRetry.handler(Unit) }
                 }
                 PupzListUiModel.Loading -> {
                     loadingErrorView.visibility = View.VISIBLE
                     errorTextView.visibility = View.INVISIBLE
+                    retryButton.visibility = View.INVISIBLE
                     feelingLuckyButton.hide()
                 }
             }
