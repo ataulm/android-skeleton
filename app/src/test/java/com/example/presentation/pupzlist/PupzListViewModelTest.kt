@@ -2,13 +2,13 @@ package com.example.presentation.pupzlist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.RxSchedulerRule
-import com.example.data.FakeBreedsRepository
+import com.example.data.StubsBreedsRepository
 import com.example.domain.Breed
 import com.example.domain.GetBreedsUsecase
 import com.example.domain.Subbreed
 import com.example.presentation.EVENT_HANDLER
 import com.google.common.truth.Truth.assertThat
-import io.reactivex.Single
+import io.reactivex.Flowable
 import org.junit.Rule
 import org.junit.Test
 
@@ -22,7 +22,7 @@ class PupzListViewModelTest {
     @JvmField
     val rxSchedulerRule = RxSchedulerRule()
 
-    private val fakeBreedsRepository = FakeBreedsRepository()
+    private val fakeBreedsRepository = StubsBreedsRepository()
     private val getBreedsUsecase = GetBreedsUsecase(fakeBreedsRepository)
 
     private val breed1 = Breed(
@@ -42,7 +42,7 @@ class PupzListViewModelTest {
 
     @Test
     fun `fetches list of breeds on initialization`() {
-        fakeBreedsRepository.getBreeds = Single.just(listOf(breed1))
+        fakeBreedsRepository.getBreeds = Flowable.just(listOf(breed1))
         val viewModel = initViewModel()
         assertThat(viewModel.state.value).isEqualTo(breed1AsUiModel)
     }

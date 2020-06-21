@@ -12,6 +12,7 @@ import com.example.presentation.EventHandler
 import com.example.presentation.subscribeWith
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import kotlin.random.Random
@@ -33,12 +34,13 @@ internal class PupzListViewModel(getBreeds: GetBreedsUsecase) : ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(
-                        onSuccess = Consumer { breeds ->
+                        onNext = Consumer { breeds ->
                             val items: List<PupzListItemUiModel> = breeds.toItemUiModels()
                             _state.value = PupzListUiModel(
                                     items = items,
                                     onClickFeelingLucky = items.clickRandomItem()
                             )
+                            // TODO: if breeds is empty, we could display the dog with a message!
                         },
                         onError = Consumer<Throwable> {
                             // TODO: show error, allow retry

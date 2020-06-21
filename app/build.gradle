@@ -44,6 +44,7 @@ dependencies {
     implementation libraries.androidxLegacySupportV13
     implementation libraries.androidxRecyclerView
     implementation libraries.androidxRoomRuntime
+    implementation libraries.androidxRoomRxJava2
     implementation libraries.glide
     implementation libraries.kotlinStdLib
     implementation libraries.lottie

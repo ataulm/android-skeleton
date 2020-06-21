@@ -24,6 +24,7 @@ ext {
             androidxRecyclerView    : 'androidx.recyclerview:recyclerview:1.2.0-alpha02',
             androidxRoomCompiler    : "androidx.room:room-compiler:${versions.room}",
             androidxRoomRuntime     : "androidx.room:room-runtime:${versions.room}",
+            androidxRoomRxJava2     : "androidx.room:room-rxjava2:${versions.room}",
             androidxTestRules       : 'androidx.test:rules:1.1.0',
             androidxTestRunner      : 'androidx.test:runner:1.1.0',
             glide                   : 'com.github.bumptech.glide:glide:4.10.0',
