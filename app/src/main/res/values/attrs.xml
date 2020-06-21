@@ -3,4 +3,7 @@
     <attr name="preferredStatusBarColor" format="color" />
     <attr name="preferDarkStatusBarIcons" format="boolean" />
 
+    <attr name="preferredNavBarColor" format="color" />
+    <attr name="preferDarkNavBarIcons" format="boolean" />
+
 </resources>

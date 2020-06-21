@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="Platform.V27.Theme.Demo" parent="Platform.V23.Theme.Demo">
+        <item name="android:navigationBarColor">?attr/preferredNavBarColor</item>
+        <item name="android:windowLightNavigationBar">?attr/preferDarkNavBarIcons</item>
+    </style>
+
+    <style name="Platform.Theme.Demo" parent="Platform.V27.Theme.Demo" />
+
+</resources>

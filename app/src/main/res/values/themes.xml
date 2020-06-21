@@ -21,6 +21,8 @@
 
         <item name="preferredStatusBarColor">?attr/colorPrimaryVariant</item>
         <item name="preferDarkStatusBarIcons">false</item>
+        <item name="preferredNavBarColor">?attr/colorSurface</item>
+        <item name="preferDarkNavBarIcons">false</item>
     </style>
 
     <style name="ThemeOverlay.Pupz.CollapsingToolbarLayout" parent="">

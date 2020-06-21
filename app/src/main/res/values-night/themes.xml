@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="Theme.Demo" parent="Base.Theme.Demo">
+        <item name="colorPrimary">?attr/colorSurface</item>
+        <item name="colorOnPrimary">?attr/colorOnSurface</item>
+        <item name="colorPrimaryVariant">#051733</item>
+        <item name="colorSecondary">#29B6F6</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="colorSurface">?android:attr/colorBackground</item>
+        <item name="colorOnSurface">?attr/colorOnBackground</item>
+        <item name="android:colorBackground">#122F5D</item>
+        <item name="colorOnBackground">@android:color/white</item>
+
+        <item name="preferredStatusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="preferDarkStatusBarIcons">false</item>
+        <item name="preferredNavBarColor">?attr/colorPrimaryVariant</item>
+        <item name="preferDarkNavBarIcons">false</item>
+    </style>
+
+</resources>
