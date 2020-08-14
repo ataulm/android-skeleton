@@ -33,6 +33,7 @@ android {
 dependencies {
     implementation libraries.androidxAppCompat
     implementation libraries.androidxConstraintLayout
+    implementation libraries.androidxCoreKtx
     implementation libraries.androidxLegacySupportV13
     implementation libraries.androidxRecyclerView
     implementation libraries.glide
