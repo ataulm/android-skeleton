@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -33,7 +32,6 @@ android {
 dependencies {
     implementation libraries.androidxAppCompat
     implementation libraries.androidxConstraintLayout
-    implementation libraries.androidxLegacySupportV13
     implementation libraries.androidxRecyclerView
     implementation libraries.glide
     implementation libraries.kotlinStdLib
