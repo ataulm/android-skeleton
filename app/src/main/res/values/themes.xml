@@ -15,8 +15,8 @@
         <item name="android:colorBackground">@android:color/white</item>
         <item name="colorOnBackground">?colorPrimaryVariant</item>
 
-        <item name="preferredStatusBarColor">?attr/colorPrimaryVariant</item>
-        <item name="preferDarkStatusBarIcons">false</item>
+        <item name="preferredStatusBarColor">@android:color/white</item>
+        <item name="preferDarkStatusBarIcons">true</item>
     </style>
 
 </resources>
