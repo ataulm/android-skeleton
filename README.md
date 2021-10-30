@@ -1,11 +1,24 @@
-android-example
-===============
-Can be used as a skeleton for new spikes. Don't modify this project except to update dependencies; checkout from the latest master.
+# talkback headers in lists
 
-It would be good to fill this out before starting the spike and with updates before each push if necessary:
+TalkBack used to have an issue with navigating to items in a ListView that were off-screen. It would sometimes skip the off-screen item and go to the next one (when it had the auto-scroll behavior enabled).
 
-#### Aim
-_e.g. wanted to try to create a completely virtual view hierarchy, so there's nothing really there on screen but an accessibility service like TalkBack could navigate it and a user proficient with TalkBack could use the app_
+- [View.setAccessibilityHeading](https://developer.android.com/reference/android/view/View#setAccessibilityHeading(boolean)) was added in API 28
+- [ViewCompat.setAccessibilityHeading](https://developer.android.com/reference/androidx/core/view/ViewCompat#setAccessibilityHeading(android.view.View,%20boolean)) is no-op on pre-19 and it should just work on 19+?
+- [ViewCompat.isAccessibilityHeading](https://developer.android.com/reference/androidx/core/view/ViewCompat#isAccessibilityHeading(android.view.View)) always returns false pre-API 19.
 
-#### Current state (inc. next steps if applicable)
-_e.g. completed - see blahblah.kt for main bits._
+Compose semantics also has a heading property which should expose elements to accessibility services in a similar way. The question is whether with LazyColumn (or Column), this behaves as expected, and allows users to skip between headings even when the next heading is off screen.
+
+## Todo
+
+Create 4 lists:
+
+- RecyclerView
+- LinearLayout
+- Compose Column
+- Compose LazyColumn
+
+with 26 sections (letters of the English alphabet).
+
+Each section has a heading and 5 items numbered 1-5, so in total there should be 156 (26 + 26 * 5) items in the list.
+
+Check with the latest version of TalkBack whether navigating by heading works in all cases. In Compose, use semantics and in Views use ViewCompat.
