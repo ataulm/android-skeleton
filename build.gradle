@@ -1,12 +1,15 @@
 buildscript {
     apply from: 'dependencies.gradle'
+    ext {
+        compose_version = '1.0.1'
+    }
     repositories {
         google()
         jcenter()
     }
     dependencies {
         classpath libraries.build.androidGradle
-        classpath libraries.build.kotlinGradle
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
     }
 }
 
