@@ -1,11 +1,9 @@
-android-example
-===============
-Can be used as a skeleton for new spikes. Don't modify this project except to update dependencies; checkout from the latest master.
+TalkBack 12.1 ignores custom state description
+==============================================
 
-It would be good to fill this out before starting the spike and with updates before each push if necessary:
+Issue tracker: https://issuetracker.google.com/issues/208178383
 
-#### Aim
-_e.g. wanted to try to create a completely virtual view hierarchy, so there's nothing really there on screen but an accessibility service like TalkBack could navigate it and a user proficient with TalkBack could use the app_
+Tested on a Pixel 5 with Android 12 (SP1A.211105.003)
+with Android Accessibility Suite (12.1.0.397273305)
 
-#### Current state (inc. next steps if applicable)
-_e.g. completed - see blahblah.kt for main bits._
+See `MyActivity.kt` for the code.

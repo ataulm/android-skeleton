@@ -1,51 +1,59 @@
 package com.example
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.SeekBar
+import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.ui.theme.AndroidskeletonTheme
+import androidx.core.view.ViewCompat
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_my)
-        setContent {
-            AndroidskeletonTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Button(
-                        onClick = {},
-                        modifier = Modifier.wrapContentSize()
-                    ) {
-                        Text(text = "I'm a compose button!")
-                    }
-                }
+        setContentView(R.layout.activity_my)
+
+        val seekBarStateDesc = findViewById<SeekBar>(R.id.seekBarWithCustomStateDescription)
+        seekBarStateDesc.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+//                setStateDescCompat(seekBarStateDesc, progress)
+                setStateDescApi30(seekBarStateDesc, progress)
             }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
+
+        var toast: Toast? = null
+        findViewById<Button>(R.id.button).setOnClickListener {
+            toast?.cancel()
+            toast = Toast.makeText(
+                applicationContext,
+//                getStateDescCompat(seekBarStateDesc),
+                getStateDescApi30(seekBarStateDesc),
+                Toast.LENGTH_SHORT
+            ).also { it.show() }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
+    private fun setStateDescCompat(seekBarStateDesc: SeekBar, progress: Int) {
+        ViewCompat.setStateDescription(seekBarStateDesc, "£$progress")
+        Log.d("!!!", "seekBarStateDesc: ${ViewCompat.getStateDescription(seekBarStateDesc)}")
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    AndroidskeletonTheme {
-        Greeting("Android")
+    private fun setStateDescApi30(seekBarStateDesc: SeekBar, progress: Int) {
+        seekBarStateDesc.stateDescription = "£$progress"
+        Log.d("!!!", "seekBarStateDesc: ${seekBarStateDesc.stateDescription}")
+    }
+
+    private fun getStateDescCompat(seekBarStateDesc: SeekBar): String {
+        return "${ViewCompat.getStateDescription(seekBarStateDesc)}"
+    }
+
+    private fun getStateDescApi30(seekBarStateDesc: SeekBar): String {
+        return "${seekBarStateDesc.stateDescription}"
     }
 }

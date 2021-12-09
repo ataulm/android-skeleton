@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/primaryButton"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="I'm a button!" />
+        android:text="Default SeekBar"
+        android:textColor="@android:color/black" />
 
-</FrameLayout>
+    <SeekBar
+        android:id="@+id/seekBarDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progress="25" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="SeekBar with custom description"
+        android:textColor="@android:color/black" />
+
+    <SeekBar
+        android:id="@+id/seekBarWithCustomStateDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progress="25" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Toast state desc" />
+
+</LinearLayout>
