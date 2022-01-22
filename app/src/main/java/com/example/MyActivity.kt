@@ -3,10 +3,7 @@ package com.example
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
@@ -65,8 +62,7 @@ fun Screen() {
         } else {
             item {
                 Column(
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillParentMaxHeight()
+                    verticalArrangement = Arrangement.Center
                 ) {
                     Text("Nope!")
                     Text("You gotta type fizz, buzz or fizzbuzz!")
